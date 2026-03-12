@@ -73,6 +73,7 @@ function FadeIn({ children, delay = 0, style = {} }) {
 
 export default function App() {
   const [activeIndustry, setActiveIndustry] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", business: "", message: "" });
