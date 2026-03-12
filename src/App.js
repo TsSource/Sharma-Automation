@@ -77,7 +77,9 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", business: "", message: "" });
-  const [submitted, setSubmitted] = useState(false);
+const [submitted, setSubmitted] = useState(false);
+const [formError, setFormError] = useState(false);
+const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 40);
@@ -90,9 +92,32 @@ export default function App() {
     setMenuOpen(false);
   };
 
-  const handleSubmit = () => {
-    if (formData.name && formData.email) setSubmitted(true);
-  };
+  const handleSubmit = async () => {
+  if (!formData.name || !formData.email) return;
+  setSubmitting(true);
+  setFormError(false);
+  try {
+    const response = await fetch("https://formspree.io/f/xaqpozye", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        business: formData.business,
+        message: formData.message,
+      }),
+    });
+    if (response.ok) {
+      setSubmitted(true);
+    } else {
+      setFormError(true);
+    }
+  } catch (error) {
+    setFormError(true);
+  } finally {
+    setSubmitting(false);
+  }
+};
 
   const s = {
     // Colors
@@ -470,7 +495,7 @@ export default function App() {
                 Fill out the form and I'll get back to you within 24 hours. Or if you'd prefer, book a time directly on my calendar.
               </p>
               <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-                {[["📧", "Email", "hello@flowmind.ai"], ["📍", "Based In", "Randolph, New Jersey"], ["⏱️", "Response Time", "Within 24 Hours"]].map(([icon, label, val]) => (
+                {[["📧", "Email", "Sharma@SharmaAutomation.com"], ["📍", "Based In", "Randolph, New Jersey"], ["⏱️", "Response Time", "Within 24 Hours"]].map(([icon, label, val]) => (
                   <div key={label} style={{ display: "flex", alignItems: "center", gap: 14 }}>
                     <div style={{ width: 40, height: 40, background: "#fff", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #e2e8f0", fontSize: 18 }}>{icon}</div>
                     <div>
@@ -498,10 +523,15 @@ export default function App() {
                   </div>
                   <div><label>Business Name & Industry</label><input placeholder="Smith Dental Group — Medical" value={formData.business} onChange={e => setFormData({ ...formData, business: e.target.value })} /></div>
                   <div><label>What would you like to automate?</label><textarea placeholder="Tell me about your biggest time drains or the tasks you'd love to hand off..." value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })} /></div>
-                  <button className="btn-primary" onClick={handleSubmit} style={{ width: "100%", padding: "15px", fontSize: 15, textAlign: "center" }}>
-                    Send Message →
-                  </button>
-                  <p className="dm" style={{ fontSize: 12, color: s.mid, textAlign: "center" }}>No spam. No pressure. Just a conversation.</p>
+                 <button className="btn-primary" onClick={handleSubmit} disabled={submitting} style={{ width: "100%", padding: "15px", fontSize: 15, textAlign: "center", opacity: submitting ? 0.7 : 1 }}>
+  {submitting ? "Sending..." : "Send Message →"}
+</button>
+{formError && (
+  <p className="dm" style={{ fontSize: 13, color: "#ef4444", textAlign: "center" }}>
+    Something went wrong. Please try again or email us directly at sharma@sharmaautomation.com
+  </p>
+)}
+<p className="dm" style={{ fontSize: 12, color: s.mid, textAlign: "center" }}>No spam. No pressure. Just a conversation.</p>
                 </div>
               </div>
             )}
