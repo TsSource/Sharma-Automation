@@ -189,12 +189,16 @@ const [submitting, setSubmitting] = useState(false);
         padding: "0 5vw",
       }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ width: 32, height: 32, background: s.navy, borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <div style={{ width: 14, height: 14, border: "2px solid #0ea5e9", borderRadius: 2, transform: "rotate(45deg)" }} />
-            </div>
-            <span className="playfair" style={{ fontSize: 18, fontWeight: 700, letterSpacing: "-0.3px" }}>Sharma Automation</span>
-          </div>
+          <div
+  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+  style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}
+>
+  <img
+    src="/SharmaAutomationIcon.png"
+    alt="Sharma Automation Logo"
+    style={{ height: 42, width: "auto", objectFit: "contain" }}
+  />
+</div>
           {/* Desktop Nav */}
 <div className="desktop-nav" style={{ display: "flex", gap: 32, alignItems: "center" }}>
   {NAV_LINKS.map(l => (
@@ -428,12 +432,13 @@ const [submitting, setSubmitting] = useState(false);
         <div className="two-col" style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }}>
           <FadeIn>
             <div style={{ position: "relative" }}>
-              <div style={{ width: "100%", aspectRatio: "4/3", background: "linear-gradient(135deg, #f0f9ff, #e0f2fe)", borderRadius: 16, display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #bae6fd" }}>
-                <div style={{ textAlign: "center" }}>
-                  <div style={{ fontSize: 64, marginBottom: 12 }}>👤</div>
-                  <div className="dm" style={{ fontSize: 13, color: s.mid, letterSpacing: "1px" }}>YOUR PHOTO HERE</div>
-                </div>
-              </div>
+              <div style={{ width: "100%", aspectRatio: "4/3", borderRadius: 16, overflow: "hidden", border: "1px solid #bae6fd" }}>
+  <img
+    src="/SharmaAutomationLogo.png"
+    alt="Rohit Sharma - Sharma Automation"
+    style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+  />
+</div>
               <div style={{ position: "absolute", bottom: -20, right: -20, background: s.navy, borderRadius: 12, padding: "18px 22px", boxShadow: "0 8px 32px rgba(0,0,0,0.15)" }}>
                 <div className="playfair" style={{ fontSize: 24, fontWeight: 700, color: "#fff" }}>Free</div>
                 <div className="dm" style={{ fontSize: 11, color: "#94a3b8", letterSpacing: "0.5px" }}>Discovery Call</div>
@@ -545,12 +550,16 @@ const [submitting, setSubmitting] = useState(false);
       {/* FOOTER */}
       <footer style={{ background: s.navy, padding: "40px 5vw", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 20 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ width: 28, height: 28, background: s.accent, borderRadius: 5, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <div style={{ width: 12, height: 12, border: "2px solid #fff", borderRadius: 2, transform: "rotate(45deg)" }} />
-            </div>
-            <span className="playfair" style={{ fontSize: 16, fontWeight: 700, color: "#fff" }}>Sharma Automation</span>
-          </div>
+          <div
+  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+  style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}
+>
+  <img
+    src="/SharmaAutomationIcon.png"
+    alt="Sharma Automation Logo"
+    style={{ height: 36, width: "auto", objectFit: "contain" }}
+  />
+</div>
           <div style={{ display: "flex", gap: 28 }}>
             {NAV_LINKS.map(l => (
               <span key={l} className="dm" onClick={() => scrollTo(l.toLowerCase().replace(" ", "-"))} style={{ fontSize: 13, color: "#64748b", cursor: "pointer", transition: "color 0.2s" }}
