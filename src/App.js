@@ -151,7 +151,7 @@ export default function App() {
             <div style={{ width: 32, height: 32, background: s.navy, borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center" }}>
               <div style={{ width: 14, height: 14, border: "2px solid #0ea5e9", borderRadius: 2, transform: "rotate(45deg)" }} />
             </div>
-            <span className="playfair" style={{ fontSize: 18, fontWeight: 700, letterSpacing: "-0.3px" }}>FlowMind AI</span>
+            <span className="playfair" style={{ fontSize: 18, fontWeight: 700, letterSpacing: "-0.3px" }}>Sharma Automation</span>
           </div>
           <div style={{ display: "flex", gap: 32, alignItems: "center" }}>
             {NAV_LINKS.map(l => (
@@ -374,7 +374,7 @@ export default function App() {
                I'm <strong style={{ color: s.navy, fontWeight: 600 }}>Rohit Sharma</strong>, an AI automation specialist with a simple mission: help small businesses reclaim their time.
              </p>
              <p className="dm" style={{ fontSize: 15, color: s.mid, lineHeight: 1.85, marginBottom: 20, fontWeight: 300 }}>
-               I built FlowMind AI because I kept watching talented business owners drown in tasks that technology should be handling — scheduling, follow-ups, billing, reminders. Work that's necessary, but pulls you away from what you're actually good at.
+               I built Sharma Automation because I kept watching talented business owners drown in tasks that technology should be handling — scheduling, follow-ups, billing, reminders. Work that's necessary, but pulls you away from what you're actually good at.
              </p>
              <p className="dm" style={{ fontSize: 15, color: s.mid, lineHeight: 1.85, marginBottom: 32, fontWeight: 300 }}>
                I have a particular focus on medical & dental, real estate, and fitness & wellness — but any small business with repetitive workflows and big growth goals is exactly who I'm here to help. Every engagement starts with a free consultation, because the right automation strategy begins with truly understanding your business first.
@@ -468,7 +468,7 @@ export default function App() {
             <div style={{ width: 28, height: 28, background: s.accent, borderRadius: 5, display: "flex", alignItems: "center", justifyContent: "center" }}>
               <div style={{ width: 12, height: 12, border: "2px solid #fff", borderRadius: 2, transform: "rotate(45deg)" }} />
             </div>
-            <span className="playfair" style={{ fontSize: 16, fontWeight: 700, color: "#fff" }}>FlowMind AI</span>
+            <span className="playfair" style={{ fontSize: 16, fontWeight: 700, color: "#fff" }}>Sharma Automation</span>
           </div>
           <div style={{ display: "flex", gap: 28 }}>
             {NAV_LINKS.map(l => (
@@ -477,7 +477,7 @@ export default function App() {
                 onMouseLeave={e => e.target.style.color = "#64748b"}>{l}</span>
             ))}
           </div>
-          <p className="dm" style={{ fontSize: 12, color: "#475569" }}>© 2026 FlowMind AI. All rights reserved.</p>
+          <p className="dm" style={{ fontSize: 12, color: "#475569" }}>© 2026 Sharma Automation. All rights reserved.</p>
         </div>
       </footer>
     </div>
