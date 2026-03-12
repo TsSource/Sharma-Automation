@@ -11,7 +11,7 @@ const PAIN_POINTS = [
 const SERVICES = [
   { icon: "🤖", title: "Custom AI Agent Setup", desc: "We design and deploy intelligent agents tailored to your specific business workflows — from lead capture to client communication.", tag: "Core Service" },
   { icon: "🔗", title: "Systems Integration", desc: "Connect your CRM, scheduling tools, email, and more into a unified automated workflow — reducing manual data entry and keeping your business moving even after hours.", tag: "Integration" },
-  { icon: "📊", title: "Performance Tracking Setup", desc: "We configure simple, clear reporting so you can see exactly how your automations are performing — leads captured, appointments booked, time saved — without digging through spreadsheets.", tag: "Visibility" },  { icon: "💬", title: "AI Chatbot & Lead Capture", desc: "Deploy a 24/7 AI assistant on your website that qualifies leads, answers common questions, and books appointments — even while you sleep.", tag: "Lead Gen" },
+  { icon: "📊", title: "Performance Tracking Setup", desc: "We configure simple, clear reporting so you can see exactly how your automations are performing — leads captured, appointments booked, time saved — without digging through spreadsheets.", tag: "Visibility" }, { icon: "💬", title: "AI Chatbot & Lead Capture", desc: "Deploy a 24/7 AI assistant on your website that qualifies leads, answers common questions, and books appointments — even while you sleep.", tag: "Lead Gen" },
   { icon: "🗺️", title: "AI Strategy Consultation", desc: "Not sure where AI fits in your business? We audit your current workflows and deliver a plain-English automation roadmap — so you invest in the right systems from day one.", tag: "Strategy" },
   { icon: "🔄", title: "Ongoing Support & Refinement", desc: "After launch, we stay available to troubleshoot, adjust, and improve your systems as your business evolves. You're never left figuring it out alone.", tag: "Support" },];
 
@@ -135,6 +135,20 @@ export default function App() {
         input:focus, textarea:focus { border-color: #0ea5e9; }
         textarea { resize: vertical; min-height: 110px; }
         label { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #334155; display: block; margin-bottom: 6px; }
+        
+        @media (max-width: 768px) {
+  .desktop-nav { display: none !important; }
+  .hamburger { display: flex !important; }
+  .mobile-menu { display: flex !important; }
+  .hero-stats { gap: 24px !important; }
+  .two-col { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .industry-panel { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .about-badge { display: none !important; }
+}
+@media (min-width: 769px) {
+  .hamburger { display: none !important; }
+  .mobile-menu { display: none !important; }
+}
       `}</style>
 
       {/* NAV */}
@@ -153,14 +167,48 @@ export default function App() {
             </div>
             <span className="playfair" style={{ fontSize: 18, fontWeight: 700, letterSpacing: "-0.3px" }}>Sharma Automation</span>
           </div>
-          <div style={{ display: "flex", gap: 32, alignItems: "center" }}>
-            {NAV_LINKS.map(l => (
-              <span key={l} className="nav-link" onClick={() => scrollTo(l.toLowerCase().replaceAll(" ", "-"))}>{l}</span>
-            ))}
-            <button className="btn-primary" onClick={() => scrollTo("contact")} style={{ padding: "10px 22px" }}>Book Free Call</button>
-          </div>
+          {/* Desktop Nav */}
+<div className="desktop-nav" style={{ display: "flex", gap: 32, alignItems: "center" }}>
+  {NAV_LINKS.map(l => (
+    <span key={l} className="nav-link" onClick={() => scrollTo(l.toLowerCase().replaceAll(" ", "-"))}>{l}</span>
+  ))}
+  <button className="btn-primary" onClick={() => scrollTo("contact")} style={{ padding: "10px 22px" }}>Book Free Call</button>
+</div>
+
+{/* Hamburger Button */}
+<button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} style={{
+  display: "none", flexDirection: "column", gap: 5, background: "none",
+  border: "none", cursor: "pointer", padding: 4,
+}}>
+  <div style={{ width: 24, height: 2, background: menuOpen ? s.accent : s.navy, transition: "all 0.3s", transform: menuOpen ? "rotate(45deg) translate(5px, 5px)" : "none" }} />
+  <div style={{ width: 24, height: 2, background: s.navy, transition: "all 0.3s", opacity: menuOpen ? 0 : 1 }} />
+  <div style={{ width: 24, height: 2, background: menuOpen ? s.accent : s.navy, transition: "all 0.3s", transform: menuOpen ? "rotate(-45deg) translate(5px, -5px)" : "none" }} />
+</button>
         </div>
       </nav>
+
+      {/* Mobile Menu */}
+<div className="mobile-menu" style={{
+  display: "none",
+  position: "fixed", top: 68, left: 0, right: 0, zIndex: 99,
+  background: "rgba(255,255,255,0.98)", backdropFilter: "blur(12px)",
+  borderBottom: "1px solid #e2e8f0",
+  flexDirection: "column", padding: "16px 24px 24px",
+  transform: menuOpen ? "translateY(0)" : "translateY(-120%)",
+  transition: "transform 0.3s ease",
+  boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
+}}>
+  {NAV_LINKS.map(l => (
+    <span key={l} onClick={() => scrollTo(l.toLowerCase().replaceAll(" ", "-"))} style={{
+      fontFamily: "'DM Sans', sans-serif", fontSize: 16, fontWeight: 500,
+      color: s.navy, padding: "14px 0", borderBottom: "1px solid #f1f5f9",
+      cursor: "pointer",
+    }}>{l}</span>
+  ))}
+  <button className="btn-primary" onClick={() => { scrollTo("contact"); setMenuOpen(false); }} style={{ marginTop: 16, padding: "14px", fontSize: 15, textAlign: "center" }}>
+    Book Free Call
+  </button>
+</div>
 
       {/* HERO */}
       <section style={{
@@ -228,7 +276,7 @@ export default function App() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24, alignItems: "stretch" }}>
             {PAIN_POINTS.map((p, i) => (
               <FadeIn key={p.title} delay={i * 0.12}>
-               <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: "32px 28px", height: "100%" }}>
+                <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: "32px 28px", height: "100%" }}>
                   <div style={{ fontSize: 32, marginBottom: 16 }}>{p.icon}</div>
                   <h3 className="playfair" style={{ fontSize: 20, fontWeight: 600, color: "#fff", marginBottom: 12 }}>{p.title}</h3>
                   <p className="dm" style={{ fontSize: 14, color: "#94a3b8", lineHeight: 1.75, fontWeight: 300 }}>{p.desc}</p>
@@ -284,11 +332,11 @@ export default function App() {
           </FadeIn>
 
           <FadeIn>
-            <div style={{
-              background: s.light, borderRadius: 16, padding: "48px",
-              display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48,
-              border: "1px solid #e2e8f0",
-            }}>
+            <div className="industry-panel" style={{
+  background: s.light, borderRadius: 16, padding: "48px",
+  display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48,
+  border: "1px solid #e2e8f0",
+}}>
               <div>
                 <div style={{
                   display: "inline-block", padding: "8px 16px", borderRadius: 6,
@@ -312,7 +360,7 @@ export default function App() {
                   {INDUSTRIES[activeIndustry].points.map((pt, i) => (
                     <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
                       <div style={{ width: 22, height: 22, borderRadius: "50%", background: INDUSTRIES[activeIndustry].color, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
-                        <svg width="10" height="10" viewBox="0 0 10 10"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#fff" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                        <svg width="10" height="10" viewBox="0 0 10 10"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="#fff" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg>
                       </div>
                       <span className="dm" style={{ fontSize: 15, color: s.slate, lineHeight: 1.6 }}>{pt}</span>
                     </li>
@@ -349,7 +397,7 @@ export default function App() {
 
       {/* ABOUT */}
       <section id="about" style={{ padding: "96px 5vw", background: s.white }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }}>
+        <div className="two-col" style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }}>
           <FadeIn>
             <div style={{ position: "relative" }}>
               <div style={{ width: "100%", aspectRatio: "4/3", background: "linear-gradient(135deg, #f0f9ff, #e0f2fe)", borderRadius: 16, display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #bae6fd" }}>
@@ -371,14 +419,14 @@ export default function App() {
                 Real Expertise.<br />No Fluff.
               </h2>
               <p className="dm" style={{ fontSize: 15, color: s.mid, lineHeight: 1.85, marginBottom: 20, fontWeight: 300 }}>
-               I'm <strong style={{ color: s.navy, fontWeight: 600 }}>Rohit Sharma</strong>, an AI automation specialist with a simple mission: help small businesses reclaim their time.
-             </p>
-             <p className="dm" style={{ fontSize: 15, color: s.mid, lineHeight: 1.85, marginBottom: 20, fontWeight: 300 }}>
-               I built Sharma Automation because I kept watching talented business owners drown in tasks that technology should be handling — scheduling, follow-ups, billing, reminders. Work that's necessary, but pulls you away from what you're actually good at.
-             </p>
-             <p className="dm" style={{ fontSize: 15, color: s.mid, lineHeight: 1.85, marginBottom: 32, fontWeight: 300 }}>
-               I have a particular focus on medical & dental, real estate, and fitness & wellness — but any small business with repetitive workflows and big growth goals is exactly who I'm here to help. Every engagement starts with a free consultation, because the right automation strategy begins with truly understanding your business first.
-             </p>
+                I'm <strong style={{ color: s.navy, fontWeight: 600 }}>Rohit Sharma</strong>, an AI automation specialist with a simple mission: help small businesses reclaim their time.
+              </p>
+              <p className="dm" style={{ fontSize: 15, color: s.mid, lineHeight: 1.85, marginBottom: 20, fontWeight: 300 }}>
+                I built Sharma Automation because I kept watching talented business owners drown in tasks that technology should be handling — scheduling, follow-ups, billing, reminders. Work that's necessary, but pulls you away from what you're actually good at.
+              </p>
+              <p className="dm" style={{ fontSize: 15, color: s.mid, lineHeight: 1.85, marginBottom: 32, fontWeight: 300 }}>
+                I have a particular focus on medical & dental, real estate, and fitness & wellness — but any small business with repetitive workflows and big growth goals is exactly who I'm here to help. Every engagement starts with a free consultation, because the right automation strategy begins with truly understanding your business first.
+              </p>
               <div style={{ display: "flex", gap: 32 }}>
                 {[["Local LLMs", "On-premise AI"], ["API Integrations", "Cloud AI"], ["Workflow Design", "End-to-end"]].map(([title, sub]) => (
                   <div key={title}>
@@ -411,7 +459,7 @@ export default function App() {
 
       {/* CONTACT */}
       <section id="contact" style={{ padding: "96px 5vw", background: s.light }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "start" }}>
+        <div className="two-col" style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "start" }}>
           <FadeIn>
             <div>
               <p className="dm" style={{ fontSize: 12, letterSpacing: "3px", color: s.accent, textTransform: "uppercase", marginBottom: 16, fontWeight: 600 }}>Get In Touch</p>
