@@ -99,7 +99,10 @@ const [submitting, setSubmitting] = useState(false);
   try {
     const response = await fetch("https://formspree.io/f/xaqpozye", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+  "Content-Type": "application/json",
+  "Accept": "application/json",
+},
       body: JSON.stringify({
         name: formData.name,
         email: formData.email,
