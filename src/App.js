@@ -9,13 +9,34 @@ const PAIN_POINTS = [
 ];
 
 const SERVICES = [
-  { icon: "🤖", title: "Custom AI Agent Setup", desc: "We design and deploy intelligent agents tailored to your specific business workflows — from lead capture to client communication.", tag: "Core Service" },
+  { icon: "🤖", title: "Custom AI Agent Setup", desc: "I design and deploy intelligent agents tailored to your specific business workflows — from lead capture to client communication.", tag: "Core Service" },
   { icon: "🔗", title: "Systems Integration", desc: "Connect your CRM, scheduling tools, email, and more into a unified automated workflow — reducing manual data entry and keeping your business moving even after hours.", tag: "Integration" },
-  { icon: "📊", title: "Performance Tracking Setup", desc: "We configure simple, clear reporting so you can see exactly how your automations are performing — leads captured, appointments booked, time saved — without digging through spreadsheets.", tag: "Visibility" }, { icon: "💬", title: "AI Chatbot & Lead Capture", desc: "Deploy a 24/7 AI assistant on your website that qualifies leads, answers common questions, and books appointments — even while you sleep.", tag: "Lead Gen" },
-  { icon: "🗺️", title: "AI Strategy Consultation", desc: "Not sure where AI fits in your business? We audit your current workflows and deliver a plain-English automation roadmap — so you invest in the right systems from day one.", tag: "Strategy" },
-  { icon: "🔄", title: "Ongoing Support & Refinement", desc: "After launch, we stay available to troubleshoot, adjust, and improve your systems as your business evolves. You're never left figuring it out alone.", tag: "Support" },];
+  { icon: "📊", title: "Performance Tracking Setup", desc: "I configure simple, clear reporting so you can see exactly how your automations are performing — leads captured, appointments booked, time saved — without digging through spreadsheets.", tag: "Visibility" }, { icon: "💬", title: "AI Chatbot & Lead Capture", desc: "Deploy a 24/7 AI assistant on your website that qualifies leads, answers common questions, and books appointments — even while you sleep.", tag: "Lead Gen" },
+  { icon: "🗺️", title: "AI Strategy Consultation", desc: "Not sure where AI fits in your business? I audit your current workflows and deliver a plain-English automation roadmap — so you invest in the right systems from day one.", tag: "Strategy" },
+  { icon: "🔄", title: "Ongoing Support & Refinement", desc: "After launch, I stay available to troubleshoot, adjust, and improve your systems as your business evolves. You're never left figuring it out alone.", tag: "Support" },];
 
 const INDUSTRIES = [
+  {
+    name: "Personal Trainers & Gyms",
+    icon: "💪",
+    color: "#f59e0b",
+    headline: "Fill your schedule. Keep your clients.",
+    points: ["Automated lead capture from Instagram & website", "Session reminders that cut no-shows by 40%", "New client onboarding without the back-and-forth", "Payment collection that runs itself"],
+  },
+  {
+    name: "Landscaping & Lawn Care",
+    icon: "🌿",
+    color: "#10b981",
+    headline: "Never miss a lead. Get paid on time.",
+    points: ["Missed call capture — instant text response to every lead", "Automated quote follow-ups at Day 2 and Day 5", "Job scheduling and crew notifications sent automatically", "Invoice reminders so you stop chasing payments"],
+  },
+  {
+    name: "Contractors & Home Services",
+    icon: "🔨",
+    color: "#3B8BD4",
+    headline: "Win more jobs. Spend less time on admin.",
+    points: ["Automated lead response before competitors call back", "Estimate follow-up sequences that close more jobs", "Appointment confirmations and day-before reminders", "Review requests after every completed job"],
+  },
   {
     name: "Medical & Dental",
     icon: "🏥",
@@ -23,27 +44,13 @@ const INDUSTRIES = [
     headline: "Free your staff from admin. Focus on patient care.",
     points: ["Automated appointment scheduling & reminders", "Digital new patient intake forms & follow-ups", "Post-visit check-in & review request automation", "No-show reduction through smart reminder sequences"],
   },
-  {
-    name: "Real Estate",
-    icon: "🏡",
-    color: "#10b981",
-    headline: "Respond to every lead. Close more deals.",
-    points: ["Automated lead capture & instant follow-up sequences", "Showing scheduling & confirmation reminders", "Personalized property listing follow-ups", "CRM-connected pipelines that keep every lead warm"],
-  },
-  {
-    name: "Fitness & Wellness",
-    icon: "💪",
-    color: "#f59e0b",
-    headline: "Fill your classes. Retain your members.",
-    points: ["Automated class booking & waitlist management", "New member welcome sequences & check-in reminders", "Re-engagement campaigns for inactive members", "Review & referral automation to grow your community"],
-  },
 ];
 
 const STEPS = [
-  { num: "01", title: "Discovery Call", desc: "We start with a free 30-minute consultation to understand your workflows, pain points, and goals. No jargon, no pressure — just a real conversation." },
-  { num: "02", title: "Custom Blueprint", desc: "We map out exactly which agents to build, what tools to connect, and what results to expect — with a clear timeline and transparent pricing tailored to your project." },
-  { num: "03", title: "Build & Deploy", desc: "We build, test, and launch your automation stack. Every system is thoroughly tested before going live so it performs reliably from day one." },
-  { num: "04", title: "Measure & Optimize", desc: "We track performance from day one and stay available to refine your agents as your business evolves. You'll always know what's working and what can be improved." },
+  { num: "01", title: "Discovery Call", desc: "I start with a free 30-minute consultation to understand your workflows, pain points, and goals. No jargon, no pressure — just a real conversation." },
+  { num: "02", title: "Custom Blueprint", desc: "I map out exactly which agents to build, what tools to connect, and what results to expect — with a clear timeline and transparent pricing tailored to your project." },
+  { num: "03", title: "Build & Deploy", desc: "I build, test, and launch your automation stack. Every system is thoroughly tested before going live so it performs reliably from day one." },
+  { num: "04", title: "Measure & Optimize", desc: "I track performance from day one and stay available to refine your agents as your business evolves. You'll always know what's working and what can be improved." },
 ];
 
 function useInView(threshold = 0.15) {
@@ -76,6 +83,7 @@ export default function App() {
   // eslint-disable-next-line no-unused-vars
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [annBarVisible, setAnnBarVisible] = useState(true);
   const [formData, setFormData] = useState({ name: "", email: "", business: "", message: "" });
 const [submitted, setSubmitted] = useState(false);
 const [formError, setFormError] = useState(false);
@@ -164,6 +172,12 @@ const [submitting, setSubmitting] = useState(false);
         textarea { resize: vertical; min-height: 110px; }
         label { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #334155; display: block; margin-bottom: 6px; }
         
+        .ann-link { color: #fff; font-weight: 700; cursor: pointer; text-decoration: none; }
+        .ann-link:hover { text-decoration: underline; }
+        .ann-dismiss { background: none; border: none; color: #fff; font-size: 14px; cursor: pointer; opacity: 0.7; position: absolute; right: 16px; line-height: 1; padding: 4px; }
+        .ann-dismiss:hover { opacity: 1; }
+        .ann-text-desktop { display: inline; }
+        .ann-text-mobile { display: none; }
         @media (max-width: 768px) {
   .desktop-nav { display: none !important; }
   .hamburger { display: flex !important; }
@@ -172,6 +186,9 @@ const [submitting, setSubmitting] = useState(false);
   .two-col { grid-template-columns: 1fr !important; gap: 40px !important; }
   .industry-panel { grid-template-columns: 1fr !important; gap: 32px !important; }
   .about-badge { display: none !important; }
+  .industry-btn { flex: 1 1 auto; min-width: 140px; text-align: center; }
+  .ann-text-desktop { display: none; }
+  .ann-text-mobile { display: inline; }
 }
 @media (min-width: 769px) {
   .hamburger { display: none !important; }
@@ -179,13 +196,29 @@ const [submitting, setSubmitting] = useState(false);
 }
       `}</style>
 
+      {/* ANNOUNCEMENT BAR */}
+      {annBarVisible && (
+        <div style={{
+          position: "relative", zIndex: 200,
+          background: "#92400e", color: "#ffffff",
+          height: 44, width: "100%",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          gap: 12, fontFamily: "'DM Sans', sans-serif", fontSize: 13,
+        }}>
+          <span className="ann-text-desktop">🎯 Founding client rate: $500 setup fee (normally $1,000+) — only 3 spots available.</span>
+          <span className="ann-text-mobile">🎯 3 founding client spots available</span>
+          <span className="ann-link" onClick={() => scrollTo("founding-clients")}>Claim Your Spot →</span>
+          <button className="ann-dismiss" onClick={() => setAnnBarVisible(false)} aria-label="Dismiss">✕</button>
+        </div>
+      )}
+
       {/* NAV */}
       <nav style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+        position: "fixed", top: annBarVisible ? 44 : 0, left: 0, right: 0, zIndex: 100,
         background: scrolled ? "rgba(255,255,255,0.97)" : "transparent",
         borderBottom: scrolled ? "1px solid #e2e8f0" : "1px solid transparent",
         backdropFilter: scrolled ? "blur(12px)" : "none",
-        transition: "all 0.3s ease",
+        transition: "all 0.3s ease, top 0.3s ease",
         padding: "0 5vw",
       }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
@@ -278,14 +311,14 @@ const [submitting, setSubmitting] = useState(false);
               With AI.
             </h1>
             <p className="dm" style={{ fontSize: 18, color: s.mid, lineHeight: 1.75, marginBottom: 40, maxWidth: 520, fontWeight: 300 }}>
-              We design and deploy custom AI agent systems for small businesses — so your team spends less time on repetitive tasks and more time on what actually grows revenue.
+              I design and deploy custom AI agent systems for small businesses — so your team spends less time on repetitive tasks and more time on what actually grows revenue.
             </p>
             <div style={{ display: "flex", gap: 14, flexWrap: "wrap", alignItems: "center" }}>
               <button className="btn-primary" onClick={() => scrollTo("contact")} style={{ fontSize: 15, padding: "15px 34px" }}>Book a Free Consultation</button>
               <button className="btn-outline" onClick={() => scrollTo("how-it-works")} style={{ fontSize: 15, padding: "14px 34px" }}>See How It Works</button>
             </div>
             <div style={{ marginTop: 52, display: "flex", gap: 36, flexWrap: "wrap" }}>
-              {[["Free", "Discovery Call"], ["100%", "Custom Built For You"], ["24/7", "Automation That Never Sleeps"]].map(([val, label]) => (
+              {[["1-on-1", "Personal Attention"], ["100%", "Custom Built For You"], ["Free", "Discovery Call"]].map(([val, label]) => (
                 <div key={label}>
                   <div className="playfair" style={{ fontSize: 28, fontWeight: 700, color: s.navy, letterSpacing: "-0.5px" }}>{val}</div>
                   <div className="dm" style={{ fontSize: 12, color: s.mid, marginTop: 2, letterSpacing: "0.3px" }}>{label}</div>
@@ -324,7 +357,7 @@ const [submitting, setSubmitting] = useState(false);
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <FadeIn>
             <div style={{ textAlign: "center", marginBottom: 60 }}>
-              <p className="dm" style={{ fontSize: 12, letterSpacing: "3px", color: s.accent, textTransform: "uppercase", marginBottom: 16, fontWeight: 600 }}>What We Build</p>
+              <p className="dm" style={{ fontSize: 12, letterSpacing: "3px", color: s.accent, textTransform: "uppercase", marginBottom: 16, fontWeight: 600 }}>What I Build</p>
               <h2 className="playfair" style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 700, color: s.navy, letterSpacing: "-0.5px", marginBottom: 16 }}>End-to-End Automation Services</h2>
               <p className="dm" style={{ fontSize: 16, color: s.mid, maxWidth: 480, margin: "0 auto", fontWeight: 300, lineHeight: 1.7 }}>Everything you need to automate your operations — designed specifically for your business.</p>
             </div>
@@ -351,7 +384,7 @@ const [submitting, setSubmitting] = useState(false);
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <FadeIn>
             <div style={{ textAlign: "center", marginBottom: 48 }}>
-              <p className="dm" style={{ fontSize: 12, letterSpacing: "3px", color: s.accent, textTransform: "uppercase", marginBottom: 16, fontWeight: 600 }}>Industries We Serve</p>
+              <p className="dm" style={{ fontSize: 12, letterSpacing: "3px", color: s.accent, textTransform: "uppercase", marginBottom: 16, fontWeight: 600 }}>Industries I Serve</p>
               <h2 className="playfair" style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 700, color: s.navy, letterSpacing: "-0.5px" }}>Built For Your Industry</h2>
             </div>
             <div style={{ display: "flex", gap: 10, justifyContent: "center", marginBottom: 48, flexWrap: "wrap" }}>
@@ -384,7 +417,7 @@ const [submitting, setSubmitting] = useState(false);
                   {INDUSTRIES[activeIndustry].headline}
                 </h3>
                 <button className="btn-primary" onClick={() => scrollTo("contact")}>
-                  Talk To Us About {INDUSTRIES[activeIndustry].name} →
+                  Talk To Me About {INDUSTRIES[activeIndustry].name} →
                 </button>
               </div>
               <div>
@@ -452,13 +485,13 @@ const [submitting, setSubmitting] = useState(false);
                 Real Expertise.<br />No Fluff.
               </h2>
               <p className="dm" style={{ fontSize: 15, color: s.mid, lineHeight: 1.85, marginBottom: 20, fontWeight: 300 }}>
-                I'm <strong style={{ color: s.navy, fontWeight: 600 }}>Rohit Sharma</strong>, an AI automation specialist with a simple mission: help small businesses reclaim their time.
+                I'm Rohit Sharma, and I started Sharma Automation with one simple goal — to help small business owners stop spending their evenings doing work that a system could handle for them.
               </p>
               <p className="dm" style={{ fontSize: 15, color: s.mid, lineHeight: 1.85, marginBottom: 20, fontWeight: 300 }}>
-                I built Sharma Automation because I kept watching talented business owners drown in tasks that technology should be handling — scheduling, follow-ups, billing, reminders. Work that's necessary, but pulls you away from what you're actually good at.
+                I'm building this business one client at a time, which means when you work with me, you get my full attention — not a ticket number. Every system I build starts with a real conversation about how YOUR business actually works.
               </p>
               <p className="dm" style={{ fontSize: 15, color: s.mid, lineHeight: 1.85, marginBottom: 32, fontWeight: 300 }}>
-                I have a particular focus on medical & dental, real estate, and fitness & wellness — but any small business with repetitive workflows and big growth goals is exactly who I'm here to help. Every engagement starts with a free consultation, because the right automation strategy begins with truly understanding your business first.
+                I'm currently taking on a small number of founding clients — businesses that want to get ahead of the automation curve before their competitors do. If that's you, let's talk.
               </p>
               <div style={{ display: "flex", gap: 32 }}>
                 {[["Local LLMs", "On-premise AI"], ["API Integrations", "Cloud AI"], ["Workflow Design", "End-to-end"]].map(([title, sub]) => (
@@ -473,6 +506,35 @@ const [submitting, setSubmitting] = useState(false);
         </div>
       </section>
 
+      {/* FOUNDING CLIENT BANNER */}
+      <section id="founding-clients" style={{ padding: "72px 5vw", background: s.white }}>
+        <FadeIn>
+          <div style={{
+            maxWidth: 960, margin: "0 auto",
+            background: "#fffbeb", border: "1px solid #fde68a",
+            borderRadius: 12, padding: 40, textAlign: "center",
+          }}>
+            <div style={{
+              display: "inline-block",
+              background: "#fef3c7", color: "#92400e",
+              fontSize: 11, fontWeight: 700, letterSpacing: "2px",
+              padding: "4px 12px", borderRadius: 20,
+              fontFamily: "'DM Sans', sans-serif",
+              textTransform: "uppercase", marginBottom: 20,
+            }}>LIMITED AVAILABILITY</div>
+            <h2 className="playfair" style={{ fontSize: "clamp(24px, 3.5vw, 36px)", fontWeight: 700, color: s.navy, letterSpacing: "-0.5px", marginBottom: 20 }}>
+              Now Accepting Founding Clients
+            </h2>
+            <p className="dm" style={{ fontSize: 15, color: s.mid, lineHeight: 1.85, maxWidth: 700, margin: "0 auto 32px", fontWeight: 300 }}>
+              I'm currently taking on 3 founding clients at a specially reduced rate in exchange for an honest case study and testimonial. Founding client setup fee: $500 (normally $1,000+). Monthly support from $200/mo. You get a fully built automation system that pays for itself in the first month. I get real-world experience and a story to tell. If you're a personal trainer, gym owner, landscaper, or contractor — this offer is for you.
+            </p>
+            <button className="btn-primary" onClick={() => scrollTo("contact")} style={{ fontSize: 15, padding: "15px 34px", background: "#92400e" }}>
+              Claim a Founding Client Spot →
+            </button>
+          </div>
+        </FadeIn>
+      </section>
+
       {/* CTA BANNER */}
       <section style={{ padding: "72px 5vw", background: s.navy }}>
         <FadeIn>
@@ -481,7 +543,7 @@ const [submitting, setSubmitting] = useState(false);
               Ready to Automate Your Business?
             </h2>
             <p className="dm" style={{ fontSize: 16, color: "#94a3b8", marginBottom: 36, lineHeight: 1.7, fontWeight: 300 }}>
-              Book a free 30-minute discovery call. We'll map out exactly what's possible for your business — no commitment required.
+              Book a free 30-minute discovery call. I'll map out exactly what's possible for your business — no commitment required.
             </p>
             <button className="btn-primary" onClick={() => scrollTo("contact")} style={{ fontSize: 15, padding: "16px 38px", background: s.accent }}>
               Book My Free Call →
@@ -500,7 +562,7 @@ const [submitting, setSubmitting] = useState(false);
                 Let's Talk About<br />Your Business
               </h2>
               <p className="dm" style={{ fontSize: 15, color: s.mid, lineHeight: 1.85, marginBottom: 40, fontWeight: 300 }}>
-                Fill out the form and I'll get back to you within 24 hours. Or if you'd prefer, book a time directly on my calendar.
+                Fill out the form and I'll get back to you within 24 hours. Founding client setup fees start from $500 — a fraction of what you'll recover in the first month. Monthly support from $200/mo. A full transparent quote is provided on your free call with no obligation.
               </p>
               <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
                 {[["📧", "Email", "Sharma@SharmaAutomation.com"], ["📍", "Based In", "Randolph, New Jersey"], ["⏱️", "Response Time", "Within 24 Hours"]].map(([icon, label, val]) => (
@@ -529,17 +591,17 @@ const [submitting, setSubmitting] = useState(false);
                     <div><label>Your Name</label><input placeholder="Jane Smith" value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} /></div>
                     <div><label>Email Address</label><input placeholder="jane@business.com" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} /></div>
                   </div>
-                  <div><label>Business Name & Industry</label><input placeholder="Smith Dental Group — Medical" value={formData.business} onChange={e => setFormData({ ...formData, business: e.target.value })} /></div>
+                  <div><label>Business Name & Industry</label><input placeholder="Mike's Landscaping — Lawn Care" value={formData.business} onChange={e => setFormData({ ...formData, business: e.target.value })} /></div>
                   <div><label>What would you like to automate?</label><textarea placeholder="Tell me about your biggest time drains or the tasks you'd love to hand off..." value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })} /></div>
                  <button className="btn-primary" onClick={handleSubmit} disabled={submitting} style={{ width: "100%", padding: "15px", fontSize: 15, textAlign: "center", opacity: submitting ? 0.7 : 1 }}>
   {submitting ? "Sending..." : "Send Message →"}
 </button>
 {formError && (
   <p className="dm" style={{ fontSize: 13, color: "#ef4444", textAlign: "center" }}>
-    Something went wrong. Please try again or email us directly at sharma@sharmaautomation.com
+    Something went wrong. Please try again or email me directly at sharma@sharmaautomation.com
   </p>
 )}
-<p className="dm" style={{ fontSize: 12, color: s.mid, textAlign: "center" }}>No spam. No pressure. Just a conversation.</p>
+<p className="dm" style={{ fontSize: 12, color: s.mid, textAlign: "center" }}>No spam. No pressure. Just a conversation. Most small business setups start from $500.</p>
                 </div>
               </div>
             )}
