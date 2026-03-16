@@ -196,66 +196,73 @@ const [submitting, setSubmitting] = useState(false);
 }
       `}</style>
 
-      {/* ANNOUNCEMENT BAR */}
-      {annBarVisible && (
-        <div style={{
-          position: "relative", zIndex: 200,
-          background: "#92400e", color: "#ffffff",
-          height: 44, width: "100%",
-          display: "flex", alignItems: "center", justifyContent: "center",
-          gap: 12, fontFamily: "'DM Sans', sans-serif", fontSize: 13,
-        }}>
-          <span className="ann-text-desktop">🎯 Founding client rate: $500 setup fee (normally $1,000+) — only 3 spots available.</span>
-          <span className="ann-text-mobile">🎯 3 founding client spots available</span>
-          <span className="ann-link" onClick={() => scrollTo("founding-clients")}>Claim Your Spot →</span>
-          <button className="ann-dismiss" onClick={() => setAnnBarVisible(false)} aria-label="Dismiss">✕</button>
-        </div>
-      )}
-
-      {/* NAV */}
-      <nav style={{
-        position: "fixed", top: annBarVisible ? 44 : 0, left: 0, right: 0, zIndex: 100,
-        background: scrolled ? "rgba(255,255,255,0.97)" : "transparent",
-        borderBottom: scrolled ? "1px solid #e2e8f0" : "1px solid transparent",
-        backdropFilter: scrolled ? "blur(12px)" : "none",
-        transition: "all 0.3s ease, top 0.3s ease",
-        padding: "0 5vw",
+      {/* HEADER WRAPPER — fixed container holding both announcement bar and nav */}
+      <div style={{
+        position: "fixed", top: 0, left: 0, right: 0,
+        zIndex: 100,
+        display: "flex", flexDirection: "column",
       }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
-          <div
-  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-  style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}
->
-  <img
-    src="/SharmaAutomationIcon.png"
-    alt="Sharma Automation Logo"
-    style={{ height: 42, width: "auto", objectFit: "contain" }}
-  />
-</div>
-          {/* Desktop Nav */}
-<div className="desktop-nav" style={{ display: "flex", gap: 32, alignItems: "center" }}>
-  {NAV_LINKS.map(l => (
-    <span key={l} className="nav-link" onClick={() => scrollTo(l.toLowerCase().replaceAll(" ", "-"))}>{l}</span>
-  ))}
-  <button className="btn-primary" onClick={() => window.open('https://calendly.com/sharma-sharmaautomation/30min', '_blank')} style={{ padding: "10px 22px" }}>Book Free Call</button>
-</div>
 
-{/* Hamburger Button */}
-<button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} style={{
-  display: "none", flexDirection: "column", gap: 5, background: "none",
-  border: "none", cursor: "pointer", padding: 4,
-}}>
-  <div style={{ width: 24, height: 2, background: menuOpen ? s.accent : s.navy, transition: "all 0.3s", transform: menuOpen ? "rotate(45deg) translate(5px, 5px)" : "none" }} />
-  <div style={{ width: 24, height: 2, background: s.navy, transition: "all 0.3s", opacity: menuOpen ? 0 : 1 }} />
-  <div style={{ width: 24, height: 2, background: menuOpen ? s.accent : s.navy, transition: "all 0.3s", transform: menuOpen ? "rotate(-45deg) translate(5px, -5px)" : "none" }} />
-</button>
-        </div>
-      </nav>
+        {/* ANNOUNCEMENT BAR */}
+        {annBarVisible && (
+          <div style={{
+            position: "relative", width: "100%", height: 44,
+            background: "#92400e", color: "#ffffff",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            gap: 12, fontFamily: "'DM Sans', sans-serif", fontSize: 13,
+          }}>
+            <span className="ann-text-desktop">🎯 Founding client rate: $500 setup fee (normally $1,000+) — only 3 spots available.</span>
+            <span className="ann-text-mobile">🎯 3 founding client spots available</span>
+            <span className="ann-link" onClick={() => scrollTo("founding-clients")}>Claim Your Spot →</span>
+            <button className="ann-dismiss" onClick={() => setAnnBarVisible(false)} aria-label="Dismiss">✕</button>
+          </div>
+        )}
+
+        {/* NAV */}
+        <nav style={{
+          position: "relative", width: "100%",
+          background: scrolled ? "rgba(255,255,255,0.97)" : "rgba(255,255,255,0.97)",
+          borderBottom: "1px solid #e2e8f0",
+          backdropFilter: "blur(12px)",
+          transition: "all 0.3s ease",
+          padding: "0 5vw",
+        }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
+            <div
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}
+            >
+              <img
+                src="/SharmaAutomationIcon.png"
+                alt="Sharma Automation Logo"
+                style={{ height: 42, width: "auto", objectFit: "contain" }}
+              />
+            </div>
+            {/* Desktop Nav */}
+            <div className="desktop-nav" style={{ display: "flex", gap: 32, alignItems: "center" }}>
+              {NAV_LINKS.map(l => (
+                <span key={l} className="nav-link" onClick={() => scrollTo(l.toLowerCase().replaceAll(" ", "-"))}>{l}</span>
+              ))}
+              <button className="btn-primary" onClick={() => window.open('https://calendly.com/sharma-sharmaautomation/30min', '_blank')} style={{ padding: "10px 22px" }}>Book Free Call</button>
+            </div>
+            {/* Hamburger Button */}
+            <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} style={{
+              display: "none", flexDirection: "column", gap: 5, background: "none",
+              border: "none", cursor: "pointer", padding: 4,
+            }}>
+              <div style={{ width: 24, height: 2, background: menuOpen ? s.accent : s.navy, transition: "all 0.3s", transform: menuOpen ? "rotate(45deg) translate(5px, 5px)" : "none" }} />
+              <div style={{ width: 24, height: 2, background: s.navy, transition: "all 0.3s", opacity: menuOpen ? 0 : 1 }} />
+              <div style={{ width: 24, height: 2, background: menuOpen ? s.accent : s.navy, transition: "all 0.3s", transform: menuOpen ? "rotate(-45deg) translate(5px, -5px)" : "none" }} />
+            </button>
+          </div>
+        </nav>
+
+      </div>
 
       {/* Mobile Menu */}
 <div className="mobile-menu" style={{
   display: "none",
-  position: "fixed", top: 68, left: 0, right: 0, zIndex: 99,
+  position: "fixed", top: annBarVisible ? 112 : 68, left: 0, right: 0, zIndex: 101,
   background: "rgba(255,255,255,0.98)", backdropFilter: "blur(12px)",
   borderBottom: "1px solid #e2e8f0",
   flexDirection: "column", padding: "16px 24px 24px",
@@ -280,7 +287,7 @@ const [submitting, setSubmitting] = useState(false);
         minHeight: "100vh",
         background: `linear-gradient(160deg, #f8fafc 0%, #f0f9ff 50%, #f8fafc 100%)`,
         display: "flex", alignItems: "center",
-        padding: "100px 5vw 80px",
+        padding: `${annBarVisible ? 112 : 68}px 5vw 80px`,
         position: "relative", overflow: "hidden",
       }}>
         {/* Background geometry */}
@@ -624,7 +631,7 @@ const [submitting, setSubmitting] = useState(false);
 </div>
           <div style={{ display: "flex", gap: 28 }}>
             {NAV_LINKS.map(l => (
-              <span key={l} className="dm" onClick={() => scrollTo(l.toLowerCase().replace(" ", "-"))} style={{ fontSize: 13, color: "#64748b", cursor: "pointer", transition: "color 0.2s" }}
+              <span key={l} className="dm" onClick={() => scrollTo(l.toLowerCase().replaceAll(" ", "-"))} style={{ fontSize: 13, color: "#64748b", cursor: "pointer", transition: "color 0.2s" }}
                 onMouseEnter={e => e.target.style.color = "#fff"}
                 onMouseLeave={e => e.target.style.color = "#64748b"}>{l}</span>
             ))}
