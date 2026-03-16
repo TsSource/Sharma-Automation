@@ -237,7 +237,7 @@ const [submitting, setSubmitting] = useState(false);
   {NAV_LINKS.map(l => (
     <span key={l} className="nav-link" onClick={() => scrollTo(l.toLowerCase().replaceAll(" ", "-"))}>{l}</span>
   ))}
-  <button className="btn-primary" onClick={() => scrollTo("contact")} style={{ padding: "10px 22px" }}>Book Free Call</button>
+  <button className="btn-primary" onClick={() => window.open('https://calendly.com/sharma-sharmaautomation/30min', '_blank')} style={{ padding: "10px 22px" }}>Book Free Call</button>
 </div>
 
 {/* Hamburger Button */}
@@ -270,7 +270,7 @@ const [submitting, setSubmitting] = useState(false);
       cursor: "pointer",
     }}>{l}</span>
   ))}
-  <button className="btn-primary" onClick={() => { scrollTo("contact"); setMenuOpen(false); }} style={{ marginTop: 16, padding: "14px", fontSize: 15, textAlign: "center" }}>
+  <button className="btn-primary" onClick={() => { window.open('https://calendly.com/sharma-sharmaautomation/30min', '_blank'); setMenuOpen(false); }} style={{ marginTop: 16, padding: "14px", fontSize: 15, textAlign: "center" }}>
     Book Free Call
   </button>
 </div>
@@ -314,7 +314,7 @@ const [submitting, setSubmitting] = useState(false);
               I design and deploy custom AI agent systems for small businesses — so your team spends less time on repetitive tasks and more time on what actually grows revenue.
             </p>
             <div style={{ display: "flex", gap: 14, flexWrap: "wrap", alignItems: "center" }}>
-              <button className="btn-primary" onClick={() => scrollTo("contact")} style={{ fontSize: 15, padding: "15px 34px" }}>Book a Free Consultation</button>
+              <button className="btn-primary" onClick={() => window.open('https://calendly.com/sharma-sharmaautomation/30min', '_blank')} style={{ fontSize: 15, padding: "15px 34px" }}>Book a Free Consultation</button>
               <button className="btn-outline" onClick={() => scrollTo("how-it-works")} style={{ fontSize: 15, padding: "14px 34px" }}>See How It Works</button>
             </div>
             <div style={{ marginTop: 52, display: "flex", gap: 36, flexWrap: "wrap" }}>
@@ -528,7 +528,7 @@ const [submitting, setSubmitting] = useState(false);
             <p className="dm" style={{ fontSize: 15, color: s.mid, lineHeight: 1.85, maxWidth: 700, margin: "0 auto 32px", fontWeight: 300 }}>
               I'm currently taking on 3 founding clients at a specially reduced rate in exchange for an honest case study and testimonial. Founding client setup fee: $500 (normally $1,000+). Monthly support from $200/mo. You get a fully built automation system that pays for itself in the first month. I get real-world experience and a story to tell. If you're a personal trainer, gym owner, landscaper, or contractor — this offer is for you.
             </p>
-            <button className="btn-primary" onClick={() => scrollTo("contact")} style={{ fontSize: 15, padding: "15px 34px", background: "#92400e" }}>
+            <button className="btn-primary" onClick={() => window.open('https://calendly.com/sharma-sharmaautomation/30min', '_blank')} style={{ fontSize: 15, padding: "15px 34px", background: "#92400e" }}>
               Claim a Founding Client Spot →
             </button>
           </div>
@@ -545,7 +545,7 @@ const [submitting, setSubmitting] = useState(false);
             <p className="dm" style={{ fontSize: 16, color: "#94a3b8", marginBottom: 36, lineHeight: 1.7, fontWeight: 300 }}>
               Book a free 30-minute discovery call. I'll map out exactly what's possible for your business — no commitment required.
             </p>
-            <button className="btn-primary" onClick={() => scrollTo("contact")} style={{ fontSize: 15, padding: "16px 38px", background: s.accent }}>
+            <button className="btn-primary" onClick={() => window.open('https://calendly.com/sharma-sharmaautomation/30min', '_blank')} style={{ fontSize: 15, padding: "16px 38px", background: s.accent }}>
               Book My Free Call →
             </button>
           </div>
