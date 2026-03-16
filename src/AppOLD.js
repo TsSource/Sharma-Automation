@@ -83,6 +83,7 @@ export default function App() {
   // eslint-disable-next-line no-unused-vars
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [annBarVisible, setAnnBarVisible] = useState(true);
   const headerRef = useRef(null);
   const [headerHeight, setHeaderHeight] = useState(112);
   const [formData, setFormData] = useState({ name: "", email: "", business: "", message: "" });
@@ -103,7 +104,7 @@ const [submitting, setSubmitting] = useState(false);
     measure();
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
-  }, []);
+  }, [annBarVisible]);
 
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -182,13 +183,22 @@ const [submitting, setSubmitting] = useState(false);
         textarea { resize: vertical; min-height: 110px; }
         label { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #334155; display: block; margin-bottom: 6px; }
         
+        .ann-link { color: #fff; font-weight: 700; cursor: pointer; text-decoration: none; }
+        .ann-link:hover { text-decoration: underline; }
+        .ann-dismiss { background: none; border: none; color: #fff; font-size: 14px; cursor: pointer; opacity: 0.7; position: absolute; right: 16px; line-height: 1; padding: 4px; }
+        .ann-dismiss:hover { opacity: 1; }
+        .ann-text-desktop { display: inline; }
+        .ann-text-mobile { display: none; }
         @media (max-width: 768px) {
           /* Nav */
           .desktop-nav { display: none !important; }
           .hamburger { display: flex !important; }
           .mobile-menu { display: flex !important; }
-          .nav-inner { height: 56px !important; }
-
+          .nav-inner { height: 60px !important; }
+          /* Announcement bar */
+          .ann-bar { font-size: 11px !important; padding: 0 40px 0 16px !important; height: auto !important; min-height: 44px !important; text-align: center; }
+          .ann-text-desktop { display: none; }
+          .ann-text-mobile { display: inline; }
           /* Hero */
           .hero-sub { font-size: 16px !important; }
           .hero-buttons { flex-direction: column !important; gap: 12px !important; width: 100% !important; align-items: stretch !important; }
@@ -201,10 +211,7 @@ const [submitting, setSubmitting] = useState(false);
           .about-badge { display: none !important; }
           .industry-btn { flex: 1 1 auto; min-width: 140px; text-align: center; }
           /* Section padding */
-          section { padding-left: 24px !important; padding-right: 24px !important; }
-          section:not(:first-of-type) { padding-top: 64px !important; padding-bottom: 64px !important; }
-          /* Logo */
-          .nav-logo-img { height: 34px !important; }
+          section { padding-left: 24px !important; padding-right: 24px !important; padding-top: 64px !important; padding-bottom: 64px !important; }
           /* Overflow guard */
           * { max-width: 100%; }
           img { max-width: 100%; height: auto; }
@@ -223,36 +230,26 @@ const [submitting, setSubmitting] = useState(false);
       }}>
 
         {/* ANNOUNCEMENT BAR */}
-        <div style={{
-            width: "100%",
-            background: "#92400e",
-            color: "#ffffff",
-            fontFamily: "'DM Sans', sans-serif",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "10px",
-            height: "44px",
-            fontSize: "13px",
-            padding: "0 48px 0 16px",
-            boxSizing: "border-box",
+        {annBarVisible && (
+          <div className="ann-bar" style={{
+            position: "relative", width: "100%", minHeight: 44,
+            background: "#92400e", color: "#ffffff",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            gap: 12, fontFamily: "'DM Sans', sans-serif", fontSize: 13,
           }}>
-            <span style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-              🎯 Founding client rate: $500 setup fee — only 3 spots left.
-            </span>
-            <span
-              onClick={() => scrollTo("founding-clients")}
-              style={{ color: "#fff", fontWeight: 700, cursor: "pointer",
-              textDecoration: "underline", flexShrink: 0, whiteSpace: "nowrap" }}>
-              Claim Your Spot →
-            </span>
+            <span className="ann-text-desktop">🎯 Founding client rate: $500 setup fee (normally $1,000+) — only 3 spots available.</span>
+            <span className="ann-text-mobile">🎯 3 founding client spots available</span>
+            <span className="ann-link" onClick={() => scrollTo("founding-clients")}>Claim Your Spot →</span>
+            <button className="ann-dismiss" onClick={() => setAnnBarVisible(false)} aria-label="Dismiss">✕</button>
           </div>
+        )}
 
         {/* NAV */}
-        <nav className="main-nav" style={{
+        <nav style={{
           position: "relative", width: "100%",
-          background: "#ffffff",
+          background: scrolled ? "rgba(255,255,255,0.97)" : "rgba(255,255,255,0.97)",
           borderBottom: "1px solid #e2e8f0",
+          backdropFilter: "blur(12px)",
           transition: "all 0.3s ease",
           padding: "0 5vw",
         }}>
@@ -264,7 +261,6 @@ const [submitting, setSubmitting] = useState(false);
               <img
                 src="/SharmaAutomationIcon.png"
                 alt="Sharma Automation Logo"
-                className="nav-logo-img"
                 style={{ height: 42, width: "auto", objectFit: "contain" }}
               />
             </div>
@@ -509,7 +505,7 @@ const [submitting, setSubmitting] = useState(false);
     style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
   />
 </div>
-              <div className="about-badge" style={{ position: "absolute", bottom: -20, right: -20, background: s.navy, borderRadius: 12, padding: "18px 22px", boxShadow: "0 8px 32px rgba(0,0,0,0.15)" }}>
+              <div style={{ position: "absolute", bottom: -20, right: -20, background: s.navy, borderRadius: 12, padding: "18px 22px", boxShadow: "0 8px 32px rgba(0,0,0,0.15)" }}>
                 <div className="playfair" style={{ fontSize: 24, fontWeight: 700, color: "#fff" }}>Free</div>
                 <div className="dm" style={{ fontSize: 11, color: "#94a3b8", letterSpacing: "0.5px" }}>Discovery Call</div>
               </div>
