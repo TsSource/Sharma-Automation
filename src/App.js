@@ -82,7 +82,6 @@ export default function App() {
   const [activeIndustry, setActiveIndustry] = useState(0);
   // eslint-disable-next-line no-unused-vars
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const headerRef = useRef(null);
   const [headerHeight, setHeaderHeight] = useState(112);
   const [formData, setFormData] = useState({ name: "", email: "", business: "", message: "" });
@@ -90,11 +89,6 @@ const [submitted, setSubmitted] = useState(false);
 const [formError, setFormError] = useState(false);
 const [submitting, setSubmitting] = useState(false);
 
-  useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", handler);
-    return () => window.removeEventListener("scroll", handler);
-  }, []);
 
   useEffect(() => {
     const measure = () => {
@@ -188,6 +182,7 @@ const [submitting, setSubmitting] = useState(false);
           .hamburger { display: flex !important; }
           .mobile-menu { display: flex !important; }
           .nav-inner { height: 56px !important; }
+          .ann-bar { display: none !important; }
 
           /* Hero */
           .hero-sub { font-size: 16px !important; }
@@ -223,7 +218,7 @@ const [submitting, setSubmitting] = useState(false);
       }}>
 
         {/* ANNOUNCEMENT BAR */}
-        <div style={{
+        <div className="ann-bar" style={{
             width: "100%",
             background: "#92400e",
             color: "#ffffff",
@@ -231,19 +226,19 @@ const [submitting, setSubmitting] = useState(false);
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            gap: "10px",
-            height: "44px",
+            flexWrap: "wrap",
+            gap: "6px",
+            minHeight: "44px",
             fontSize: "13px",
-            padding: "0 48px 0 16px",
+            padding: "10px 16px",
+            textAlign: "center",
             boxSizing: "border-box",
           }}>
-            <span style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-              🎯 Founding client rate: $500 setup fee — only 3 spots left.
-            </span>
+            <span>🎯 Founding client rate: $500 setup fee — only 3 spots left.</span>
             <span
               onClick={() => scrollTo("founding-clients")}
               style={{ color: "#fff", fontWeight: 700, cursor: "pointer",
-              textDecoration: "underline", flexShrink: 0, whiteSpace: "nowrap" }}>
+              textDecoration: "underline", whiteSpace: "nowrap" }}>
               Claim Your Spot →
             </span>
           </div>
