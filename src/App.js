@@ -336,8 +336,14 @@ export default function App() {
         <div className="two-col" style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }}>
           <FadeIn>
             <div style={{ position: "relative" }}>
-              <div style={{ width: "100%", aspectRatio: "4/3", borderRadius: 16, overflow: "hidden", border: "1px solid #bae6fd" }}>
-                <img src="/AIHeadshot.png" alt="Rohit Sharma - Founder of Sharma Automation" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center" }} />
+              <div style={{ width: "100%", borderRadius: 16, overflow: "hidden", border: "1px solid #bae6fd", position: "relative", paddingBottom: "56.25%" }}>
+                <iframe
+                  src="https://www.youtube.com/embed/qdscK3wHbVM"
+                  title="Rohit Sharma - Sharma Automation Introduction"
+                  style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
               </div>
               <div className="about-badge" style={{ position: "absolute", bottom: -20, right: -20, background: s.navy, borderRadius: 12, padding: "18px 22px", boxShadow: "0 8px 32px rgba(0,0,0,0.15)" }}><div className="playfair" style={{ fontSize: 24, fontWeight: 700, color: "#fff" }}>Free</div><div className="dm" style={{ fontSize: 11, color: "#94a3b8", letterSpacing: "0.5px" }}>Discovery Call</div></div>
             </div>
