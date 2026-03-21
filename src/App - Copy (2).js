@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-const OTHER_NAV_LINKS = ["Industries", "How It Works", "About", "FAQ", "Contact"];
+const OTHER_NAV_LINKS = ["Industries", "How It Works", "About", "Contact"];
 
 const PAIN_POINTS = [
   { icon: "⏰", title: "Drowning in Admin Work", desc: "Your team spends hours on scheduling, follow-ups, and data entry — time that should go toward growing your business." },
@@ -37,14 +37,6 @@ const STEPS = [
   { num: "04", title: "Measure & Optimize", desc: "I track performance from day one and stay available to refine your agents as your business evolves. You'll always know what's working and what can be improved." },
 ];
 
-const FAQS = [
-  { q: "What does Google Business Profile optimization actually do for my business?", a: "It makes sure your business shows up on Google Maps when local customers search for your services. I optimize your listing's categories, description, photos, service area, and review strategy so you appear alongside — or above — your competitors in local search results." },
-  { q: "How can optimizing my Google Business Profile make my business more revenue?", a: "When someone searches \"landscaper near me\" or \"contractor in Randolph,\" Google shows the top 3 local businesses on the map. If you're not one of them, those customers go to your competitors. A fully optimized profile with strong reviews puts you in that top 3, which means more calls, more bookings, and more revenue without spending a dollar on ads." },
-  { q: "How much does this cost?", a: "Every project is different, but a full Google Business Profile audit with optimization, review strategy, and directory management starts at $400. Monthly maintenance and management runs $75–$150 per month. I offer a free discovery call to understand your needs before quoting anything." },
-  { q: "Do I need to give you my Google password?", a: "No. I'll walk you through adding me as a manager on your Google Business Profile, which lets me optimize your listing without accessing your email, calendar, or any other personal information. You stay in full control and can remove my access at any time." },
-  { q: "What kind of businesses do you work with?", a: "I work with small local service businesses — landscapers, contractors, personal trainers, gym owners, dental offices, and home service companies. If your customers find you by searching Google for a service in their area, I can help you show up." },
-];
-
 function useInView(threshold = 0.15) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
@@ -68,19 +60,16 @@ export default function App() {
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef(null);
-  const [headerHeight, setHeaderHeight] = useState(112);
+  const [headerHeight, setHeaderHeight] = useState(56);
   const [formData, setFormData] = useState({ name: "", email: "", business: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [formError, setFormError] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
-  const [faqOpen, setFaqOpen] = useState(null);
-  const [aboutSlide, setAboutSlide] = useState(0);
   const dropdownTimeout = useRef(null);
 
   useEffect(() => { const measure = () => { if (headerRef.current) setHeaderHeight(headerRef.current.offsetHeight); }; measure(); window.addEventListener("resize", measure); return () => window.removeEventListener("resize", measure); }, []);
   useEffect(() => { const h = () => { setShowBackToTop(window.scrollY > 400); }; window.addEventListener("scroll", h); return () => window.removeEventListener("scroll", h); }, []);
-  useEffect(() => { const interval = setInterval(() => { setAboutSlide(prev => (prev + 1) % 2); }, 3000); return () => clearInterval(interval); }, []);
 
   const scrollTo = (id) => { document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); };
   const handleServiceNav = (tabIndex) => { setActiveServiceTab(tabIndex); setServicesDropdownOpen(false); setMobileServicesOpen(false); setMenuOpen(false); setTimeout(() => { document.getElementById("services")?.scrollIntoView({ behavior: "smooth" }); }, 50); };
@@ -141,11 +130,6 @@ export default function App() {
         .services-dropdown-item .dd-sub { font-size: 12px; color: #94a3b8; font-weight: 400; margin-top: 1px; }
         .mobile-services-sub-item { font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 400; color: #64748b; padding: 10px 0 10px 16px; cursor: pointer; border-bottom: 1px solid #f8fafc; display: flex; align-items: center; gap: 8px; }
         .mobile-services-sub-item:hover { color: #0ea5e9; }
-        .faq-item { border: 1px solid #e2e8f0; border-radius: 10px; margin-bottom: 12px; overflow: hidden; transition: border-color 0.2s; background: #fff; }
-        .faq-item:hover { border-color: #cbd5e1; }
-        .faq-q { font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; color: #0f172a; padding: 20px 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; user-select: none; }
-        .faq-q:hover { color: #0ea5e9; }
-        .faq-a { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; color: #64748b; line-height: 1.75; padding: 0 24px 20px; }
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
           .hamburger { display: flex !important; }
@@ -167,8 +151,6 @@ export default function App() {
           .nav-logo-img { height: 34px !important; }
           * { max-width: 100%; }
           img { max-width: 100%; height: auto; }
-          .about-slider { width: 200% !important; max-width: none !important; }
-          .about-slider img { width: 50% !important; max-width: none !important; height: 100% !important; }
           .back-to-top-btn { bottom: 20px !important; right: 20px !important; width: 42px !important; height: 42px !important; font-size: 18px !important; }
           .service-grid { grid-template-columns: 1fr !important; }
         }
@@ -340,17 +322,7 @@ export default function App() {
         <div className="two-col" style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }}>
           <FadeIn>
             <div style={{ position: "relative" }}>
-              <div style={{ width: "100%", aspectRatio: "4/3", borderRadius: 16, overflow: "hidden", border: "1px solid #bae6fd", position: "relative" }}>
-                <div className="about-slider" style={{ display: "flex", width: "200%", height: "100%", transition: "transform 0.7s ease", transform: `translateX(-${aboutSlide * 50}%)` }}>
-                  <img src="/AIHeadshot.png" alt="Rohit Sharma - Founder of Sharma Automation" style={{ width: "50%", height: "100%", objectFit: "cover", objectPosition: "top center", flexShrink: 0 }} />
-                  <img src="/SharmaAutomationLogo.png" alt="Sharma Automation Logo" style={{ width: "50%", height: "100%", objectFit: "cover", objectPosition: "center", flexShrink: 0 }} />
-                </div>
-                <div style={{ position: "absolute", bottom: 12, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 8 }}>
-                  {[0, 1].map(i => (
-                    <div key={i} onClick={() => setAboutSlide(i)} style={{ width: 8, height: 8, borderRadius: "50%", background: aboutSlide === i ? "#0ea5e9" : "rgba(255,255,255,0.6)", cursor: "pointer", transition: "background 0.3s", boxShadow: "0 1px 4px rgba(0,0,0,0.2)" }} />
-                  ))}
-                </div>
-              </div>
+              <div style={{ width: "100%", aspectRatio: "4/3", borderRadius: 16, overflow: "hidden", border: "1px solid #bae6fd" }}><img src="/SharmaAutomationLogo.png" alt="Rohit Sharma - Sharma Automation" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} /></div>
               <div className="about-badge" style={{ position: "absolute", bottom: -20, right: -20, background: s.navy, borderRadius: 12, padding: "18px 22px", boxShadow: "0 8px 32px rgba(0,0,0,0.15)" }}><div className="playfair" style={{ fontSize: 24, fontWeight: 700, color: "#fff" }}>Free</div><div className="dm" style={{ fontSize: 11, color: "#94a3b8", letterSpacing: "0.5px" }}>Discovery Call</div></div>
             </div>
           </FadeIn>
@@ -366,34 +338,6 @@ export default function App() {
               </div>
             </div>
           </FadeIn>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section id="faq" style={{ padding: "96px 5vw", background: s.light }}>
-        <div style={{ maxWidth: 760, margin: "0 auto" }}>
-          <FadeIn>
-            <div style={{ textAlign: "center", marginBottom: 48 }}>
-              <p className="dm" style={{ fontSize: 12, letterSpacing: "3px", color: s.accent, textTransform: "uppercase", marginBottom: 16, fontWeight: 600 }}>Common Questions</p>
-              <h2 className="playfair" style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 700, color: s.navy, letterSpacing: "-0.5px" }}>Frequently Asked Questions</h2>
-            </div>
-          </FadeIn>
-          {FAQS.map((faq, i) => (
-            <FadeIn key={i} delay={i * 0.06}>
-              <div className="faq-item" style={{ borderColor: faqOpen === i ? s.accent : "#e2e8f0" }}>
-                <div className="faq-q" onClick={() => setFaqOpen(faqOpen === i ? null : i)}>
-                  <span>{faq.q}</span>
-                  <svg width="14" height="14" viewBox="0 0 14 14" style={{ flexShrink: 0, transition: "transform 0.25s", transform: faqOpen === i ? "rotate(45deg)" : "rotate(0)" }}>
-                    <line x1="7" y1="1" x2="7" y2="13" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                    <line x1="1" y1="7" x2="13" y2="7" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                  </svg>
-                </div>
-                <div style={{ maxHeight: faqOpen === i ? "300px" : "0", overflow: "hidden", transition: "max-height 0.3s ease" }}>
-                  <div className="faq-a">{faq.a}</div>
-                </div>
-              </div>
-            </FadeIn>
-          ))}
         </div>
       </section>
 
