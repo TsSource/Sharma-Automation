@@ -75,10 +75,12 @@ export default function App() {
   const [submitting, setSubmitting] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [faqOpen, setFaqOpen] = useState(null);
+  const [aboutSlide, setAboutSlide] = useState(0);
   const dropdownTimeout = useRef(null);
 
   useEffect(() => { const measure = () => { if (headerRef.current) setHeaderHeight(headerRef.current.offsetHeight); }; measure(); window.addEventListener("resize", measure); return () => window.removeEventListener("resize", measure); }, []);
   useEffect(() => { const h = () => { setShowBackToTop(window.scrollY > 400); }; window.addEventListener("scroll", h); return () => window.removeEventListener("scroll", h); }, []);
+  useEffect(() => { const interval = setInterval(() => { setAboutSlide(prev => (prev + 1) % 2); }, 3000); return () => clearInterval(interval); }, []);
 
   const scrollTo = (id) => { document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); };
   const handleServiceNav = (tabIndex) => { setActiveServiceTab(tabIndex); setServicesDropdownOpen(false); setMobileServicesOpen(false); setMenuOpen(false); setTimeout(() => { document.getElementById("services")?.scrollIntoView({ behavior: "smooth" }); }, 50); };
@@ -165,6 +167,8 @@ export default function App() {
           .nav-logo-img { height: 34px !important; }
           * { max-width: 100%; }
           img { max-width: 100%; height: auto; }
+          .about-slider { width: 200% !important; max-width: none !important; }
+          .about-slider img { width: 50% !important; max-width: none !important; height: 100% !important; }
           .back-to-top-btn { bottom: 20px !important; right: 20px !important; width: 42px !important; height: 42px !important; font-size: 18px !important; }
           .service-grid { grid-template-columns: 1fr !important; }
         }
@@ -336,8 +340,16 @@ export default function App() {
         <div className="two-col" style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }}>
           <FadeIn>
             <div style={{ position: "relative" }}>
-              <div style={{ width: "100%", aspectRatio: "4/3", borderRadius: 16, overflow: "hidden", border: "1px solid #bae6fd" }}>
-                <img src="/AIHeadshot.png" alt="Rohit Sharma - Founder of Sharma Automation" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center" }} />
+              <div style={{ width: "100%", aspectRatio: "4/3", borderRadius: 16, overflow: "hidden", border: "1px solid #bae6fd", position: "relative" }}>
+                <div className="about-slider" style={{ display: "flex", width: "200%", height: "100%", transition: "transform 0.7s ease", transform: `translateX(-${aboutSlide * 50}%)` }}>
+                  <img src="/AIHeadshot.png" alt="Rohit Sharma - Founder of Sharma Automation" style={{ width: "50%", height: "100%", objectFit: "cover", objectPosition: "top center", flexShrink: 0 }} />
+                  <img src="/SharmaAutomationLogo.png" alt="Sharma Automation Logo" style={{ width: "50%", height: "100%", objectFit: "cover", objectPosition: "center", flexShrink: 0 }} />
+                </div>
+                <div style={{ position: "absolute", bottom: 12, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 8 }}>
+                  {[0, 1].map(i => (
+                    <div key={i} onClick={() => setAboutSlide(i)} style={{ width: 8, height: 8, borderRadius: "50%", background: aboutSlide === i ? "#0ea5e9" : "rgba(255,255,255,0.6)", cursor: "pointer", transition: "background 0.3s", boxShadow: "0 1px 4px rgba(0,0,0,0.2)" }} />
+                  ))}
+                </div>
               </div>
               <div className="about-badge" style={{ position: "absolute", bottom: -20, right: -20, background: s.navy, borderRadius: 12, padding: "18px 22px", boxShadow: "0 8px 32px rgba(0,0,0,0.15)" }}><div className="playfair" style={{ fontSize: 24, fontWeight: 700, color: "#fff" }}>Free</div><div className="dm" style={{ fontSize: 11, color: "#94a3b8", letterSpacing: "0.5px" }}>Discovery Call</div></div>
             </div>
