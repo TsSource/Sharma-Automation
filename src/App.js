@@ -68,7 +68,7 @@ export default function App() {
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef(null);
-  const [headerHeight, setHeaderHeight] = useState(112);
+  const [headerHeight, setHeaderHeight] = useState(56);
   const [formData, setFormData] = useState({ name: "", email: "", business: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [formError, setFormError] = useState(false);
