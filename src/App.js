@@ -69,10 +69,6 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef(null);
   const [headerHeight, setHeaderHeight] = useState(56);
-  const [formData, setFormData] = useState({ name: "", email: "", business: "", message: "" });
-  const [submitted, setSubmitted] = useState(false);
-  const [formError, setFormError] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [faqOpen, setFaqOpen] = useState(null);
   const dropdownTimeout = useRef(null);
@@ -85,14 +81,13 @@ export default function App() {
   const handleDropdownEnter = () => { clearTimeout(dropdownTimeout.current); setServicesDropdownOpen(true); };
   const handleDropdownLeave = () => { dropdownTimeout.current = setTimeout(() => { setServicesDropdownOpen(false); }, 200); };
 
-  const handleSubmit = async () => {
-    if (!formData.name || !formData.email) return;
-    setSubmitting(true); setFormError(false);
-    try {
-      const response = await fetch("https://formspree.io/f/xaqpozye", { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify({ name: formData.name, email: formData.email, business: formData.business, message: formData.message }) });
-      if (response.ok) { setSubmitted(true); } else { setFormError(true); }
-    } catch (error) { setFormError(true); } finally { setSubmitting(false); }
-  };
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://link.msgsndr.com/js/form_embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => { document.body.removeChild(script); };
+  }, []);
 
   const s = { navy: "#0f172a", slate: "#334155", mid: "#64748b", light: "#f1f5f9", white: "#ffffff", accent: "#0ea5e9", accentDark: "#0369a1", border: "#e2e8f0" };
   const activeServices = activeServiceTab === 0 ? VISIBILITY_SERVICES : AUTOMATION_SERVICES;
@@ -167,6 +162,7 @@ export default function App() {
           img { max-width: 100%; height: auto; }
           .back-to-top-btn { bottom: 20px !important; right: 20px !important; width: 42px !important; height: 42px !important; font-size: 18px !important; }
           .service-grid { grid-template-columns: 1fr !important; }
+          .ghl-form-iframe { height: 750px !important; }
         }
         @media (min-width: 769px) { .hamburger { display: none !important; } .mobile-menu { display: none !important; } }
       `}</style>
@@ -428,23 +424,27 @@ export default function App() {
             </div>
           </FadeIn>
           <FadeIn delay={0.15}>
-            {submitted ? (
-              <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 16, padding: "52px 40px", textAlign: "center" }}><div style={{ fontSize: 52, marginBottom: 20 }}>✅</div><h3 className="playfair" style={{ fontSize: 24, fontWeight: 700, color: s.navy, marginBottom: 12 }}>Message Received!</h3><p className="dm" style={{ fontSize: 15, color: s.mid, lineHeight: 1.7 }}>Thanks for reaching out. I'll be in touch within 24 hours to schedule your free consultation.</p></div>
-            ) : (
-              <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 16, padding: "40px" }}>
-                <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-                    <div><label>Your Name</label><input placeholder="Jane Smith" value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} /></div>
-                    <div><label>Email Address</label><input placeholder="jane@business.com" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} /></div>
-                  </div>
-                  <div><label>Business Name & Industry</label><input placeholder="Mike's Landscaping — Lawn Care" value={formData.business} onChange={e => setFormData({ ...formData, business: e.target.value })} /></div>
-                  <div><label>What would you like to automate?</label><textarea placeholder="Tell me about your biggest time drains or the tasks you'd love to hand off..." value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })} /></div>
-                  <button className="btn-primary" onClick={handleSubmit} disabled={submitting} style={{ width: "100%", padding: "15px", fontSize: 15, textAlign: "center", opacity: submitting ? 0.7 : 1 }}>{submitting ? "Sending..." : "Send Message →"}</button>
-                  {formError && (<p className="dm" style={{ fontSize: 13, color: "#ef4444", textAlign: "center" }}>Something went wrong. Please try again or email me directly at sharma@sharmaautomation.com</p>)}
-                  <p className="dm" style={{ fontSize: 12, color: s.mid, textAlign: "center" }}>No spam. No pressure. Just a conversation. Most small business setups start from $500.</p>
-                </div>
-              </div>
-            )}
+            <div style={{ borderRadius: 16, overflow: "hidden" }}>
+              <iframe
+                src="https://api.leadconnectorhq.com/widget/form/jUedMA7PglKtkEaVgXMg"
+                className="ghl-form-iframe"
+                style={{ width: "100%", height: 650, border: "none", display: "block" }}
+                scrolling="no"
+                id="inline-jUedMA7PglKtkEaVgXMg"
+                data-layout="{'id':'INLINE'}"
+                data-trigger-type="alwaysShow"
+                data-trigger-value=""
+                data-activation-type="alwaysActivated"
+                data-activation-value=""
+                data-deactivation-type="neverDeactivate"
+                data-deactivation-value=""
+                data-form-name="Sharma Automation Contact Form"
+                data-height="650"
+                data-layout-iframe-id="inline-jUedMA7PglKtkEaVgXMg"
+                data-form-id="jUedMA7PglKtkEaVgXMg"
+                title="Sharma Automation Contact Form"
+              />
+            </div>
           </FadeIn>
         </div>
       </section>
