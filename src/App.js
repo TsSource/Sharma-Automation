@@ -196,7 +196,7 @@ export default function App() {
                 </div>
               </div>
               {OTHER_NAV_LINKS.map(l => (<span key={l} className="nav-link" onClick={() => scrollTo(l.toLowerCase().replaceAll(" ", "-"))}>{l}</span>))}
-              <button className="btn-primary" onClick={() => window.open('https://calendly.com/sharma-sharmaautomation/30min', '_blank')} style={{ padding: "10px 22px" }}>Book Free Call</button>
+              <button className="btn-primary" onClick={() => window.open('https://api.leadconnectorhq.com/widget/booking/l0FfSuPINhd1ypD8cyiX', '_blank')} style={{ padding: "10px 22px" }}>Book Free Call</button>
             </div>
             <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} style={{ display: "none", flexDirection: "column", gap: 5, background: "none", border: "none", cursor: "pointer", padding: 4 }}>
               <div style={{ width: 24, height: 2, background: menuOpen ? s.accent : s.navy, transition: "all 0.3s", transform: menuOpen ? "rotate(45deg) translate(5px, 5px)" : "none" }} />
@@ -218,7 +218,7 @@ export default function App() {
           <div className="mobile-services-sub-item" onClick={() => handleServiceNav(1)}>🤖 Automate Your Business</div>
         </div>
         {OTHER_NAV_LINKS.map(l => (<span key={l} onClick={() => scrollTo(l.toLowerCase().replaceAll(" ", "-"))} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, fontWeight: 500, color: s.navy, padding: "14px 0", borderBottom: "1px solid #f1f5f9", cursor: "pointer" }}>{l}</span>))}
-        <button className="btn-primary" onClick={() => { window.open('https://calendly.com/sharma-sharmaautomation/30min', '_blank'); setMenuOpen(false); }} style={{ marginTop: 16, padding: "14px", fontSize: 15, textAlign: "center" }}>Book Free Call</button>
+        <button className="btn-primary" onClick={() => { window.open('https://api.leadconnectorhq.com/widget/booking/l0FfSuPINhd1ypD8cyiX', '_blank'); setMenuOpen(false); }} style={{ marginTop: 16, padding: "14px", fontSize: 15, textAlign: "center" }}>Book Free Call</button>
       </div>
 
       {/* HERO */}
@@ -236,7 +236,7 @@ export default function App() {
             <h1 className="playfair" style={{ fontSize: "clamp(32px, 8vw, 66px)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-1px", marginBottom: 24, color: s.navy }}>Put Your Business<br /><span style={{ color: s.accent }}>On Autopilot</span> With AI.</h1>
             <p className="dm hero-sub" style={{ fontSize: 18, color: s.mid, lineHeight: 1.75, marginBottom: 40, maxWidth: 520, fontWeight: 300 }}>I help small businesses get found on Google and automate the work that's holding them back — so you spend less time on admin and more time growing.</p>
             <div className="hero-buttons" style={{ display: "flex", gap: 14, flexWrap: "wrap", alignItems: "center" }}>
-              <button className="btn-primary hero-btn-primary" onClick={() => window.open('https://calendly.com/sharma-sharmaautomation/30min', '_blank')} style={{ fontSize: 15, padding: "15px 34px" }}>Book a Free Consultation</button>
+              <button className="btn-primary hero-btn-primary" onClick={() => window.open('https://api.leadconnectorhq.com/widget/booking/l0FfSuPINhd1ypD8cyiX', '_blank')} style={{ fontSize: 15, padding: "15px 34px" }}>Book a Free Consultation</button>
               <button className="btn-outline hero-btn-outline" onClick={() => scrollTo("how-it-works")} style={{ fontSize: 15, padding: "14px 34px" }}>See How It Works</button>
             </div>
             <div style={{ marginTop: 52, display: "flex", gap: 36, flexWrap: "wrap" }}>
@@ -394,7 +394,7 @@ export default function App() {
             <div style={{ display: "inline-block", background: "#fef3c7", color: "#92400e", fontSize: 11, fontWeight: 700, letterSpacing: "2px", padding: "4px 12px", borderRadius: 20, fontFamily: "'DM Sans', sans-serif", textTransform: "uppercase", marginBottom: 20 }}>LIMITED AVAILABILITY</div>
             <h2 className="playfair" style={{ fontSize: "clamp(24px, 3.5vw, 36px)", fontWeight: 700, color: s.navy, letterSpacing: "-0.5px", marginBottom: 20 }}>Now Accepting Founding Clients</h2>
             <p className="dm" style={{ fontSize: 15, color: s.mid, lineHeight: 1.85, maxWidth: 700, margin: "0 auto 32px", fontWeight: 300 }}>I'm currently taking on 3 founding clients at a specially reduced rate in exchange for an honest case study and testimonial. Founding client setup fee: $500 (normally $1,000+). Monthly support from $200/mo. You get a fully built automation system that pays for itself in the first month. I get real-world experience and a story to tell. If you're a personal trainer, gym owner, landscaper, or contractor — this offer is for you.</p>
-            <button className="btn-primary" onClick={() => window.open('https://calendly.com/sharma-sharmaautomation/30min', '_blank')} style={{ fontSize: 15, padding: "15px 34px", background: "#92400e" }}>Claim a Founding Client Spot →</button>
+            <button className="btn-primary" onClick={() => window.open('https://api.leadconnectorhq.com/widget/booking/l0FfSuPINhd1ypD8cyiX', '_blank')} style={{ fontSize: 15, padding: "15px 34px", background: "#92400e" }}>Claim a Founding Client Spot →</button>
           </div>
         </FadeIn>
       </section>
@@ -405,7 +405,7 @@ export default function App() {
           <div style={{ maxWidth: 700, margin: "0 auto", textAlign: "center" }}>
             <h2 className="playfair" style={{ fontSize: "clamp(26px, 4vw, 42px)", fontWeight: 700, color: "#fff", letterSpacing: "-0.5px", marginBottom: 16 }}>Ready to Grow Your Business?</h2>
             <p className="dm" style={{ fontSize: 16, color: "#94a3b8", marginBottom: 36, lineHeight: 1.7, fontWeight: 300 }}>Book a free 30-minute discovery call. I'll show you exactly what's possible — no commitment required.</p>
-            <button className="btn-primary" onClick={() => window.open('https://calendly.com/sharma-sharmaautomation/30min', '_blank')} style={{ fontSize: 15, padding: "16px 38px", background: s.accent }}>Book My Free Call →</button>
+            <button className="btn-primary" onClick={() => window.open('https://api.leadconnectorhq.com/widget/booking/l0FfSuPINhd1ypD8cyiX', '_blank')} style={{ fontSize: 15, padding: "16px 38px", background: s.accent }}>Book My Free Call →</button>
           </div>
         </FadeIn>
       </section>
