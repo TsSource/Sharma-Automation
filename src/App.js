@@ -18,16 +18,17 @@ const VISIBILITY_SERVICES = [
 
 const AUTOMATION_SERVICES = [
   { icon: "🤖", title: "AI Chatbot & Lead Capture", desc: "Deploy a 24/7 AI assistant on your website that qualifies leads, answers common questions, and books appointments — even while you sleep.", tag: "Lead Gen" },
+  { icon: "💬", title: "AI-Powered Customer Communication", desc: "Automatically respond to missed calls with a text, send personalized follow-ups, and keep the conversation going with AI — so no lead ever feels ignored, even when you're on a job.", tag: "AI Comms" },
   { icon: "🔗", title: "Systems Integration", desc: "Connect your CRM, scheduling tools, email, and more into a unified automated workflow — reducing manual data entry and keeping your business moving even after hours.", tag: "Integration" },
   { icon: "🔄", title: "Workflow Automation", desc: "I automate the repetitive tasks that eat up your day — booking confirmations, appointment reminders, post-job follow-ups, and review requests. Once it's set up, it runs in the background.", tag: "Automation" },
-  { icon: "📊", title: "Performance Tracking Setup", desc: "I configure simple, clear reporting so you can see exactly how your automations are performing — leads captured, appointments booked, time saved — without digging through spreadsheets.", tag: "Visibility" },
+  { icon: "📊", title: "Performance Tracking Setup", desc: "I configure simple, clear reporting so you can see exactly how your automations are performing — leads captured, appointments booked, time saved — without digging through spreadsheets.", tag: "Analytics" },
 ];
 
 const INDUSTRIES = [
-  { name: "Personal Trainers & Gyms", icon: "💪", color: "#f59e0b", headline: "Fill your schedule. Keep your clients.", points: ["Automated lead capture from Instagram & website", "Session reminders that cut no-shows by 40%", "New client onboarding without the back-and-forth", "Payment collection that runs itself"] },
-  { name: "Landscaping & Lawn Care", icon: "🌿", color: "#10b981", headline: "Never miss a lead. Get paid on time.", points: ["Missed call capture — instant text response to every lead", "Automated quote follow-ups at Day 2 and Day 5", "Job scheduling and crew notifications sent automatically", "Invoice reminders so you stop chasing payments"] },
-  { name: "Contractors & Home Services", icon: "🔨", color: "#3B8BD4", headline: "Win more jobs. Spend less time on admin.", points: ["Automated lead response before competitors call back", "Estimate follow-up sequences that close more jobs", "Appointment confirmations and day-before reminders", "Review requests after every completed job"] },
-  { name: "Medical & Dental", icon: "🏥", color: "#0ea5e9", headline: "Free your staff from admin. Focus on patient care.", points: ["Automated appointment scheduling & reminders", "Digital new patient intake forms & follow-ups", "Post-visit check-in & review request automation", "No-show reduction through smart reminder sequences"] },
+  { name: "Personal Trainers & Gyms", icon: "💪", color: "#f59e0b", headline: "Fill your schedule. Keep your clients.", points: ["Automated lead capture from Instagram & website", "Session reminders that cut no-shows by 40%", "New client onboarding without the back-and-forth", "Missed call text-back so no lead goes unanswered"] },
+  { name: "Landscaping & Lawn Care", icon: "🌿", color: "#10b981", headline: "Never miss a lead. Get paid on time.", points: ["Missed call capture — instant text response to every lead", "Automated quote follow-ups at Day 2 and Day 5", "Job scheduling and crew notifications sent automatically", "Post-job follow-ups and invoice reminders on autopilot"] },
+  { name: "Contractors & Home Services", icon: "🔨", color: "#3B8BD4", headline: "Win more jobs. Spend less time on admin.", points: ["Automated lead response before competitors call back", "Estimate follow-up sequences that close more jobs", "Appointment confirmations and day-before reminders", "Post-job follow-ups and review requests — fully automated"] },
+  { name: "Medical & Dental", icon: "🏥", color: "#0ea5e9", headline: "Free your staff from admin. Focus on patient care.", points: ["Automated appointment scheduling & reminders", "Digital new patient intake forms & follow-ups", "Post-visit check-in & satisfaction follow-ups", "No-show reduction through smart reminder sequences"] },
 ];
 
 const STEPS = [
@@ -38,11 +39,12 @@ const STEPS = [
 ];
 
 const FAQS = [
-  { q: "What does Google Business Profile optimization actually do for my business?", a: "It makes sure your business shows up on Google Maps when local customers search for your services. I optimize your listing's categories, description, photos, service area, and review strategy so you appear alongside — or above — your competitors in local search results." },
-  { q: "How can optimizing my Google Business Profile make my business more revenue?", a: "When someone searches \"landscaper near me\" or \"contractor in Randolph,\" Google shows the top 3 local businesses on the map. If you're not one of them, those customers go to your competitors. A fully optimized profile with strong reviews puts you in that top 3, which means more calls, more bookings, and more revenue without spending a dollar on ads." },
-  { q: "How much does this cost?", a: "Every project is different, but a full Google Business Profile audit with optimization, review strategy, and directory management starts at $400. Monthly maintenance and management runs $75–$150 per month. I offer a free discovery call to understand your needs before quoting anything." },
-  { q: "Do I need to give you my Google password?", a: "No. I'll walk you through adding me as a manager on your Google Business Profile, which lets me optimize your listing without accessing your email, calendar, or any other personal information. You stay in full control and can remove my access at any time." },
-  { q: "What kind of businesses do you work with?", a: "I work with small local service businesses — landscapers, contractors, personal trainers, gym owners, dental offices, and home service companies. If your customers find you by searching Google for a service in their area, I can help you show up." },
+  { q: "What exactly is AI workflow automation?", a: "It means setting up systems that handle repetitive tasks for you automatically — things like responding to new leads, sending appointment reminders, following up after a job, and requesting reviews. Instead of you or your staff doing these manually, an AI-powered system runs them in the background 24/7. You set it up once, and it keeps working." },
+  { q: "How much does this cost?", a: "Every project is different depending on what you need automated. Founding client setup starts at $500, which includes a full custom automation build tailored to your business. Monthly support and optimization runs from $200/mo. I provide a complete transparent quote on your free discovery call — no surprises, no obligation." },
+  { q: "How long does it take to get set up?", a: "Most automation systems are fully built, tested, and live within 1–2 weeks. Simpler setups like missed-call text-back or appointment reminders can be done in a few days. I don't launch anything until it's been thoroughly tested, so it works reliably from day one." },
+  { q: "Do I need to be tech-savvy to use this?", a: "Not at all. The whole point is that once it's set up, it runs on its own. I handle all the technical work — building, connecting, and testing everything. You'll get a simple walkthrough of how to monitor results, but the system does the heavy lifting." },
+  { q: "What kind of businesses do you work with?", a: "I work with small local service businesses — landscapers, contractors, personal trainers, gym owners, dental offices, and home service companies. If you're spending too much time on scheduling, follow-ups, or chasing leads, I can help you automate it." },
+  { q: "What happens after my system is live?", a: "I don't disappear after launch. Monthly support includes ongoing monitoring, performance tracking, and adjustments as your business evolves. If something needs tweaking or you want to add a new automation, I handle it. You always know what's working and what can be improved." },
 ];
 
 function useInView(threshold = 0.15) {
@@ -90,9 +92,9 @@ export default function App() {
   }, []);
 
   const s = { navy: "#0f172a", slate: "#334155", mid: "#64748b", light: "#f1f5f9", white: "#ffffff", accent: "#0ea5e9", accentDark: "#0369a1", border: "#e2e8f0" };
-  const activeServices = activeServiceTab === 0 ? VISIBILITY_SERVICES : AUTOMATION_SERVICES;
-  const activeTagBg = activeServiceTab === 0 ? "#ecfdf5" : "#f0f9ff";
-  const activeTagColor = activeServiceTab === 0 ? "#065f46" : "#0369a1";
+  const activeServices = activeServiceTab === 0 ? AUTOMATION_SERVICES : VISIBILITY_SERVICES;
+  const activeTagBg = activeServiceTab === 0 ? "#f0f9ff" : "#ecfdf5";
+  const activeTagColor = activeServiceTab === 0 ? "#0369a1" : "#065f46";
 
   return (
     <div style={{ fontFamily: "'Georgia', 'Times New Roman', serif", background: s.white, color: s.navy, overflowX: "hidden" }}>
@@ -186,12 +188,12 @@ export default function App() {
                 </span>
                 <div className="services-dropdown" style={{ opacity: servicesDropdownOpen ? 1 : 0, pointerEvents: servicesDropdownOpen ? "auto" : "none", transform: servicesDropdownOpen ? "translateX(-50%) translateY(0)" : "translateX(-50%) translateY(-8px)", transition: "opacity 0.2s, transform 0.2s" }}>
                   <div className="services-dropdown-item" onClick={() => handleServiceNav(0)}>
-                    <span style={{ fontSize: 16 }}>📍</span>
-                    <div><div>Get Found Online</div><div className="dd-sub">Google Maps, SEO, Reviews</div></div>
-                  </div>
-                  <div className="services-dropdown-item" onClick={() => handleServiceNav(1)}>
                     <span style={{ fontSize: 16 }}>🤖</span>
                     <div><div>Automate Your Business</div><div className="dd-sub">Chatbots, Workflows, Integrations</div></div>
+                  </div>
+                  <div className="services-dropdown-item" onClick={() => handleServiceNav(1)}>
+                    <span style={{ fontSize: 16 }}>📍</span>
+                    <div><div>Get Found Online</div><div className="dd-sub">Google Maps, SEO, Reviews</div></div>
                   </div>
                 </div>
               </div>
@@ -214,8 +216,8 @@ export default function App() {
           <svg width="10" height="6" viewBox="0 0 10 6" style={{ transition: "transform 0.2s", transform: mobileServicesOpen ? "rotate(180deg)" : "rotate(0)" }}><path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
         </span>
         <div style={{ maxHeight: mobileServicesOpen ? "200px" : "0", overflow: "hidden", transition: "max-height 0.3s ease" }}>
-          <div className="mobile-services-sub-item" onClick={() => handleServiceNav(0)}>📍 Get Found Online</div>
-          <div className="mobile-services-sub-item" onClick={() => handleServiceNav(1)}>🤖 Automate Your Business</div>
+          <div className="mobile-services-sub-item" onClick={() => handleServiceNav(0)}>🤖 Automate Your Business</div>
+          <div className="mobile-services-sub-item" onClick={() => handleServiceNav(1)}>📍 Get Found Online</div>
         </div>
         {OTHER_NAV_LINKS.map(l => (<span key={l} onClick={() => scrollTo(l.toLowerCase().replaceAll(" ", "-"))} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, fontWeight: 500, color: s.navy, padding: "14px 0", borderBottom: "1px solid #f1f5f9", cursor: "pointer" }}>{l}</span>))}
         <button className="btn-primary" onClick={() => { window.open('https://api.leadconnectorhq.com/widget/booking/l0FfSuPINhd1ypD8cyiX', '_blank'); setMenuOpen(false); }} style={{ marginTop: 16, padding: "14px", fontSize: 15, textAlign: "center" }}>Book Free Call</button>
@@ -234,7 +236,7 @@ export default function App() {
             </div>
             <style>{`@keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }`}</style>
             <h1 className="playfair" style={{ fontSize: "clamp(32px, 8vw, 66px)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-1px", marginBottom: 24, color: s.navy }}>Put Your Business<br /><span style={{ color: s.accent }}>On Autopilot</span> With AI.</h1>
-            <p className="dm hero-sub" style={{ fontSize: 18, color: s.mid, lineHeight: 1.75, marginBottom: 40, maxWidth: 520, fontWeight: 300 }}>I help small businesses get found on Google and automate the work that's holding them back — so you spend less time on admin and more time growing.</p>
+            <p className="dm hero-sub" style={{ fontSize: 18, color: s.mid, lineHeight: 1.75, marginBottom: 40, maxWidth: 520, fontWeight: 300 }}>I build AI-powered automation systems for small businesses — handling your leads, follow-ups, scheduling, and customer communication so you can focus on the work that actually makes you money.</p>
             <div className="hero-buttons" style={{ display: "flex", gap: 14, flexWrap: "wrap", alignItems: "center" }}>
               <button className="btn-primary hero-btn-primary" onClick={() => window.open('https://api.leadconnectorhq.com/widget/booking/l0FfSuPINhd1ypD8cyiX', '_blank')} style={{ fontSize: 15, padding: "15px 34px" }}>Book a Free Consultation</button>
               <button className="btn-outline hero-btn-outline" onClick={() => scrollTo("how-it-works")} style={{ fontSize: 15, padding: "14px 34px" }}>See How It Works</button>
@@ -263,14 +265,14 @@ export default function App() {
             <div style={{ textAlign: "center", marginBottom: 40 }}>
               <p className="dm" style={{ fontSize: 12, letterSpacing: "3px", color: s.accent, textTransform: "uppercase", marginBottom: 16, fontWeight: 600 }}>What I Do</p>
               <h2 className="playfair" style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 700, color: s.navy, letterSpacing: "-0.5px", marginBottom: 16 }}>Two Ways I Help Your Business Grow</h2>
-              <p className="dm" style={{ fontSize: 16, color: s.mid, maxWidth: 560, margin: "0 auto 32px", fontWeight: 300, lineHeight: 1.7 }}>Get found by more customers online, then automate the work that follows — so your business grows without adding hours to your day.</p>
+              <p className="dm" style={{ fontSize: 16, color: s.mid, maxWidth: 560, margin: "0 auto 32px", fontWeight: 300, lineHeight: 1.7 }}>Automate the work that's eating your day, and get found by more customers online — so your business grows without adding hours to your schedule.</p>
               <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-                <button className={`service-tab-btn${activeServiceTab === 0 ? " active" : ""}`} onClick={() => setActiveServiceTab(0)}>📍 Get Found Online</button>
-                <button className={`service-tab-btn${activeServiceTab === 1 ? " active" : ""}`} onClick={() => setActiveServiceTab(1)}>🤖 Automate Your Business</button>
+                <button className={`service-tab-btn${activeServiceTab === 0 ? " active" : ""}`} onClick={() => setActiveServiceTab(0)}>🤖 Automate Your Business</button>
+                <button className={`service-tab-btn${activeServiceTab === 1 ? " active" : ""}`} onClick={() => setActiveServiceTab(1)}>📍 Get Found Online</button>
               </div>
             </div>
           </FadeIn>
-          <FadeIn><p className="dm" style={{ textAlign: "center", fontSize: 14, color: s.mid, marginBottom: 32, fontWeight: 300 }}>{activeServiceTab === 0 ? "Show up on Google Maps. Build your reviews. Get more customers calling you." : "Stop doing manually what a system can handle for you."}</p></FadeIn>
+          <FadeIn><p className="dm" style={{ textAlign: "center", fontSize: 14, color: s.mid, marginBottom: 32, fontWeight: 300 }}>{activeServiceTab === 0 ? "Stop doing manually what a system can handle for you." : "Show up on Google Maps. Build your reviews. Get more customers calling you."}</p></FadeIn>
           <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20, alignItems: "stretch" }}>
             {activeServices.map((sv, i) => (
               <FadeIn key={sv.title} delay={i * 0.08}>
@@ -327,18 +329,45 @@ export default function App() {
         </div>
       </section>
 
+      {/* RESULTS / SOCIAL PROOF */}
+      <section style={{ padding: "72px 5vw", background: s.navy }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <FadeIn>
+            <div style={{ textAlign: "center", marginBottom: 48 }}>
+              <p className="dm" style={{ fontSize: 12, letterSpacing: "3px", color: s.accent, textTransform: "uppercase", marginBottom: 16, fontWeight: 600 }}>What You Get</p>
+              <h2 className="playfair" style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 700, color: "#fff", letterSpacing: "-0.5px" }}>Systems That Work While You Don't</h2>
+            </div>
+          </FadeIn>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 24 }}>
+            {[
+              { icon: "🕐", stat: "24/7", label: "Lead Capture & Response", desc: "Your AI system never sleeps. Every inquiry gets an instant response — nights, weekends, holidays." },
+              { icon: "⚡", stat: "<60s", label: "Average Response Time", desc: "Leads hear back in under a minute. Your competitors take hours. Speed wins jobs." },
+              { icon: "📅", stat: "90%", label: "Less Admin Time", desc: "Scheduling, reminders, follow-ups, and review requests — all handled automatically." },
+              { icon: "🚀", stat: "1–2 Weeks", label: "From Call to Live System", desc: "No drawn-out timelines. Your automation stack is built, tested, and running fast." },
+            ].map((item, i) => (
+              <FadeIn key={item.label} delay={i * 0.1}>
+                <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: "32px 24px", textAlign: "center", height: "100%" }}>
+                  <div style={{ fontSize: 28, marginBottom: 12 }}>{item.icon}</div>
+                  <div className="playfair" style={{ fontSize: 36, fontWeight: 700, color: s.accent, marginBottom: 4 }}>{item.stat}</div>
+                  <div className="dm" style={{ fontSize: 14, fontWeight: 600, color: "#fff", marginBottom: 8 }}>{item.label}</div>
+                  <p className="dm" style={{ fontSize: 13, color: "#94a3b8", lineHeight: 1.7, fontWeight: 300 }}>{item.desc}</p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ABOUT */}
       <section id="about" style={{ padding: "96px 5vw", background: s.white }}>
         <div className="two-col" style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }}>
           <FadeIn>
             <div style={{ position: "relative" }}>
-              <div style={{ width: "100%", borderRadius: 16, overflow: "hidden", border: "1px solid #bae6fd", position: "relative", paddingBottom: "56.25%" }}>
-                <iframe
-                  src="https://www.youtube.com/embed/qdscK3wHbVM"
-                  title="Rohit Sharma - Sharma Automation Introduction"
-                  style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
+              <div style={{ width: "100%", borderRadius: 16, overflow: "hidden", border: "1px solid #bae6fd" }}>
+                <img
+                  src="/AIHeadshot.png"
+                  alt="Rohit Sharma - Sharma Automation"
+                  style={{ width: "100%", height: "auto", display: "block" }}
                 />
               </div>
               <div className="about-badge" style={{ position: "absolute", bottom: -20, right: -20, background: s.navy, borderRadius: 12, padding: "18px 22px", boxShadow: "0 8px 32px rgba(0,0,0,0.15)" }}><div className="playfair" style={{ fontSize: 24, fontWeight: 700, color: "#fff" }}>Free</div><div className="dm" style={{ fontSize: 11, color: "#94a3b8", letterSpacing: "0.5px" }}>Discovery Call</div></div>
@@ -352,7 +381,7 @@ export default function App() {
               <p className="dm" style={{ fontSize: 15, color: s.mid, lineHeight: 1.85, marginBottom: 20, fontWeight: 300 }}>I'm building this business one client at a time, which means when you work with me, you get my full attention — not a ticket number. Every system I build starts with a real conversation about how YOUR business actually works.</p>
               <p className="dm" style={{ fontSize: 15, color: s.mid, lineHeight: 1.85, marginBottom: 32, fontWeight: 300 }}>I'm currently taking on a small number of founding clients — businesses that want to get ahead of the automation curve before their competitors do. If that's you, let's talk.</p>
               <div style={{ display: "flex", gap: 32 }}>
-                {[["Local SEO", "Google Maps"], ["AI Agents", "Custom Built"], ["Workflow", "End-to-end"]].map(([title, sub]) => (<div key={title}><div className="dm" style={{ fontSize: 13, fontWeight: 600, color: s.navy, marginBottom: 2 }}>{title}</div><div className="dm" style={{ fontSize: 12, color: s.mid }}>{sub}</div></div>))}
+                {[["AI Automation", "Custom Built"], ["Workflow", "End-to-end"], ["Local SEO", "Google Maps"]].map(([title, sub]) => (<div key={title}><div className="dm" style={{ fontSize: 13, fontWeight: 600, color: s.navy, marginBottom: 2 }}>{title}</div><div className="dm" style={{ fontSize: 12, color: s.mid }}>{sub}</div></div>))}
               </div>
             </div>
           </FadeIn>
