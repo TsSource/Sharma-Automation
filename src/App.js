@@ -210,7 +210,7 @@ export default function App() {
       </div>
 
       {/* MOBILE MENU */}
-      <div className="mobile-menu" style={{ display: "none", position: "fixed", top: headerHeight, left: 0, right: 0, zIndex: 101, background: "rgba(255,255,255,0.98)", backdropFilter: "blur(12px)", borderBottom: "1px solid #e2e8f0", flexDirection: "column", padding: "16px 24px 24px", transform: menuOpen ? "translateY(0)" : "translateY(-120%)", transition: "transform 0.3s ease", boxShadow: "0 8px 32px rgba(0,0,0,0.08)" }}>
+      <div className="mobile-menu" style={{ display: "none", position: "fixed", top: headerHeight, left: 0, right: 0, zIndex: 101, background: "rgba(255,255,255,0.98)", backdropFilter: "blur(12px)", borderBottom: "1px solid #e2e8f0", flexDirection: "column", padding: "16px 24px 24px", transform: menuOpen ? "translateY(0)" : "translateY(-120%)", visibility: menuOpen ? "visible" : "hidden", transition: "transform 0.3s ease, visibility 0.3s ease", boxShadow: "0 8px 32px rgba(0,0,0,0.08)" }}>
         <span onClick={() => setMobileServicesOpen(!mobileServicesOpen)} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, fontWeight: 500, color: s.navy, padding: "14px 0", borderBottom: "1px solid #f1f5f9", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           Services
           <svg width="10" height="6" viewBox="0 0 10 6" style={{ transition: "transform 0.2s", transform: mobileServicesOpen ? "rotate(180deg)" : "rotate(0)" }}><path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
