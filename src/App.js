@@ -109,6 +109,17 @@ export default function App() {
     return () => { document.body.removeChild(script); };
   }, []);
 
+  // Handle deep links like /#ai-coach — wait for page to render, then scroll
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      const timer = setTimeout(() => {
+        document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
+      }, 600);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   const s = { navy: "#0f172a", slate: "#334155", mid: "#64748b", light: "#f1f5f9", white: "#ffffff", accent: "#0ea5e9", accentDark: "#0369a1", border: "#e2e8f0" };
   const activeServices = activeServiceTab === 0 ? AUTOMATION_SERVICES : VISIBILITY_SERVICES;
   const activeTagBg = activeServiceTab === 0 ? "#f0f9ff" : "#ecfdf5";
@@ -159,6 +170,7 @@ export default function App() {
         .faq-q { font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; color: #0f172a; padding: 20px 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; user-select: none; }
         .faq-q:hover { color: #0ea5e9; }
         .faq-a { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; color: #64748b; line-height: 1.75; padding: 0 24px 20px; }
+        section[id] { scroll-margin-top: 120px; }
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
           .hamburger { display: flex !important; }
@@ -186,6 +198,7 @@ export default function App() {
           .arch-arrow { transform: rotate(90deg); text-align: center; padding: 4px 0 !important; }
           .pricing-grid { grid-template-columns: 1fr !important; }
           .ghl-form-iframe { height: 750px !important; }
+          section[id] { scroll-margin-top: 72px !important; }
         }
         @media (min-width: 769px) { .hamburger { display: none !important; } .mobile-menu { display: none !important; } }
       `}</style>
