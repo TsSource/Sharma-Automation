@@ -160,10 +160,10 @@ export default function AICoachLanding() {
             })}
             <button className="btn-primary" onClick={() => scrollTo("book")} style={{ padding: "10px 22px", background: s.accent }}>Book Setup Call</button>
           </div>
-          <button className="mobile-nav" onClick={() => setMenuOpen(!menuOpen)} style={{ display: "none", background: "none", border: "none", cursor: "pointer", padding: 4 }}>
-            <div style={{ width: 24, height: 2, background: s.navy, marginBottom: 5, transition: "all 0.3s", transform: menuOpen ? "rotate(45deg) translate(5px,5px)" : "none" }} />
-            <div style={{ width: 24, height: 2, background: s.navy, marginBottom: 5, transition: "all 0.3s", opacity: menuOpen ? 0 : 1 }} />
-            <div style={{ width: 24, height: 2, background: s.navy, transition: "all 0.3s", transform: menuOpen ? "rotate(-45deg) translate(5px,-5px)" : "none" }} />
+          <button className="mobile-nav" onClick={() => setMenuOpen(!menuOpen)} style={{ display: "none", flexDirection: "column", gap: 5, background: "none", border: "none", cursor: "pointer", padding: 8 }}>
+            <div style={{ width: 22, height: 2.5, background: s.navy, borderRadius: 2, transition: "all 0.3s", transform: menuOpen ? "rotate(45deg) translate(5px,5px)" : "none" }} />
+            <div style={{ width: 22, height: 2.5, background: s.navy, borderRadius: 2, transition: "all 0.3s", opacity: menuOpen ? 0 : 1 }} />
+            <div style={{ width: 22, height: 2.5, background: s.navy, borderRadius: 2, transition: "all 0.3s", transform: menuOpen ? "rotate(-45deg) translate(5px,-5px)" : "none" }} />
           </button>
         </div>
         {menuOpen && (
