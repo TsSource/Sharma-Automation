@@ -50,20 +50,7 @@ const FAQS = [
   { q: "Which AI model does the AI Coach use?", a: "Whichever one you want. The system is model agnostic — it runs on GPT, Grok, Gemini, or fully offline with Ollama on your own hardware. You can switch models anytime. There's no lock-in to any single AI provider." },
 ];
 
-const AI_COACH_FEATURES = [
-  { icon: "📊", title: "Real Data Coaching", desc: "Reads your actual heart rate, power, HRV, sleep, and fitness/fatigue/form trends — not generic advice from a template." },
-  { icon: "📱", title: "Multi-Platform via MCP", desc: "Works in Discord, Claude Desktop, and Claude.ai. One coaching engine, every platform you already use." },
-  { icon: "📅", title: "Conversation to Calendar", desc: "Say \"post it\" and the structured workout lands on your Intervals.icu calendar — syncs to Zwift, Garmin, and Wahoo." },
-  { icon: "🧠", title: "Model Agnostic", desc: "Runs on GPT, Grok, Gemini, or fully local with Ollama. You choose the AI. Switch anytime. Zero vendor lock-in." },
-  { icon: "⚙️", title: "Customizable Philosophy", desc: "Tune the coaching for cycling power, running pace zones, triathlon distribution, or any approach. Your coach, your rules." },
-  { icon: "🔒", title: "You Own Everything", desc: "Runs on your machine with your API key. No subscriptions to cancel. Your data never leaves your control." },
-];
 
-const AI_COACH_PRICING = [
-  { tier: "Solo Athlete", price: "$199", period: "one-time", desc: "Self-coached athletes who want AI-powered daily guidance from their own data.", features: ["White glove setup session", "Full system on your machine", "Your choice of AI model", "10 MCP coaching tools", "Intervals.icu calendar integration", "Local training dashboard"], cta: "Get Started", highlight: false },
-  { tier: "Founding Athlete", price: "$99", period: "limited offer", desc: "3 spots only — full setup + 3 months support in exchange for honest feedback and a testimonial.", features: ["Everything in Solo Athlete", "3 months of dedicated support", "Priority bug fixes & updates", "Direct access to the developer", "Grandfathered at $29/mo after"], cta: "Claim Your Spot", highlight: true },
-  { tier: "Cloud Hosted", price: "$39–59", period: "/month", desc: "For athletes who don't want to run anything locally. I host it, you use it.", features: ["Fully managed hosting", "No local install needed", "Automatic updates", "Discord bot included", "All Solo features included", "Cancel anytime"], cta: "Contact Me", highlight: false },
-];
 
 function useInView(threshold = 0.15) {
   const ref = useRef(null);
@@ -197,6 +184,7 @@ export default function App() {
           .arch-flow { grid-template-columns: 1fr !important; gap: 8px !important; }
           .arch-arrow { transform: rotate(90deg); text-align: center; padding: 4px 0 !important; }
           .pricing-grid { grid-template-columns: 1fr !important; }
+          .cta-grid { grid-template-columns: 1fr !important; }
           .ghl-form-iframe { height: 750px !important; }
           section[id] { scroll-margin-top: 72px !important; }
         }
@@ -428,22 +416,23 @@ export default function App() {
         </div>
       </section>
 
-      {/* AI COACH — FEATURED BUILD */}
+      {/* AI COACH — PORTFOLIO TEASER */}
       <section id="ai-coach" style={{ padding: "96px 5vw", background: s.navy }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          {/* Header + Tagline */}
+
+          {/* Header */}
           <FadeIn>
             <div style={{ textAlign: "center", marginBottom: 48 }}>
               <div style={{ display: "inline-block", background: "rgba(14,165,233,0.15)", color: s.accent, fontSize: 11, fontWeight: 700, letterSpacing: "2px", padding: "4px 14px", borderRadius: 20, fontFamily: "'DM Sans', sans-serif", textTransform: "uppercase", marginBottom: 20 }}>FEATURED BUILD</div>
               <h2 className="playfair" style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 700, color: "#fff", letterSpacing: "-0.5px", marginBottom: 16 }}>AI Coach for Endurance Athletes</h2>
-              <p className="dm" style={{ fontSize: 18, color: s.accent, fontWeight: 500, marginBottom: 12, fontStyle: "italic" }}>"Your coach follows you — you don't follow your coach."</p>
-              <p className="dm" style={{ fontSize: 15, color: "#94a3b8", lineHeight: 1.75, maxWidth: 680, margin: "0 auto", fontWeight: 300 }}>I built a conversational AI coaching system that reads your real training data — heart rate, power, HRV, sleep, fitness and fatigue trends — and tells you exactly what to do today. It works across Discord, Claude Desktop, and Claude.ai. One coaching engine, every platform you already use.</p>
+              <p className="dm" style={{ fontSize: 18, color: s.accent, fontWeight: 500, marginBottom: 16, fontStyle: "italic" }}>"Your coach follows you -- you don't follow your coach."</p>
+              <p className="dm" style={{ fontSize: 15, color: "#94a3b8", lineHeight: 1.75, maxWidth: 680, margin: "0 auto", fontWeight: 300 }}>I built a full-stack AI coaching system from scratch. It connects to real training platforms, analyzes an athlete's actual performance data, and delivers personalized daily coaching through Discord. One conversation, and the workout lands on their calendar, ready to sync to Garmin or Zwift.</p>
             </div>
           </FadeIn>
 
           {/* YouTube Demo Embed */}
           <FadeIn delay={0.1}>
-            <div style={{ maxWidth: 800, margin: "0 auto 64px", borderRadius: 12, overflow: "hidden", border: "2px solid rgba(14,165,233,0.3)", boxShadow: "0 12px 48px rgba(0,0,0,0.3)" }}>
+            <div style={{ maxWidth: 800, margin: "0 auto 56px", borderRadius: 12, overflow: "hidden", border: "2px solid rgba(14,165,233,0.3)", boxShadow: "0 12px 48px rgba(0,0,0,0.3)" }}>
               <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
                 <iframe
                   src="https://www.youtube.com/embed/oAYBbpXXWI0"
@@ -456,87 +445,56 @@ export default function App() {
             </div>
           </FadeIn>
 
-          {/* Problem vs Solution */}
+          {/* What This Demonstrates */}
           <FadeIn delay={0.15}>
-            <div className="two-col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginBottom: 64 }}>
-              <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: 32 }}>
-                <p className="dm" style={{ fontSize: 11, letterSpacing: "2px", color: "#ef4444", textTransform: "uppercase", marginBottom: 16, fontWeight: 700 }}>What Exists Today</p>
-                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                  {["TrainingPeaks shows charts — you interpret them yourself", "Strava shows stats — no actionable coaching", "Generic AI coaches give generic plans from templates", "Every platform locks you into their app and their subscription"].map((pt, i) => (
-                    <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
-                      <span style={{ color: "#ef4444", fontSize: 14, marginTop: 2, flexShrink: 0 }}>✕</span>
-                      <span className="dm" style={{ fontSize: 14, color: "#94a3b8", lineHeight: 1.6, fontWeight: 300 }}>{pt}</span>
-                    </div>
-                  ))}
-                </div>
+            <div style={{ marginBottom: 56 }}>
+              <div style={{ textAlign: "center", marginBottom: 28 }}>
+                <p className="dm" style={{ fontSize: 12, letterSpacing: "3px", color: s.accent, textTransform: "uppercase", fontWeight: 600 }}>What This Build Demonstrates</p>
               </div>
-              <div style={{ background: "rgba(14,165,233,0.06)", border: "1px solid rgba(14,165,233,0.2)", borderRadius: 12, padding: 32 }}>
-                <p className="dm" style={{ fontSize: 11, letterSpacing: "2px", color: "#10b981", textTransform: "uppercase", marginBottom: 16, fontWeight: 700 }}>What I Built</p>
-                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                  {["Conversational coaching from your actual training data", "Tells you exactly what to do today in plain English", "\"Post it\" → workout lands on your calendar in one sentence", "You own the AI, the data, and the entire system"].map((pt, i) => (
-                    <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
-                      <span style={{ color: "#10b981", fontSize: 14, marginTop: 2, flexShrink: 0 }}>✓</span>
-                      <span className="dm" style={{ fontSize: 14, color: "#cbd5e1", lineHeight: 1.6, fontWeight: 400 }}>{pt}</span>
-                    </div>
-                  ))}
-                </div>
+              <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
+                {[
+                  { icon: "🤖", title: "Custom AI Agent", desc: "A conversational AI that reasons about real data and gives actionable recommendations -- not canned responses." },
+                  { icon: "🔗", title: "Live Data Integration", desc: "Connected to Strava, Intervals.icu, and wearable devices. Real-time data flowing into every coaching decision." },
+                  { icon: "📱", title: "Multi-Platform Delivery", desc: "One system, accessible from Discord, Claude Desktop, and Claude.ai simultaneously via MCP." },
+                  { icon: "📦", title: "Packaged Product", desc: "Full installer, setup wizard, settings GUI, and automated onboarding. Ready to hand to a client." },
+                ].map((item, i) => (
+                  <div key={item.title} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: "24px 20px", transition: "border-color 0.2s" }} onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(14,165,233,0.4)"} onMouseLeave={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"}>
+                    <div style={{ fontSize: 24, marginBottom: 10 }}>{item.icon}</div>
+                    <h3 className="dm" style={{ fontSize: 15, fontWeight: 600, color: "#fff", marginBottom: 6 }}>{item.title}</h3>
+                    <p className="dm" style={{ fontSize: 13, color: "#94a3b8", lineHeight: 1.7, fontWeight: 300 }}>{item.desc}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </FadeIn>
 
-          {/* Feature Cards */}
-          <FadeIn>
-            <div style={{ textAlign: "center", marginBottom: 32 }}>
-              <p className="dm" style={{ fontSize: 12, letterSpacing: "3px", color: s.accent, textTransform: "uppercase", fontWeight: 600 }}>Capabilities</p>
-            </div>
-          </FadeIn>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20, marginBottom: 64 }}>
-            {AI_COACH_FEATURES.map((f, i) => (
-              <FadeIn key={f.title} delay={i * 0.06}>
-                <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: "28px 24px", height: "100%", transition: "border-color 0.2s" }} onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(14,165,233,0.4)"} onMouseLeave={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"}>
-                  <div style={{ fontSize: 28, marginBottom: 12 }}>{f.icon}</div>
-                  <h3 className="playfair" style={{ fontSize: 18, fontWeight: 600, color: "#fff", marginBottom: 8 }}>{f.title}</h3>
-                  <p className="dm" style={{ fontSize: 14, color: "#94a3b8", lineHeight: 1.75, fontWeight: 300 }}>{f.desc}</p>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-
-          {/* Architecture Flow */}
-          <FadeIn>
-            <div style={{ marginBottom: 64 }}>
-              <div style={{ textAlign: "center", marginBottom: 32 }}>
-                <p className="dm" style={{ fontSize: 12, letterSpacing: "3px", color: s.accent, textTransform: "uppercase", fontWeight: 600 }}>How It Works</p>
-              </div>
-              <div className="arch-flow" style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr auto 1fr", gap: 0, alignItems: "center", maxWidth: 900, margin: "0 auto" }}>
-                {/* Data Sources */}
-                <div style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.25)", borderRadius: 12, padding: "24px 20px", textAlign: "center" }}>
-                  <p className="dm" style={{ fontSize: 11, letterSpacing: "2px", color: "#10b981", textTransform: "uppercase", fontWeight: 700, marginBottom: 12 }}>Your Data</p>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                    {["Apple Watch / Garmin", "Strava", "Intervals.icu"].map(item => (
-                      <span key={item} className="dm" style={{ fontSize: 13, color: "#94a3b8", fontWeight: 300 }}>{item}</span>
+          {/* Architecture Flow (compact) */}
+          <FadeIn delay={0.2}>
+            <div style={{ marginBottom: 56 }}>
+              <div className="arch-flow" style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr auto 1fr", gap: 0, alignItems: "center", maxWidth: 800, margin: "0 auto" }}>
+                <div style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.25)", borderRadius: 12, padding: "20px 16px", textAlign: "center" }}>
+                  <p className="dm" style={{ fontSize: 10, letterSpacing: "2px", color: "#10b981", textTransform: "uppercase", fontWeight: 700, marginBottom: 8 }}>Data Sources</p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                    {["Strava", "Intervals.icu", "Wearables"].map(item => (
+                      <span key={item} className="dm" style={{ fontSize: 12, color: "#94a3b8", fontWeight: 300 }}>{item}</span>
                     ))}
                   </div>
                 </div>
-                {/* Arrow */}
-                <div className="arch-arrow" style={{ color: "#475569", fontSize: 24, padding: "0 12px" }}>→</div>
-                {/* Coaching Engine */}
-                <div style={{ background: "rgba(14,165,233,0.1)", border: "1px solid rgba(14,165,233,0.3)", borderRadius: 12, padding: "24px 20px", textAlign: "center" }}>
-                  <p className="dm" style={{ fontSize: 11, letterSpacing: "2px", color: s.accent, textTransform: "uppercase", fontWeight: 700, marginBottom: 12 }}>AI Coaching Engine</p>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                    {["10 MCP Tools", "Your Choice of LLM", "Sports Science Analysis"].map(item => (
-                      <span key={item} className="dm" style={{ fontSize: 13, color: "#94a3b8", fontWeight: 300 }}>{item}</span>
+                <div className="arch-arrow" style={{ color: "#475569", fontSize: 22, padding: "0 10px" }}>→</div>
+                <div style={{ background: "rgba(14,165,233,0.1)", border: "1px solid rgba(14,165,233,0.3)", borderRadius: 12, padding: "20px 16px", textAlign: "center" }}>
+                  <p className="dm" style={{ fontSize: 10, letterSpacing: "2px", color: s.accent, textTransform: "uppercase", fontWeight: 700, marginBottom: 8 }}>AI Engine</p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                    {["10 MCP Tools", "Any LLM Provider", "Sports Science"].map(item => (
+                      <span key={item} className="dm" style={{ fontSize: 12, color: "#94a3b8", fontWeight: 300 }}>{item}</span>
                     ))}
                   </div>
                 </div>
-                {/* Arrow */}
-                <div className="arch-arrow" style={{ color: "#475569", fontSize: 24, padding: "0 12px" }}>→</div>
-                {/* Delivery */}
-                <div style={{ background: "rgba(245,158,11,0.08)", border: "1px solid rgba(245,158,11,0.25)", borderRadius: 12, padding: "24px 20px", textAlign: "center" }}>
-                  <p className="dm" style={{ fontSize: 11, letterSpacing: "2px", color: "#f59e0b", textTransform: "uppercase", fontWeight: 700, marginBottom: 12 }}>Delivery</p>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                    {["Discord", "Claude Desktop / Claude.ai", "Intervals.icu Calendar"].map(item => (
-                      <span key={item} className="dm" style={{ fontSize: 13, color: "#94a3b8", fontWeight: 300 }}>{item}</span>
+                <div className="arch-arrow" style={{ color: "#475569", fontSize: 22, padding: "0 10px" }}>→</div>
+                <div style={{ background: "rgba(245,158,11,0.08)", border: "1px solid rgba(245,158,11,0.25)", borderRadius: 12, padding: "20px 16px", textAlign: "center" }}>
+                  <p className="dm" style={{ fontSize: 10, letterSpacing: "2px", color: "#f59e0b", textTransform: "uppercase", fontWeight: 700, marginBottom: 8 }}>Delivery</p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                    {["Discord", "Claude Desktop", "Calendar Sync"].map(item => (
+                      <span key={item} className="dm" style={{ fontSize: 12, color: "#94a3b8", fontWeight: 300 }}>{item}</span>
                     ))}
                   </div>
                 </div>
@@ -544,46 +502,14 @@ export default function App() {
             </div>
           </FadeIn>
 
-          {/* Pricing Cards */}
-          <FadeIn>
-            <div style={{ textAlign: "center", marginBottom: 36 }}>
-              <p className="dm" style={{ fontSize: 12, letterSpacing: "3px", color: s.accent, textTransform: "uppercase", fontWeight: 600, marginBottom: 12 }}>Pricing</p>
-              <h3 className="playfair" style={{ fontSize: "clamp(22px, 3vw, 32px)", fontWeight: 700, color: "#fff", letterSpacing: "-0.5px" }}>Simple, Transparent Pricing</h3>
-            </div>
-          </FadeIn>
-          <div className="pricing-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20, marginBottom: 40 }}>
-            {AI_COACH_PRICING.map((plan, i) => (
-              <FadeIn key={plan.tier} delay={i * 0.08}>
-                <div style={{ background: plan.highlight ? "rgba(14,165,233,0.08)" : "rgba(255,255,255,0.03)", border: plan.highlight ? "2px solid rgba(14,165,233,0.5)" : "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: "32px 28px", height: "100%", display: "flex", flexDirection: "column", position: "relative" }}>
-                  {plan.highlight && (
-                    <div style={{ position: "absolute", top: -12, left: "50%", transform: "translateX(-50%)", background: s.accent, color: "#fff", fontSize: 11, fontWeight: 700, letterSpacing: "1px", padding: "4px 14px", borderRadius: 20, fontFamily: "'DM Sans', sans-serif", textTransform: "uppercase", whiteSpace: "nowrap" }}>LIMITED — 3 SPOTS</div>
-                  )}
-                  <p className="dm" style={{ fontSize: 13, fontWeight: 600, color: s.accent, letterSpacing: "1px", textTransform: "uppercase", marginBottom: 8 }}>{plan.tier}</p>
-                  <div style={{ marginBottom: 12 }}>
-                    <span className="playfair" style={{ fontSize: 36, fontWeight: 700, color: "#fff" }}>{plan.price}</span>
-                    <span className="dm" style={{ fontSize: 14, color: "#64748b", marginLeft: 4 }}>{plan.period}</span>
-                  </div>
-                  <p className="dm" style={{ fontSize: 14, color: "#94a3b8", lineHeight: 1.7, marginBottom: 24, fontWeight: 300 }}>{plan.desc}</p>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28, flex: 1 }}>
-                    {plan.features.map((feat, fi) => (
-                      <div key={fi} style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
-                        <span style={{ color: "#10b981", fontSize: 13, marginTop: 2, flexShrink: 0 }}>✓</span>
-                        <span className="dm" style={{ fontSize: 13, color: "#cbd5e1", lineHeight: 1.5, fontWeight: 300 }}>{feat}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <button className="btn-primary" onClick={() => scrollTo("contact")} style={{ width: "100%", textAlign: "center", padding: "13px 20px", background: plan.highlight ? s.accent : "rgba(255,255,255,0.1)", border: plan.highlight ? "none" : "1px solid rgba(255,255,255,0.15)", fontSize: 14 }}>{plan.cta}</button>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-
-          {/* Coach Setup Note */}
-          <FadeIn>
-            <div style={{ textAlign: "center", maxWidth: 700, margin: "0 auto" }}>
-              <p className="dm" style={{ fontSize: 13, color: "#64748b", lineHeight: 1.7, fontWeight: 300 }}>
-                <strong style={{ color: "#94a3b8", fontWeight: 500 }}>For coaches managing multiple athletes:</strong> Contact me for Coach tier pricing — includes multi-athlete dashboard, per-athlete customization, and coach summary tools. Setup from $399 one-time.
-              </p>
+          {/* Dual CTAs */}
+          <FadeIn delay={0.25}>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 20 }}>
+              <div className="cta-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, maxWidth: 700, width: "100%" }}>
+                <button className="btn-primary" onClick={() => window.location.href = '/ai-coach'} style={{ width: "100%", textAlign: "center", padding: "16px 24px", background: s.accent, fontSize: 15, borderRadius: 8 }}>See the Full AI Coach Page →</button>
+                <button className="btn-primary" onClick={() => window.open('https://api.leadconnectorhq.com/widget/booking/l0FfSuPINhd1ypD8cyiX', '_blank')} style={{ width: "100%", textAlign: "center", padding: "16px 24px", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.2)", fontSize: 15, borderRadius: 8 }}>Want Something Like This? →</button>
+              </div>
+              <p className="dm" style={{ fontSize: 13, color: "#64748b", fontWeight: 300 }}>Athlete? Check out the AI Coach. Business owner? Let's talk about what I can build for you.</p>
             </div>
           </FadeIn>
         </div>
