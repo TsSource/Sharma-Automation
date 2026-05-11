@@ -265,7 +265,7 @@ export default function AICoachLanding() {
           <FadeIn><div style={{ textAlign: "center", marginBottom: 48 }}>
             <p className="section-label" style={{ color: s.accent }}>The Solution</p>
             <h2 className="heading" style={{ color: "#fff" }}>One AI Coach. Built On Your Data.</h2>
-            <p className="dm" style={{ fontSize: 16, color: "rgba(255,255,255,0.7)", lineHeight: 1.75, maxWidth: 640, margin: "0 auto", fontWeight: 300 }}>The same coaching engine works across Discord, Claude Desktop, and Claude.ai. Ask your coach a question anywhere. Get a personalized answer backed by your real training data.</p>
+            <p className="dm" style={{ fontSize: 16, color: "rgba(255,255,255,0.7)", lineHeight: 1.75, maxWidth: 640, margin: "0 auto", fontWeight: 300 }}>Ask your coach a question and get a personalized answer backed by your real training data.</p>
           </div></FadeIn>
           <FadeIn delay={0.1}>
             <div className="two-col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
