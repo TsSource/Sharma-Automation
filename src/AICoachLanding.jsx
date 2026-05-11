@@ -1,21 +1,20 @@
 import { useState, useEffect, useRef } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
-   AI COACH LANDING PAGE — Vibrant Athletic Aesthetic (Merged)
+   AI COACH LANDING PAGE: Cloud Product Marketing (Scope B)
    sharmaautomation.com/ai-coach
-   
-   Merged: New vibrant design + founder story + race photos
-           + original 10-step setup call, requirements, 3-tier
-           pricing, founding spotlight, and all proven copy.
+
+   Marketing landing for AI Coach Cloud, the hosted SaaS endurance
+   coaching platform. CTAs route to coach.sharmaautomation.com for
+   signup and login. 7-day free trial on all plans.
 
    Color Palette:
-     --bg-white    #FFFFFF     --bg-warm     #F8F7F4
-     --bg-dark     #1B1B1B     --accent      #E84525
-     --gold        #F4A127     --steel       #2B6CB0
+     bgWhite #FFFFFF / bgWarm #F8F7F4 / bgDark #1B1B1B
+     accent #E84525 / gold #F4A127 / steel #2B6CB0
 
-   Image placeholders (place in public/ folder):
-     /race-hero.jpg, /race-finish.jpg,
-     /race-bike.jpg, /race-run.jpg, /race-swim.jpg, /race-medal.jpg
+   Race photos (in public/):
+     race-hero.jpg, race-finish.jpg,
+     race-bike.jpg, race-run.jpg, race-swim.jpeg, race-medal.jpg
 ═══════════════════════════════════════════════════════════════ */
 
 /* ── Color Tokens ──────────────────────────────────────────── */
@@ -33,76 +32,49 @@ const s = {
 const PAIN_POINTS = [
   { icon: "📊", title: "Data Without Answers", desc: "TrainingPeaks shows you a chart. You stare at it. You still don't know what to do today." },
   { icon: "📋", title: "Plans That Don't Adapt", desc: "Life happens. You miss a day. Your rigid training plan doesn't adjust, so you either skip it or push through when you shouldn't." },
-  { icon: "📱", title: "Five Apps, Zero Coaching", desc: "Strava for logging. TrainingPeaks for planning. Garmin for data. None of them talk to each other. None of them tell you what to actually do." },
+  { icon: "📱", title: "Apps That Don't Coach", desc: "Your watch logs your run. Your phone tracks your sleep. None of them tell you what to do tomorrow. They show data; they don't give advice." },
 ];
 
 const FEATURES = [
-  { icon: "📊", title: "Real Data Coaching", desc: "Reads your actual heart rate, power, HRV, sleep, and fitness/fatigue/form trends. Not generic advice from a template." },
-  { icon: "📱", title: "Multi Platform via MCP", desc: "Works in Discord, Claude Desktop, and Claude.ai. One coaching engine, every platform you already use." },
-  { icon: "📅", title: "Conversation to Calendar", desc: "Say \"post it\" and the structured workout lands on your Intervals.icu calendar. Syncs to Zwift, Garmin, and Wahoo." },
-  { icon: "🧠", title: "Model Agnostic", desc: "Runs on GPT, Grok, Gemini, or fully local with Ollama. You choose the AI. Switch anytime. Zero vendor lock in." },
-  { icon: "⚙️", title: "Customizable Philosophy", desc: "Tune the coaching for cycling power, running pace zones, triathlon distribution, or any approach. Your coach, your rules." },
-  { icon: "🔒", title: "You Own Everything", desc: "Runs on your machine with your API key. No subscriptions to cancel. Your data never leaves your control." },
+  { icon: "📊", title: "Personalized to YOUR Data", desc: "Every recommendation is generated from your actual training. Not a generic template, not advice scraped from running blogs." },
+  { icon: "💬", title: "Conversational, Ask Anything", desc: "Talk to your coach like you'd text a friend. Get answers in plain English, backed by your numbers." },
+  { icon: "📅", title: "Writes Workouts to Your Calendar", desc: "Say 'post it' and the structured workout lands on your Intervals.icu calendar. Syncs to Zwift, Garmin, and Wahoo." },
+  { icon: "🧠", title: "Adapts to HRV, Sleep, and Fatigue", desc: "Your plan flexes when you do. Bad sleep or high fatigue? Your coach adjusts the day, not next month." },
+  { icon: "🏃", title: "Built By An Athlete", desc: "A competitive age-group triathlete who uses this system every morning. Not a Silicon Valley product team." },
+  { icon: "🔒", title: "Your Data, Your Control", desc: "Powered by your Intervals.icu account. Export, view, or delete anytime. No vendor lock-in." },
 ];
 
-const REQUIREMENTS = [
-  { icon: "💻", title: "Your Computer", desc: "Windows or Mac. Runs locally on your machine. Your data stays yours." },
-  { icon: "📈", title: "Intervals.icu Account (free)", desc: "This is where your training data lives. Connects to Strava, Garmin, Zwift, Apple Watch, and more. If you don't have one, we create it together on the call." },
-  { icon: "🧠", title: "AI Provider (pick one during setup)", items: ["ChatGPT Plus subscription with one click OAuth sign in (easiest, recommended)", "Bring your own API key from OpenAI, Google Gemini, Grok, or others", "Local AI via Ollama for fully offline coaching with zero subscription"] },
-  { icon: "💬", title: "Discord (free)", desc: "Your coach lives in a private Discord server. You talk to it like texting a friend. We create the server and bot together on the call." },
-  { icon: "⚡", title: "OpenClaw (open source, free)", desc: "The AI agent engine that powers everything. Installed automatically during setup. You never need to touch it directly." },
-];
-
-const SETUP_STEPS = [
-  { num: "01", title: "Introductions", time: "5 min", desc: "We get to know each other. I'll ask about your training: what sports you do, how many hours a week, what apps or devices you currently use, and what frustrates you about your current coaching setup. This helps me customize your AI coach to fit how you actually train." },
-  { num: "02", title: "Process Overview", time: "2 min", desc: "I'll walk you through exactly what we're about to do together so there are no surprises. You'll know every step before we start." },
-  { num: "03", title: "Payment", time: "3 min", desc: "I'll send you the Stripe payment link directly in the Google Meet chat. For founding athletes, that's $99 total, which locks in your 3 months of support and the optional $29/mo grandfathered retainer rate for life. Once payment confirms, we move forward." },
-  { num: "04", title: "Download the Installer", time: "5 min", desc: "After payment, I'll send you a private Google Drive link to download the AI Coach installer. You'll run the executable on your computer. I'll be watching your shared screen and guiding you through each prompt as the installer runs." },
-  { num: "05", title: "Intervals.icu Setup", time: "10 min", desc: "If you already have an Intervals.icu account, we connect it. If you don't, I'll walk you through creating a free account right on the call. We'll link your training data sources like Strava, Garmin, Zwift, or Apple Watch so your history starts flowing in automatically." },
-  { num: "06", title: "AI Provider Configuration", time: "10 min", desc: "You'll choose how your coach thinks. I'll guide you through one of three options: signing in with your ChatGPT subscription via one click OAuth, entering your own API key, or setting up Ollama for fully local offline coaching. You pick, I direct you through the setup." },
-  { num: "07", title: "Discord and Bot Setup", time: "10 min", desc: "I'll walk you through creating a private Discord server (or using one you already have) and adding your personal coaching bot. You'll click through each step on your screen while I tell you exactly what to do and where to click." },
-  { num: "08", title: "Coaching Personality", time: "5 min", desc: "This is the fun part. With your screen shared, I'll guide you through customizing your coach's personality, training philosophy, and tone. Want a coach who is blunt and pushes hard? We'll set that. Prefer something encouraging and supportive? We'll set that instead." },
-  { num: "09", title: "First Real Conversation", time: "5 min", desc: "You type a real question to your AI coach. Something like \"What should I do today?\" You'll watch it pull your actual training data from Intervals.icu and respond with personalized, data driven coaching advice. This is the moment it all clicks.", highlight: true },
-  { num: "10", title: "Wrap Up and Support Info", time: "5 min", desc: "I'll make sure everything is working, answer any remaining questions, and give you the rundown on your 90 days of founding athlete support. You'll know exactly how to reach me and what to expect over the next 3 months." },
+const HOW_IT_WORKS = [
+  { num: "01", title: "Sign Up", time: "60 seconds", desc: "Email and password. Confirm your address. You're in." },
+  { num: "02", title: "Connect Intervals.icu", desc: "Paste your credentials once. We pull your training history, your fitness and fatigue trends, and your goal races." },
+  { num: "03", title: "Get Coached", desc: "Your AI coach reads your data and starts giving personalized guidance from day one. Ask anything. Get answers backed by your real numbers." },
 ];
 
 const PRICING = [
-  { tier: "Solo Athlete", price: "$199", period: "one time", desc: "Athletes who want AI powered daily guidance from their own data.", features: ["White glove setup session", "Full system on your machine", "Your choice of AI model", "10 MCP coaching tools", "Intervals.icu calendar integration", "Local training dashboard"], cta: "Get Started", highlight: false },
-  { tier: "Founding Athlete", price: "$99", period: "limited offer", desc: "3 spots only. Full setup plus 3 months of dedicated support in exchange for honest feedback and a testimonial.", features: ["Everything in Solo Athlete", "3 months of dedicated support", "Priority bug fixes and updates", "Direct access to the developer", "Optional $29/mo grandfathered retainer"], cta: "Claim Your Spot", highlight: true },
-  { tier: "Cloud Hosted", price: "$39-59", period: "/month", desc: "For athletes who don't want to run anything locally. I host it, you use it.", features: ["Fully managed hosting", "No local install needed", "Automatic updates", "Discord bot included", "All Solo features included", "Cancel anytime"], cta: "Contact Me", highlight: false },
+  { tier: "Founding", price: "$14.99", period: "/month", desc: "Lock in this rate for as long as you remain subscribed. Supporter pricing for getting in early.", features: ["7-day free trial", "Personalized AI coaching from your training data", "Workouts written to your Intervals.icu calendar", "Adapts to HRV, sleep, and fatigue", "Conversational, ask-anything", "Cancel anytime"], cta: "Claim Founding Rate", highlight: true, badge: "LIMITED TIME" },
+  { tier: "Monthly", price: "$24.99", period: "/month", desc: "Full access, billed monthly. Cancel anytime.", features: ["7-day free trial", "Personalized AI coaching from your training data", "Workouts written to your Intervals.icu calendar", "Adapts to HRV, sleep, and fatigue", "Conversational, ask-anything", "Cancel anytime"], cta: "Start Free Trial", highlight: false, badge: null },
+  { tier: "Annual", price: "$249", period: "/year", desc: "Save $51 versus monthly. Two months free.", features: ["7-day free trial", "Personalized AI coaching from your training data", "Workouts written to your Intervals.icu calendar", "Adapts to HRV, sleep, and fatigue", "Conversational, ask-anything", "Cancel anytime"], cta: "Start Free Trial", highlight: false, badge: "BEST VALUE" },
 ];
 
 const PERSONAS = [
   { icon: "🏊‍♂️🚴‍♂️🏃‍♂️", title: "Self-Coached Triathletes", desc: "You train for 70.3s or full distance and want smarter guidance without a $200/month human coach." },
-  { icon: "🏃", title: "Marathon and Ultra Runners", desc: "You log miles, track paces, and need a coach that adapts to your fatigue, not a static 16 week PDF." },
+  { icon: "🏃", title: "Marathon Runners", desc: "You log miles, track paces, and need a coach that adapts to your fatigue, not a static 16-week PDF." },
   { icon: "🚴", title: "Cyclists and Zwift Riders", desc: "You ride with power. FTP, TSS, and IF are your vocabulary. Your coach should speak it too." },
-  { icon: "👨‍🏫", title: "Coaches With Multiple Athletes", desc: "You manage multiple athletes and need an AI that writes structured workouts to each one's calendar. You review, they execute." },
-];
-
-const COMPARISON = [
-  { f: "Personalized to YOUR data", tp: "❌", st: "❌", ai: "✅" },
-  { f: "Conversational coaching", tp: "❌", st: "❌", ai: "✅" },
-  { f: "Writes workouts to calendar", tp: "✅", st: "❌", ai: "✅" },
-  { f: "Works across platforms", tp: "❌", st: "❌", ai: "✅" },
-  { f: "Runs on YOUR computer", tp: "❌", st: "❌", ai: "✅" },
-  { f: "No monthly subscription", tp: "❌", st: "❌", ai: "✅" },
-  { f: "Choose your own AI model", tp: "❌", st: "❌", ai: "✅" },
-  { f: "Morning briefings", tp: "❌", st: "❌", ai: "✅" },
+  { icon: "🏊", title: "Swimmers", desc: "You log meters, track CSS or pace per 100, and need a coach that builds structured workouts you can actually follow at the pool." },
 ];
 
 const FAQS = [
   { q: "Who built this?", a: "A competitive age-group triathlete who has completed multiple IRONMAN 70.3 races and uses this system every single day for his own training. This is not a Silicon Valley tech product. It was built by an athlete who needed smarter coaching and couldn't find it anywhere." },
   { q: "Do you actually use this yourself?", a: "Every morning. My AI coach analyzes my previous day's training, checks my fitness and fatigue trends, and gives me a personalized recommendation before I even lace up my shoes. What you're buying is the exact same system I rely on." },
-  { q: "Do I need to be technical to use this?", a: "Not at all. The entire setup happens on a Google Meet screenshare where I guide you through every click. You share your screen, I tell you exactly what to do. After setup, you just talk to your Discord bot." },
-  { q: "What if I don't use Strava?", a: "The system works with any data source that connects to Intervals.icu, including Garmin Connect, Zwift, Apple Watch via HealthFit, and more. If you don't track anywhere yet, we set that up together on the call." },
-  { q: "Which AI model does it use?", a: "Whichever one you want. The system is model agnostic. It runs on GPT, Grok, Gemini, or fully offline with Ollama on your own hardware. You can switch models anytime. There is no lock in to any single AI provider." },
-  { q: "What happens after 3 months?", a: "You own the install forever. It doesn't stop working. If you want ongoing updates and priority support, you can optionally stay on at the $29/mo grandfathered retainer rate (locked in for life as a founding athlete). Or keep it standalone with no retainer." },
-  { q: "What's the catch with the $99 founding rate?", a: "No catch. I'm looking for 3 athletes who will use it daily and give me honest feedback plus a short testimonial. You get a massive discount. I get real world proof that the system works. Everybody wins." },
-  { q: "Is my data private?", a: "Completely. The entire system runs on YOUR computer. Your training data never leaves your machine. There is no cloud server, no account to create, no company database storing your workouts. You own everything." },
+  { q: "Do I need to be technical to use this?", a: "Not at all. Sign up takes 60 seconds. Connecting your Intervals.icu account takes another minute. From there, you talk to your coach like you'd text a friend. No installs, no setup calls, no command line." },
+  { q: "What if I don't have an Intervals.icu account?", a: "You'll need one to use AI Coach. The good news: Intervals.icu is free, and it pulls data from most training apps automatically (Garmin Connect, Zwift, Apple Watch via HealthFit, and others). Sign up at intervals.icu, then connect AI Coach to your account." },
+  { q: "Which AI does it use?", a: "AI Coach runs on Anthropic's Claude. The same models that power Claude.ai, configured specifically for endurance coaching. We chose Claude because it's the most reliable model available for the kind of careful reasoning coaching requires." },
+  { q: "Is there a free trial?", a: "Yes. Every plan starts with a 7-day free trial. You enter a card upfront so your account stays active when the trial ends, but you can cancel anytime during the trial with no charge." },
+  { q: "What's the catch with the founding rate?", a: "No catch. Early supporters get the founding rate locked in for as long as they remain subscribed. I'm building this with your feedback, and the founding price is my thank-you for getting in early. Use it, tell me what works and what doesn't, and share a testimonial or review when you're ready." },
+  { q: "Is my data private?", a: "We take privacy seriously. Your account lives on encrypted, AWS-backed infrastructure (Supabase and Railway), with industry-standard encryption in transit and at rest. Your Intervals.icu credentials are stored in an encrypted vault, never logged or exposed. We never sell, rent, or share your data with third parties. Anthropic does not train its AI models on customer API data, so your conversations stay private. Your training data lives at Intervals.icu, which is the source of truth, and you can export it from there anytime. You can review your conversation history and remove individual threads at any time." },
 ];
 
-/* ── Booking URL ────────────────────────────────────────────── */
-const BOOKING_URL = "https://api.leadconnectorhq.com/widget/booking/aqUuQwD1tP8e3LyBb51Z";
+const NAV_LINKS = [["Story", "story"], ["Features", "features"], ["Pricing", "pricing"], ["FAQ", "faq"]];
 
 /* ── Utility Components ──────────────────────────────────────── */
 function useInView(threshold = 0.15) {
@@ -196,10 +168,11 @@ export default function AICoachLanding() {
             <img src="/SharmaAutomationIcon.png" alt="Sharma Automation" style={{ height: 36, width: "auto", objectFit: "contain", filter: navScrolled ? "none" : "brightness(10)" }} />
           </div>
           <div className="desktop-cta" style={{ display: "flex", alignItems: "center", gap: 24 }}>
-            {[["My Story", "story"], ["Setup Call", "setup-call"], ["Features", "features"], ["Pricing", "pricing"], ["FAQ", "faq"]].map(([label, target]) => (
+            {NAV_LINKS.map(([label, target]) => (
               <span key={label} className="dm" onClick={() => scrollTo(target)} style={{ fontSize: 14, fontWeight: 500, color: navScrolled ? s.textBody : "rgba(255,255,255,0.85)", cursor: "pointer", transition: "color 0.2s" }} onMouseEnter={e => e.target.style.color = s.accent} onMouseLeave={e => e.target.style.color = navScrolled ? s.textBody : "rgba(255,255,255,0.85)"}>{label}</span>
             ))}
-            <button className="btn-primary" onClick={() => scrollTo("book")} style={{ padding: "10px 22px", fontSize: 13 }}>Book Setup Call</button>
+            <a href="https://coach.sharmaautomation.com/login" className="dm" style={{ fontSize: 14, fontWeight: 500, color: navScrolled ? s.textBody : "rgba(255,255,255,0.85)", textDecoration: "none", transition: "color 0.2s" }}>Sign In</a>
+            <a href="https://coach.sharmaautomation.com/signup" className="btn-primary" style={{ padding: "10px 22px", fontSize: 13, textDecoration: "none", display: "inline-block" }}>Start Free Trial</a>
           </div>
           <button className="mobile-nav" onClick={() => setMenuOpen(!menuOpen)} style={{ display: "none", flexDirection: "column", gap: 5, background: "none", border: "none", cursor: "pointer", padding: 8 }}>
             <div style={{ width: 22, height: 2.5, background: navScrolled ? s.textDark : "#fff", borderRadius: 2, transition: "all 0.3s", transform: menuOpen ? "rotate(45deg) translate(5px,5px)" : "none" }} />
@@ -209,10 +182,11 @@ export default function AICoachLanding() {
         </div>
         {menuOpen && (
           <div style={{ padding: "16px 0 24px", display: "flex", flexDirection: "column", gap: 4, background: "rgba(255,255,255,0.98)" }}>
-            {[["My Story", "story"], ["Setup Call", "setup-call"], ["Features", "features"], ["Pricing", "pricing"], ["FAQ", "faq"]].map(([label, target]) => (
+            {NAV_LINKS.map(([label, target]) => (
               <span key={label} className="dm" onClick={() => { scrollTo(target); setMenuOpen(false); }} style={{ fontSize: 16, fontWeight: 500, color: s.textDark, padding: "12px 0", borderBottom: `1px solid ${s.border}`, cursor: "pointer" }}>{label}</span>
             ))}
-            <button className="btn-primary" onClick={() => { scrollTo("book"); setMenuOpen(false); }} style={{ marginTop: 12, padding: 14, textAlign: "center" }}>Book Setup Call</button>
+            <a href="https://coach.sharmaautomation.com/login" className="dm" style={{ fontSize: 16, fontWeight: 500, color: s.textDark, padding: "12px 0", borderBottom: `1px solid ${s.border}`, textDecoration: "none" }} onClick={() => setMenuOpen(false)}>Sign In</a>
+            <a href="https://coach.sharmaautomation.com/signup" className="btn-primary" style={{ marginTop: 12, padding: 14, textAlign: "center", textDecoration: "none", display: "block" }} onClick={() => setMenuOpen(false)}>Start Free Trial</a>
           </div>
         )}
       </nav>
@@ -230,17 +204,17 @@ export default function AICoachLanding() {
               I Built The Coach<br /><span style={{ color: s.accent }}>I Wished I Had</span>
             </h1>
             <p className="dm" style={{ fontSize: "clamp(16px, 2vw, 20px)", color: "rgba(255,255,255,0.8)", lineHeight: 1.65, marginBottom: 40, maxWidth: 620, margin: "0 auto 40px", fontWeight: 300 }}>
-              A conversational AI coaching system that reads your real training data and tells you exactly what to do today. Works across Discord, Claude Desktop, and Claude.ai.
+              A conversational AI coach that reads your real training data and tells you exactly what to do today. Sign up in 60 seconds, connect Intervals.icu, and start training smarter.
             </p>
             <div className="hero-buttons" style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-              <button className="btn-primary" onClick={() => scrollTo("book")} style={{ fontSize: 16, padding: "16px 36px" }}>Book Your Free Setup Call</button>
-              <button className="btn-outline-light" onClick={() => scrollTo("demo")} style={{ fontSize: 16, padding: "15px 36px" }}>Watch the 3 Min Demo</button>
+              <a href="https://coach.sharmaautomation.com/signup" className="btn-primary" style={{ fontSize: 16, padding: "16px 36px", textDecoration: "none", display: "inline-block" }}>Start Free Trial</a>
+              <button className="btn-outline-light" onClick={() => scrollTo("demo")} style={{ fontSize: 16, padding: "15px 36px" }}>Watch the Demo</button>
             </div>
           </FadeIn>
         </div>
       </section>
 
-      {/* ═══ 3. FOUNDER STORY (NEW) ═══ */}
+      {/* ═══ 3. FOUNDER STORY ═══ */}
       <section id="story" style={{ padding: "96px 5vw", background: s.bgWhite }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div className="story-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
@@ -255,8 +229,8 @@ export default function AICoachLanding() {
               <h2 className="heading" style={{ textTransform: "none", fontSize: "clamp(26px, 3.5vw, 38px)" }}>I've Been Where You Are</h2>
               <div className="dm" style={{ fontSize: 16, lineHeight: 1.8 }}>
                 <p style={{ marginBottom: 20 }}>I've been a competitive age-group triathlete for five years. I've finished multiple IRONMAN 70.3 races. I train 7 to 10 hours a week. And like most self-coached athletes, I spent too much time staring at data I didn't fully understand and following plans that didn't adapt to how I actually felt.</p>
-                <p style={{ marginBottom: 20 }}>So I built something better. An AI that connects to my Intervals.icu account, reads my real workout data (heart rate, power, sleep, HRV, and fitness trends), and gives me a personalized recommendation every morning through Discord.</p>
-                <p style={{ marginBottom: 28, color: s.textDark, fontWeight: 600 }}>I use it every single day. This is my own coaching system, and I'm offering it to other athletes who want the same thing.</p>
+                <p style={{ marginBottom: 20 }}>So I built something better. An AI that connects to my Intervals.icu account, reads my real workout data (heart rate, power, sleep, HRV, and fitness trends), and gives me a personalized recommendation every morning.</p>
+                <p style={{ marginBottom: 28, color: s.textDark, fontWeight: 600 }}>I use it every single day. Now I've made it available to other athletes, fully hosted in the cloud. No install, no technical setup. Just sign up and start training smarter.</p>
                 <button className="btn-outline" onClick={() => scrollTo("demo")}>Watch the Demo ↓</button>
               </div>
             </FadeIn>
@@ -290,7 +264,7 @@ export default function AICoachLanding() {
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <FadeIn><div style={{ textAlign: "center", marginBottom: 48 }}>
             <p className="section-label" style={{ color: s.accent }}>The Solution</p>
-            <h2 className="heading" style={{ color: "#fff" }}>One AI Coach. Every Platform You Use.</h2>
+            <h2 className="heading" style={{ color: "#fff" }}>One AI Coach. Built On Your Data.</h2>
             <p className="dm" style={{ fontSize: 16, color: "rgba(255,255,255,0.7)", lineHeight: 1.75, maxWidth: 640, margin: "0 auto", fontWeight: 300 }}>The same coaching engine works across Discord, Claude Desktop, and Claude.ai. Ask your coach a question anywhere. Get a personalized answer backed by your real training data.</p>
           </div></FadeIn>
           <FadeIn delay={0.1}>
@@ -309,7 +283,7 @@ export default function AICoachLanding() {
               <div style={{ background: "rgba(232,69,37,0.06)", border: `1px solid rgba(232,69,37,0.25)`, borderRadius: 8, padding: 32 }}>
                 <p className="barlow" style={{ fontSize: 12, letterSpacing: "0.15em", color: "#10b981", textTransform: "uppercase", marginBottom: 16, fontWeight: 700 }}>What I Built</p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                  {["Conversational coaching from your actual training data.", "Tells you exactly what to do today in plain English.", "\"Post it\" and the workout lands on your calendar in one sentence.", "You own the AI, the data, and the entire system."].map((pt, i) => (
+                  {["Conversational coaching from your actual training data.", "Tells you exactly what to do today in plain English.", "\"Post it\" and the workout lands on your Intervals.icu calendar.", "Sign up in 60 seconds."].map((pt, i) => (
                     <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
                       <span style={{ color: "#10b981", fontSize: 14, marginTop: 2, flexShrink: 0 }}>✓</span>
                       <span className="dm" style={{ fontSize: 14, color: "rgba(255,255,255,0.85)", lineHeight: 1.6, fontWeight: 400 }}>{pt}</span>
@@ -339,25 +313,24 @@ export default function AICoachLanding() {
         </div>
       </section>
 
-      {/* ═══ 7. YOUR SETUP CALL (10 steps) ═══ */}
-      <section id="setup-call" style={{ padding: "96px 5vw", background: s.bgWhite }}>
+      {/* ═══ 7. HOW IT WORKS ═══ */}
+      <section id="how-it-works" style={{ padding: "96px 5vw", background: s.bgWhite }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <FadeIn><div style={{ textAlign: "center", marginBottom: 16 }}>
-            <p className="section-label" style={{ color: s.accent }}>The White Glove Experience</p>
-            <h2 className="heading">One Call. Fully Installed.</h2>
-            <p className="dm" style={{ fontSize: 16, color: s.textBody, lineHeight: 1.75, maxWidth: 640, margin: "0 auto", fontWeight: 300 }}>Everything happens on a single Google Meet video call. You share your screen, I walk you through every step. By the end of the hour, your AI coach is live and ready.</p>
+            <p className="section-label" style={{ color: s.accent }}>Getting Started</p>
+            <h2 className="heading">From Sign Up to Coached in Minutes</h2>
           </div></FadeIn>
           <div style={{ marginTop: 48 }}>
-            {SETUP_STEPS.map((step, i) => (
-              <FadeIn key={step.num} delay={i * 0.04}>
+            {HOW_IT_WORKS.map((step, i) => (
+              <FadeIn key={step.num} delay={i * 0.06}>
                 <div style={{ display: "flex", gap: 24, marginBottom: 32, alignItems: "flex-start" }}>
-                  <div style={{ flexShrink: 0, width: 56, height: 56, borderRadius: 8, background: step.highlight ? s.accentDim : s.bgWarm, border: `1px solid ${step.highlight ? s.accent : s.border}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <span className="barlow" style={{ fontSize: 20, fontWeight: 700, color: step.highlight ? s.accent : s.textDark }}>{step.num}</span>
+                  <div style={{ flexShrink: 0, width: 56, height: 56, borderRadius: 8, background: s.bgWarm, border: `1px solid ${s.border}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <span className="barlow" style={{ fontSize: 20, fontWeight: 700, color: s.textDark }}>{step.num}</span>
                   </div>
                   <div style={{ flex: 1 }}>
                     <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 6 }}>
                       <h3 className="barlow" style={{ fontSize: 18, fontWeight: 700, color: s.textDark, textTransform: "uppercase", letterSpacing: "0.04em" }}>{step.title}</h3>
-                      <span className="dm" style={{ fontSize: 12, color: s.textMuted, fontWeight: 400 }}>{step.time}</span>
+                      {step.time && <span className="dm" style={{ fontSize: 12, color: s.textMuted, fontWeight: 400 }}>{step.time}</span>}
                     </div>
                     <p className="dm" style={{ fontSize: 14, color: s.textBody, lineHeight: 1.75, fontWeight: 300 }}>{step.desc}</p>
                   </div>
@@ -367,13 +340,13 @@ export default function AICoachLanding() {
           </div>
           <FadeIn>
             <div style={{ textAlign: "center", marginTop: 16, padding: "24px 32px", background: s.bgWarm, borderRadius: 8, border: `1px solid ${s.border}` }}>
-              <p className="dm" style={{ fontSize: 15, color: s.textBody, fontWeight: 400 }}>Total call time: roughly 45 to 60 minutes. You walk away with a fully installed, fully customized AI coach running on your own computer.</p>
+              <p className="dm" style={{ fontSize: 15, color: s.textBody, fontWeight: 500 }}>7-day free trial. Cancel anytime. No setup calls, no installs.</p>
             </div>
           </FadeIn>
         </div>
       </section>
 
-      {/* ═══ 8. RACE PHOTO GALLERY (NEW) ═══ */}
+      {/* ═══ 8. RACE PHOTO GALLERY ═══ */}
       <section style={{ overflow: "hidden" }}>
         <div className="gallery-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", minHeight: 300 }}>
           {["/race-bike.jpg", "/race-run.jpg", "/race-swim.jpeg", "/race-medal.jpg"].map((src, i) => (
@@ -386,8 +359,8 @@ export default function AICoachLanding() {
       <section id="features" style={{ padding: "96px 5vw", background: s.bgWarm }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <FadeIn><div style={{ textAlign: "center", marginBottom: 48 }}>
-            <p className="section-label" style={{ color: s.accent }}>Capabilities</p>
-            <h2 className="heading">What Your AI Coach Can Do</h2>
+            <p className="section-label" style={{ color: s.accent }}>Why AI Coach</p>
+            <h2 className="heading">What Makes This Different</h2>
           </div></FadeIn>
           <div className="feature-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20 }}>
             {FEATURES.map((f, i) => (
@@ -403,86 +376,20 @@ export default function AICoachLanding() {
         </div>
       </section>
 
-      {/* ═══ 10. REQUIREMENTS ═══ */}
-      <section style={{ padding: "96px 5vw", background: s.bgWhite }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <FadeIn><div style={{ textAlign: "center", marginBottom: 16 }}>
-            <p className="section-label" style={{ color: s.steel }}>Transparency</p>
-            <h2 className="heading">What Gets Installed</h2>
-            <p className="dm" style={{ fontSize: 15, color: s.textBody, lineHeight: 1.75, maxWidth: 640, margin: "0 auto", fontWeight: 300 }}>Everything below is set up for you during your white glove setup call. No technical knowledge required. This is just so you know what powers your AI Coach under the hood.</p>
-          </div></FadeIn>
-          <div className="req-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20, marginTop: 48 }}>
-            {REQUIREMENTS.map((r, i) => (
-              <FadeIn key={r.title} delay={i * 0.06}>
-                <div className="card">
-                  <div style={{ fontSize: 28, marginBottom: 12 }}>{r.icon}</div>
-                  <h3 className="barlow" style={{ fontSize: 18, fontWeight: 700, color: s.textDark, marginBottom: 8, textTransform: "uppercase", letterSpacing: "0.04em" }}>{r.title}</h3>
-                  {r.desc && <p className="dm" style={{ fontSize: 14, color: s.textBody, lineHeight: 1.75, fontWeight: 300 }}>{r.desc}</p>}
-                  {r.items && (
-                    <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 4 }}>
-                      {r.items.map((item, j) => (
-                        <div key={j} style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
-                          <span style={{ color: s.accent, fontSize: 13, marginTop: 2, flexShrink: 0 }}>✓</span>
-                          <span className="dm" style={{ fontSize: 13, color: s.textBody, lineHeight: 1.6, fontWeight: 300 }}>{item}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-          <FadeIn>
-            <p className="dm" style={{ textAlign: "center", marginTop: 32, fontSize: 14, color: s.textBody, fontWeight: 500, fontStyle: "italic" }}>All of this is included in every white glove setup. You show up to the call, we handle the rest.</p>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* ═══ 11. COMPARISON TABLE (NEW) ═══ */}
-      <section style={{ padding: "96px 5vw", background: s.bgWarm }}>
-        <div style={{ maxWidth: 800, margin: "0 auto" }}>
-          <FadeIn><div style={{ textAlign: "center", marginBottom: 40 }}>
-            <p className="section-label" style={{ color: s.steel }}>Why Switch</p>
-            <h2 className="heading">How It Compares</h2>
-          </div></FadeIn>
-          <FadeIn delay={0.15}>
-            <div style={{ overflowX: "auto", borderRadius: 8, border: `1px solid ${s.border}`, background: s.bgWhite }}>
-              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 15 }}>
-                <thead><tr style={{ background: s.bgWarm }}>
-                  <th className="barlow" style={{ textAlign: "left", padding: "14px 20px", color: s.textMuted, fontWeight: 600, fontSize: 13, letterSpacing: "0.1em", textTransform: "uppercase" }}>Feature</th>
-                  <th className="barlow" style={{ padding: "14px 16px", textAlign: "center", color: s.textMuted, fontWeight: 600, fontSize: 13, letterSpacing: "0.1em", textTransform: "uppercase" }}>TrainingPeaks</th>
-                  <th className="barlow" style={{ padding: "14px 16px", textAlign: "center", color: s.textMuted, fontWeight: 600, fontSize: 13, letterSpacing: "0.1em", textTransform: "uppercase" }}>Strava</th>
-                  <th className="barlow" style={{ padding: "14px 16px", textAlign: "center", color: s.accent, fontWeight: 700, fontSize: 13, letterSpacing: "0.1em", textTransform: "uppercase" }}>AI Coach</th>
-                </tr></thead>
-                <tbody>
-                  {COMPARISON.map((r, i) => (
-                    <tr key={i} style={{ borderTop: `1px solid ${s.border}` }}>
-                      <td className="dm" style={{ padding: "14px 20px", fontWeight: 500, color: s.textDark }}>{r.f}</td>
-                      <td style={{ padding: "14px 16px", textAlign: "center", fontSize: 18 }}>{r.tp}</td>
-                      <td style={{ padding: "14px 16px", textAlign: "center", fontSize: 18 }}>{r.st}</td>
-                      <td style={{ padding: "14px 16px", textAlign: "center", fontSize: 18 }}>{r.ai}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* ═══ 12. PRICING (3 tiers, dark) ═══ */}
+      {/* ═══ 10. PRICING (3 tiers, dark) ═══ */}
       <section id="pricing" style={{ padding: "96px 5vw", background: s.bgDark }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <FadeIn><div style={{ textAlign: "center", marginBottom: 48 }}>
             <p className="section-label" style={{ color: s.accent }}>Pricing</p>
             <h2 className="heading" style={{ color: "#fff" }}>Simple, Transparent Pricing</h2>
+            <p className="dm" style={{ fontSize: 16, color: "rgba(255,255,255,0.7)", lineHeight: 1.75, maxWidth: 640, margin: "0 auto", fontWeight: 300 }}>7-day free trial on every plan. Cancel anytime.</p>
           </div></FadeIn>
           <div className="pricing-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
             {PRICING.map((plan, i) => (
               <FadeIn key={plan.tier} delay={i * 0.08}>
                 <div style={{ background: plan.highlight ? "rgba(232,69,37,0.08)" : "rgba(255,255,255,0.03)", border: plan.highlight ? `2px solid ${s.accent}` : "1px solid rgba(255,255,255,0.08)", borderRadius: 8, padding: "32px 28px", height: "100%", display: "flex", flexDirection: "column", position: "relative" }}>
-                  {plan.highlight && (
-                    <div className="barlow" style={{ position: "absolute", top: -12, left: "50%", transform: "translateX(-50%)", background: s.gold, color: "#fff", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", padding: "4px 14px", borderRadius: 4, textTransform: "uppercase", whiteSpace: "nowrap" }}>3 SPOTS ONLY</div>
+                  {plan.badge && (
+                    <div className="barlow" style={{ position: "absolute", top: -12, left: "50%", transform: "translateX(-50%)", background: plan.highlight ? s.gold : s.steel, color: "#fff", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", padding: "4px 14px", borderRadius: 4, textTransform: "uppercase", whiteSpace: "nowrap" }}>{plan.badge}</div>
                   )}
                   <p className="barlow" style={{ fontSize: 14, fontWeight: 700, color: s.accent, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 }}>{plan.tier}</p>
                   <div style={{ marginBottom: 12 }}>
@@ -498,37 +405,30 @@ export default function AICoachLanding() {
                       </div>
                     ))}
                   </div>
-                  <button className="btn-primary" onClick={() => scrollTo("book")} style={{ width: "100%", textAlign: "center", padding: "13px 20px", background: plan.highlight ? s.accent : "rgba(255,255,255,0.1)", border: plan.highlight ? "none" : "1px solid rgba(255,255,255,0.15)", boxShadow: plan.highlight ? `0 4px 16px ${s.accentGlow}` : "none" }}>{plan.cta}</button>
+                  <a href="https://coach.sharmaautomation.com/signup" className="btn-primary" style={{ width: "100%", textAlign: "center", padding: "13px 20px", background: plan.highlight ? s.accent : "rgba(255,255,255,0.1)", border: plan.highlight ? "none" : "1px solid rgba(255,255,255,0.15)", boxShadow: plan.highlight ? `0 4px 16px ${s.accentGlow}` : "none", textDecoration: "none", display: "inline-block" }}>{plan.cta}</a>
                 </div>
               </FadeIn>
             ))}
           </div>
-          <FadeIn>
-            <div style={{ textAlign: "center", maxWidth: 700, margin: "32px auto 0" }}>
-              <p className="dm" style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", lineHeight: 1.7, fontWeight: 300 }}>
-                <strong style={{ color: "rgba(255,255,255,0.7)", fontWeight: 500 }}>For coaches managing multiple athletes:</strong> Contact me for Coach tier pricing, which includes multi athlete dashboard, per athlete customization, and coach summary tools. Setup from $399 one time.
-              </p>
-            </div>
-          </FadeIn>
         </div>
       </section>
 
-      {/* ═══ 13. FOUNDING ATHLETE SPOTLIGHT ═══ */}
+      {/* ═══ 11. FOUNDING SPOTLIGHT ═══ */}
       <section style={{ padding: "72px 5vw", background: s.bgWhite }}>
         <FadeIn>
           <div className="founding-box" style={{ maxWidth: 800, margin: "0 auto", background: s.goldBg, border: `1px solid ${s.goldBorder}`, borderRadius: 8, padding: "48px 40px", textAlign: "center" }}>
             <div className="barlow" style={{ display: "inline-block", background: "#fef3c7", color: s.goldDark, fontSize: 12, fontWeight: 700, letterSpacing: "0.15em", padding: "4px 14px", borderRadius: 4, textTransform: "uppercase", marginBottom: 20 }}>FOUNDING ATHLETE PROGRAM</div>
-            <h2 className="heading" style={{ fontSize: "clamp(24px, 3.5vw, 36px)" }}>$99 Gets You Everything</h2>
-            <p className="dm" style={{ fontSize: 15, color: s.textBody, lineHeight: 1.85, maxWidth: 600, margin: "0 auto 20px", fontWeight: 300 }}>I'm looking for 3 athletes who will use the AI Coach daily and give me honest feedback. In exchange, you get the full white glove setup, 3 months of dedicated support, and the optional $29/mo grandfathered retainer rate locked in for life.</p>
+            <h2 className="heading" style={{ fontSize: "clamp(24px, 3.5vw, 36px)" }}>Founding Pricing. Limited Time.</h2>
+            <p className="dm" style={{ fontSize: 15, color: s.textBody, lineHeight: 1.85, maxWidth: 600, margin: "0 auto 20px", fontWeight: 300 }}>Founding access is $14.99 per month, locked in at that rate for as long as you remain subscribed. You're getting in early. I'm building this with your feedback.</p>
             <p className="dm" style={{ fontSize: 15, color: s.textBody, lineHeight: 1.85, maxWidth: 600, margin: "0 auto 32px", fontWeight: 300 }}>
-              <strong style={{ color: s.textDark, fontWeight: 600 }}>What I ask in return:</strong> Use it. Tell me what works and what doesn't. Record a 60 second testimonial when you're ready. That's it.
+              <strong style={{ color: s.textDark, fontWeight: 600 }}>What I ask in return:</strong> Use it. Tell me what works and what doesn't. Share a testimonial or review when you're ready. That's it.
             </p>
-            <button className="btn-gold" onClick={() => scrollTo("book")}>Claim a Founding Athlete Spot</button>
+            <a href="https://coach.sharmaautomation.com/signup" className="btn-gold" style={{ textDecoration: "none", display: "inline-block" }}>Claim Founding Rate</a>
           </div>
         </FadeIn>
       </section>
 
-      {/* ═══ 14. BUILT FOR ═══ */}
+      {/* ═══ 12. BUILT FOR ═══ */}
       <section style={{ padding: "96px 5vw", background: s.bgWarm }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <FadeIn><div style={{ textAlign: "center", marginBottom: 48 }}>
@@ -549,7 +449,7 @@ export default function AICoachLanding() {
         </div>
       </section>
 
-      {/* ═══ 15. FAQ ═══ */}
+      {/* ═══ 13. FAQ ═══ */}
       <section id="faq" style={{ padding: "96px 5vw", background: s.bgWhite }}>
         <div style={{ maxWidth: 760, margin: "0 auto" }}>
           <FadeIn><div style={{ textAlign: "center", marginBottom: 48 }}>
@@ -566,7 +466,7 @@ export default function AICoachLanding() {
                     <line x1="1" y1="7" x2="13" y2="7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                   </svg>
                 </div>
-                <div style={{ maxHeight: faqOpen === i ? "300px" : "0", overflow: "hidden", transition: "max-height 0.3s ease" }}>
+                <div style={{ maxHeight: faqOpen === i ? "600px" : "0", overflow: "hidden", transition: "max-height 0.3s ease" }}>
                   <div className="faq-a">{faq.a}</div>
                 </div>
               </div>
@@ -575,28 +475,50 @@ export default function AICoachLanding() {
         </div>
       </section>
 
-      {/* ═══ 16. FINAL CTA + BOOKING ═══ */}
+      {/* ═══ 14. FINAL CTA ═══ */}
       <section id="book" style={{ padding: "96px 5vw", background: s.bgDark }}>
         <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center" }}>
           <FadeIn>
             <h2 className="heading" style={{ color: "#fff", fontSize: "clamp(28px, 4.5vw, 48px)" }}>
               Your Coach Follows You.<br /><span style={{ color: s.accent }}>You Don't Follow Your Coach.</span>
             </h2>
-            <p className="dm" style={{ fontSize: 16, color: "rgba(255,255,255,0.7)", lineHeight: 1.75, marginBottom: 40, maxWidth: 560, margin: "0 auto 40px", fontWeight: 300 }}>Book your free setup call below. We'll get everything installed on a single Google Meet screenshare. You walk away with a working AI coach by the end of the hour.</p>
+            <p className="dm" style={{ fontSize: 16, color: "rgba(255,255,255,0.7)", lineHeight: 1.75, marginBottom: 40, maxWidth: 560, margin: "0 auto 40px", fontWeight: 300 }}>Sign up takes 60 seconds. Your AI coach will be reading your training data within minutes.</p>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <div style={{ borderRadius: 8, overflow: "hidden", border: "1px solid rgba(255,255,255,0.1)" }}>
-              <iframe className="booking-iframe" src={BOOKING_URL} style={{ width: "100%", height: 1100, border: "none", display: "block", background: "#fff" }} scrolling="yes" title="AI Coach Setup Call Booking" />
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
+              <a
+                href="https://coach.sharmaautomation.com/signup"
+                className="btn-primary"
+                style={{ fontSize: 18, padding: "18px 48px", textDecoration: "none", display: "inline-block" }}
+              >
+                Start Free Trial
+              </a>
+              <p className="dm" style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", margin: 0 }}>
+                Already have an account?{" "}
+                <a
+                  href="https://coach.sharmaautomation.com/login"
+                  style={{ color: s.accent, textDecoration: "none", fontWeight: 500 }}
+                >
+                  Sign in
+                </a>
+              </p>
             </div>
           </FadeIn>
           <FadeIn delay={0.2}>
-            <p className="dm" style={{ marginTop: 24, fontSize: 13, color: "rgba(255,255,255,0.4)" }}>Free call. No commitment. Just a real conversation about your training.</p>
+            <p className="dm" style={{ marginTop: 24, fontSize: 13, color: "rgba(255,255,255,0.4)" }}>7-day free trial. Cancel anytime. No setup required.</p>
           </FadeIn>
         </div>
       </section>
 
       {/* ═══ FOOTER ═══ */}
       <footer style={{ background: s.bgWhite, padding: "40px 5vw", borderTop: `1px solid ${s.border}` }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto 16px", display: "flex", justifyContent: "center", gap: 20, flexWrap: "wrap" }}>
+          <a href="/privacy" className="dm" style={{ fontSize: 13, color: s.textMuted, textDecoration: "none" }}>Privacy Policy</a>
+          <span style={{ color: s.textMuted, fontSize: 13 }}>·</span>
+          <a href="/terms" className="dm" style={{ fontSize: 13, color: s.textMuted, textDecoration: "none" }}>Terms of Service</a>
+          <span style={{ color: s.textMuted, fontSize: 13 }}>·</span>
+          <a href="mailto:sharma@sharmaautomation.com" className="dm" style={{ fontSize: 13, color: s.textMuted, textDecoration: "none" }}>Contact</a>
+        </div>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 20 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
             <img src="/SharmaAutomationIcon.png" alt="Sharma Automation" style={{ height: 36, width: "auto", objectFit: "contain" }} />
