@@ -301,7 +301,7 @@ export default function AICoachLanding() {
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <FadeIn><div style={{ textAlign: "center", marginBottom: 40 }}>
             <p className="section-label" style={{ color: s.accent }}>See It In Action</p>
-            <h2 className="heading">3 Minutes. The Full Picture.</h2>
+            <h2 className="heading">The Full Picture.</h2>
           </div></FadeIn>
           <FadeIn delay={0.1}>
             <div style={{ borderRadius: 8, overflow: "hidden", boxShadow: s.shadowLift }}>

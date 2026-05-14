@@ -45,9 +45,6 @@ const FAQS = [
   { q: "Do I need to be tech-savvy to use this?", a: "Not at all. The whole point is that once it's set up, it runs on its own. I handle all the technical work — building, connecting, and testing everything. You'll get a simple walkthrough of how to monitor results, but the system does the heavy lifting." },
   { q: "What kind of businesses do you work with?", a: "I work with small local service businesses — landscapers, contractors, personal trainers, gym owners, dental offices, and home service companies. If you're spending too much time on scheduling, follow-ups, or chasing leads, I can help you automate it." },
   { q: "What happens after my system is live?", a: "I don't disappear after launch. Monthly support includes ongoing monitoring, performance tracking, and adjustments as your business evolves. If something needs tweaking or you want to add a new automation, I handle it. You always know what's working and what can be improved." },
-  { q: "What is the AI Coach for athletes?", a: "It's a standalone product I built — a conversational AI endurance coach that reads your real training data (heart rate, power, HRV, sleep, fitness/fatigue trends) and gives you personalized coaching in plain English. It works through Discord, Claude Desktop, and Claude.ai. You just ask \"what should I do today?\" and it tells you. Say \"post it\" and the workout lands on your Intervals.icu calendar, ready to sync to Zwift, Garmin, or Wahoo." },
-  { q: "Do I need to be technical to use the AI Coach?", a: "Not at all. I handle the entire setup in a white glove session — connecting your Strava and Intervals.icu accounts, configuring your coaching preferences, installing the system, and walking you through how to use it. After that, you just talk to your Discord bot." },
-  { q: "Which AI model does the AI Coach use?", a: "Whichever one you want. The system is model agnostic — it runs on GPT, Grok, Gemini, or fully offline with Ollama on your own hardware. You can switch models anytime. There's no lock-in to any single AI provider." },
 ];
 
 
@@ -426,7 +423,7 @@ export default function App() {
               <div style={{ display: "inline-block", background: "rgba(14,165,233,0.15)", color: s.accent, fontSize: 11, fontWeight: 700, letterSpacing: "2px", padding: "4px 14px", borderRadius: 20, fontFamily: "'DM Sans', sans-serif", textTransform: "uppercase", marginBottom: 20 }}>FEATURED BUILD</div>
               <h2 className="playfair" style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 700, color: "#fff", letterSpacing: "-0.5px", marginBottom: 16 }}>AI Coach for Endurance Athletes</h2>
               <p className="dm" style={{ fontSize: 18, color: s.accent, fontWeight: 500, marginBottom: 16, fontStyle: "italic" }}>"Your coach follows you -- you don't follow your coach."</p>
-              <p className="dm" style={{ fontSize: 15, color: "#94a3b8", lineHeight: 1.75, maxWidth: 680, margin: "0 auto", fontWeight: 300 }}>I built a full-stack AI coaching system from scratch. It connects to real training platforms, analyzes an athlete's actual performance data, and delivers personalized daily coaching through Discord. One conversation, and the workout lands on their calendar, ready to sync to Garmin or Zwift.</p>
+              <p className="dm" style={{ fontSize: 15, color: "#94a3b8", lineHeight: 1.75, maxWidth: 680, margin: "0 auto", fontWeight: 300 }}>A full-stack AI coaching SaaS, built end-to-end. Reads athletes' real training data, holds a coaching conversation, and writes workouts back to their Intervals.icu calendar, ready to sync to Garmin or Zwift. Sixty-second signup, no install, no setup call. Live in production at coach.sharmaautomation.com.</p>
             </div>
           </FadeIn>
 
@@ -453,10 +450,10 @@ export default function App() {
               </div>
               <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
                 {[
-                  { icon: "🤖", title: "Custom AI Agent", desc: "A conversational AI that reasons about real data and gives actionable recommendations -- not canned responses." },
-                  { icon: "🔗", title: "Live Data Integration", desc: "Connected to Strava, Intervals.icu, and wearable devices. Real-time data flowing into every coaching decision." },
-                  { icon: "📱", title: "Multi-Platform Delivery", desc: "One system, accessible from Discord, Claude Desktop, and Claude.ai simultaneously via MCP." },
-                  { icon: "📦", title: "Packaged Product", desc: "Full installer, setup wizard, settings GUI, and automated onboarding. Ready to hand to a client." },
+                  { icon: "🤖", title: "Custom AI Agent", desc: "Custom AI agent on Claude (Anthropic). Conversational reasoning over the athlete's full training history. Reads calendars, writes workouts, pushes back when a plan is wrong." },
+                  { icon: "🔗", title: "Live Data Integration", desc: "Intervals.icu as the single source of truth. Garmin, Wahoo, Zwift, and Apple Watch sync upstream. HRV, sleep, and fatigue flow into every coaching response." },
+                  { icon: "🌐", title: "Hosted Web App", desc: "Self-serve SaaS. Sign up in 60 seconds, connect Intervals.icu, get coached. No Discord, no install, no command line. Just a browser." },
+                  { icon: "🚀", title: "Production SaaS", desc: "Stripe checkout, Supabase auth, Railway-hosted API, 7-day free trial. End-to-end product running in production — not a prototype." },
                 ].map((item, i) => (
                   <div key={item.title} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: "24px 20px", transition: "border-color 0.2s" }} onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(14,165,233,0.4)"} onMouseLeave={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"}>
                     <div style={{ fontSize: 24, marginBottom: 10 }}>{item.icon}</div>
@@ -475,7 +472,7 @@ export default function App() {
                 <div style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.25)", borderRadius: 12, padding: "20px 16px", textAlign: "center" }}>
                   <p className="dm" style={{ fontSize: 10, letterSpacing: "2px", color: "#10b981", textTransform: "uppercase", fontWeight: 700, marginBottom: 8 }}>Data Sources</p>
                   <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                    {["Strava", "Intervals.icu", "Wearables"].map(item => (
+                    {["Intervals.icu", "Garmin, Wahoo, Zwift", "HRV, Sleep, Fatigue"].map(item => (
                       <span key={item} className="dm" style={{ fontSize: 12, color: "#94a3b8", fontWeight: 300 }}>{item}</span>
                     ))}
                   </div>
@@ -484,7 +481,7 @@ export default function App() {
                 <div style={{ background: "rgba(14,165,233,0.1)", border: "1px solid rgba(14,165,233,0.3)", borderRadius: 12, padding: "20px 16px", textAlign: "center" }}>
                   <p className="dm" style={{ fontSize: 10, letterSpacing: "2px", color: s.accent, textTransform: "uppercase", fontWeight: 700, marginBottom: 8 }}>AI Engine</p>
                   <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                    {["10 MCP Tools", "Any LLM Provider", "Sports Science"].map(item => (
+                    {["Claude (Anthropic)", "Agentic Tool Use", "Sports Science Prompts"].map(item => (
                       <span key={item} className="dm" style={{ fontSize: 12, color: "#94a3b8", fontWeight: 300 }}>{item}</span>
                     ))}
                   </div>
@@ -493,7 +490,7 @@ export default function App() {
                 <div style={{ background: "rgba(245,158,11,0.08)", border: "1px solid rgba(245,158,11,0.25)", borderRadius: 12, padding: "20px 16px", textAlign: "center" }}>
                   <p className="dm" style={{ fontSize: 10, letterSpacing: "2px", color: "#f59e0b", textTransform: "uppercase", fontWeight: 700, marginBottom: 8 }}>Delivery</p>
                   <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                    {["Discord", "Claude Desktop", "Calendar Sync"].map(item => (
+                    {["Conversational Chat", "Fitness Dashboard", "Calendar Write-Back"].map(item => (
                       <span key={item} className="dm" style={{ fontSize: 12, color: "#94a3b8", fontWeight: 300 }}>{item}</span>
                     ))}
                   </div>
