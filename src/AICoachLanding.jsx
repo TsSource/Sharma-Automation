@@ -306,7 +306,7 @@ export default function AICoachLanding() {
           <FadeIn delay={0.1}>
             <div style={{ borderRadius: 8, overflow: "hidden", boxShadow: s.shadowLift }}>
               <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
-                <iframe src="https://www.youtube.com/embed/oAYBbpXXWI0?rel=0" title="Sharma AI Coach Demo" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+                <iframe src="https://www.youtube.com/embed/t94TFathyCs?rel=0" title="Sharma AI Coach Demo" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
               </div>
             </div>
           </FadeIn>

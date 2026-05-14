@@ -435,7 +435,7 @@ export default function App() {
             <div style={{ maxWidth: 800, margin: "0 auto 56px", borderRadius: 12, overflow: "hidden", border: "2px solid rgba(14,165,233,0.3)", boxShadow: "0 12px 48px rgba(0,0,0,0.3)" }}>
               <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
                 <iframe
-                  src="https://www.youtube.com/embed/oAYBbpXXWI0"
+                  src="https://www.youtube.com/embed/t94TFathyCs"
                   title="Sharma AI Coach Demo"
                   style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
