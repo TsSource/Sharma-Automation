@@ -101,7 +101,7 @@ export default function TermsOfService() {
           </p>
 
           <h2 className="legal-h2 first">Section 1. The Service</h2>
-          <p className="legal-p">AI Coach Cloud is a hosted SaaS endurance training coaching platform that uses artificial intelligence to provide personalized coaching guidance based on your training data. The Service integrates with your Intervals.icu account and provides:</p>
+          <p className="legal-p">AI Coach Cloud is a hosted SaaS endurance training coaching platform that uses artificial intelligence to provide personalized coaching guidance based on your training data. The Service can optionally connect to your Intervals.icu account and provides:</p>
           <ul className="legal-ul">
             <li>AI-generated training recommendations.</li>
             <li>A conversational coaching interface.</li>
@@ -123,8 +123,8 @@ export default function TermsOfService() {
           </ul>
           <p className="legal-p">You may not share your account with others or create multiple accounts to circumvent payment.</p>
 
-          <h2 className="legal-h2">Section 4. Third-Party Account Requirement</h2>
-          <p className="legal-p">The Service requires an active Intervals.icu account to function. You are responsible for maintaining your Intervals.icu account and for ensuring the credentials you provide to AI Coach Cloud remain valid. AI Coach Cloud is not affiliated with Intervals.icu; the use of Intervals.icu is governed by their own terms of service.</p>
+          <h2 className="legal-h2">Section 4. Third-Party Account Connection</h2>
+          <p className="legal-p">The Service does not require an Intervals.icu account to function. You may optionally connect an Intervals.icu account to enable features that read your training data and write workouts to your calendar. If you connect an Intervals.icu account, you are responsible for maintaining it and for ensuring the credentials you provide to AI Coach Cloud remain valid. AI Coach Cloud is not affiliated with Intervals.icu; the use of Intervals.icu is governed by their own terms of service.</p>
 
           <h2 className="legal-h2">Section 5. Subscriptions, Trial, and Billing</h2>
           <p className="legal-p"><strong>Free trial.</strong> All subscription plans begin with a 7-day free trial. To start a trial, you must provide a valid payment method. You can cancel at any time during the trial period at no charge.</p>
