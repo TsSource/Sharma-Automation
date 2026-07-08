@@ -86,7 +86,7 @@ export default function TermsOfService() {
       <section className="legal-hero" style={{ background: s.bgWarm, padding: '128px 5vw 48px' }}>
         <div style={{ maxWidth: 760, margin: '0 auto', textAlign: 'left' }}>
           <h1 className="barlow" style={{ fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 700, color: s.textDark, textTransform: 'uppercase', letterSpacing: '0.02em', lineHeight: 1.1 }}>Terms of Service</h1>
-          <p className="dm" style={{ marginTop: 12, fontSize: 14, fontWeight: 300, color: s.textMuted }}>Effective Date: [TO BE SET AT LAUNCH]</p>
+          <p className="dm" style={{ marginTop: 12, fontSize: 14, fontWeight: 300, color: s.textMuted }}>Effective Date: July 7, 2026</p>
         </div>
       </section>
 

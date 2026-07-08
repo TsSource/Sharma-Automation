@@ -83,7 +83,7 @@ export default function PrivacyPolicy() {
       <section className="legal-hero" style={{ background: s.bgWarm, padding: '128px 5vw 48px' }}>
         <div style={{ maxWidth: 760, margin: '0 auto', textAlign: 'left' }}>
           <h1 className="barlow" style={{ fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 700, color: s.textDark, textTransform: 'uppercase', letterSpacing: '0.02em', lineHeight: 1.1 }}>Privacy Policy</h1>
-          <p className="dm" style={{ marginTop: 12, fontSize: 14, fontWeight: 300, color: s.textMuted }}>Effective Date: [TO BE SET AT LAUNCH]</p>
+          <p className="dm" style={{ marginTop: 12, fontSize: 14, fontWeight: 300, color: s.textMuted }}>Effective Date: July 7, 2026</p>
         </div>
       </section>
 
@@ -101,6 +101,7 @@ export default function PrivacyPolicy() {
           <p className="legal-p">We collect the following categories of information when you use AI Coach Cloud:</p>
           <p className="legal-p"><strong>Account information.</strong> When you sign up, we collect your name, email address, and a password. Passwords are stored only as one-way cryptographic hashes; we cannot read your password.</p>
           <p className="legal-p"><strong>Training data.</strong> If you connect an Intervals.icu account, AI Coach Cloud reads your training history from it, including workouts, heart rate, power, pace, HRV, sleep, fitness and fatigue metrics, and goal races. We access this data using credentials you provide. Your Intervals.icu credentials are stored in an encrypted vault and are never logged or exposed.</p>
+          <p className="legal-p"><strong>Uploaded workout files.</strong> You can also provide training data directly by uploading workout files (FIT, TCX, or GPX, including gzip-compressed versions) without connecting any third-party account. Uploaded workouts are parsed and the resulting training data is stored securely in our database to power your coaching. The original file is retained to support duplicate detection and re-processing. You can request deletion of your data by contacting us at <a href="mailto:sharma@sharmaautomation.com" className="legal-link">sharma@sharmaautomation.com</a>.</p>
           <p className="legal-p"><strong>Payment information.</strong> Subscription payments are processed by Stripe, Inc. We do not store credit card numbers, CVV codes, or banking details. We receive only the limited information Stripe shares with us about your subscription status, plan, and renewal dates.</p>
           <p className="legal-p"><strong>Conversation history.</strong> Your conversations with the AI Coach are stored on our servers so the coach can refer back to context across sessions. You can view and delete individual conversation threads from within the Service at any time.</p>
           <p className="legal-p"><strong>Usage and technical data.</strong> Our servers automatically log standard technical information including IP address, browser type, device type, pages visited, and timestamps. We use these logs to monitor service health, diagnose problems, and prevent abuse. We do not use these logs for advertising or sale.</p>
@@ -129,7 +130,7 @@ export default function PrivacyPolicy() {
 
           <h2 className="legal-h2">Section 4. Data Retention</h2>
           <p className="legal-p">We retain your account information and conversation history for as long as your account is active and for a reasonable period after cancellation to support billing reconciliation, audit, and legal compliance, typically 30 days. After that period, we delete your personal data, subject to any longer retention required by law (for example, financial records).</p>
-          <p className="legal-p">If you connect an Intervals.icu account, your training data is read from it in real time and is not stored on our servers in bulk; Intervals.icu remains the source of truth for your training history.</p>
+          <p className="legal-p">If you connect an Intervals.icu account, your training data is read from it in real time and is not stored on our servers in bulk; Intervals.icu remains the source of truth for that training history. Training data from uploaded workout files is stored in our database as described in Section 1.</p>
           <p className="legal-p">Logs and technical data are retained for up to 90 days for security and operational purposes.</p>
 
           <h2 className="legal-h2">Section 5. Data Security</h2>
@@ -150,7 +151,7 @@ export default function PrivacyPolicy() {
             <li><strong>Access:</strong> You can view your account information and conversation history within the Service at any time.</li>
             <li><strong>Correction:</strong> You can update your account information at any time through your account settings.</li>
             <li><strong>Deletion:</strong> You can delete individual conversation threads at any time from within the Service. To request deletion of your entire account and associated personal data, contact us at <a href="mailto:sharma@sharmaautomation.com" className="legal-link">sharma@sharmaautomation.com</a>. We will process verified deletion requests within 30 days.</li>
-            <li><strong>Portability:</strong> If you connect an Intervals.icu account, your training data remains at Intervals.icu, which provides export tools directly. Conversation history is available for export on request to <a href="mailto:sharma@sharmaautomation.com" className="legal-link">sharma@sharmaautomation.com</a>.</li>
+            <li><strong>Portability:</strong> If you connect an Intervals.icu account, that training data remains at Intervals.icu, which provides export tools directly. Conversation history is available for export on request to <a href="mailto:sharma@sharmaautomation.com" className="legal-link">sharma@sharmaautomation.com</a>.</li>
             <li><strong>Marketing opt-out:</strong> We do not send marketing emails by default. Operational emails (account confirmation, password reset, billing notices) are required for service operation.</li>
           </ul>
 
