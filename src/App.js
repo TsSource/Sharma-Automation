@@ -423,7 +423,7 @@ export default function App() {
               <div style={{ display: "inline-block", background: "rgba(14,165,233,0.15)", color: s.accent, fontSize: 11, fontWeight: 700, letterSpacing: "2px", padding: "4px 14px", borderRadius: 20, fontFamily: "'DM Sans', sans-serif", textTransform: "uppercase", marginBottom: 20 }}>FEATURED BUILD</div>
               <h2 className="playfair" style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 700, color: "#fff", letterSpacing: "-0.5px", marginBottom: 16 }}>AI Coach for Endurance Athletes</h2>
               <p className="dm" style={{ fontSize: 18, color: s.accent, fontWeight: 500, marginBottom: 16, fontStyle: "italic" }}>"Your coach follows you -- you don't follow your coach."</p>
-              <p className="dm" style={{ fontSize: 15, color: "#94a3b8", lineHeight: 1.75, maxWidth: 680, margin: "0 auto", fontWeight: 300 }}>A full-stack AI coaching SaaS, built end-to-end. Reads athletes' real training data, holds a coaching conversation, and writes workouts back to their Intervals.icu calendar, ready to sync to Garmin or Zwift. Sixty-second signup, no install, no setup call. Live in production at coach.sharmaautomation.com.</p>
+              <p className="dm" style={{ fontSize: 15, color: "#94a3b8", lineHeight: 1.75, maxWidth: 680, margin: "0 auto", fontWeight: 300 }}>A full-stack AI coaching SaaS, built end-to-end. Reads athletes' real training data, holds a coaching conversation, and writes workouts back to their calendar, ready to sync to Garmin or Zwift. Connects to intervals.icu. Sixty-second signup, no install, no setup call. Live in production at coach.sharmaautomation.com.</p>
             </div>
           </FadeIn>
 
@@ -451,8 +451,8 @@ export default function App() {
               <div className="service-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
                 {[
                   { icon: "🤖", title: "Custom AI Agent", desc: "Custom AI agent on Claude (Anthropic). Conversational reasoning over the athlete's full training history. Reads calendars, writes workouts, pushes back when a plan is wrong." },
-                  { icon: "🔗", title: "Live Data Integration", desc: "Intervals.icu as the single source of truth. Garmin, Wahoo, Zwift, and Apple Watch sync upstream. HRV, sleep, and fatigue flow into every coaching response." },
-                  { icon: "🌐", title: "Hosted Web App", desc: "Self-serve SaaS. Sign up in 60 seconds, connect Intervals.icu, get coached. No Discord, no install, no command line. Just a browser." },
+                  { icon: "🔗", title: "Live Data Integration", desc: "Connects to intervals.icu, where Garmin, Wahoo, Zwift, and Apple Watch sync upstream. HRV, sleep, and fatigue flow into every coaching response." },
+                  { icon: "🌐", title: "Hosted Web App", desc: "Self-serve SaaS. Sign up in 60 seconds and get coached — connects to your intervals.icu account. No Discord, no install, no command line. Just a browser." },
                   { icon: "🚀", title: "Production SaaS", desc: "Stripe checkout, Supabase auth, Railway-hosted API, 7-day free trial. End-to-end product running in production — not a prototype." },
                 ].map((item, i) => (
                   <div key={item.title} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: "24px 20px", transition: "border-color 0.2s" }} onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(14,165,233,0.4)"} onMouseLeave={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"}>
@@ -472,7 +472,7 @@ export default function App() {
                 <div style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.25)", borderRadius: 12, padding: "20px 16px", textAlign: "center" }}>
                   <p className="dm" style={{ fontSize: 10, letterSpacing: "2px", color: "#10b981", textTransform: "uppercase", fontWeight: 700, marginBottom: 8 }}>Data Sources</p>
                   <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                    {["Intervals.icu", "Garmin, Wahoo, Zwift", "HRV, Sleep, Fatigue"].map(item => (
+                    {["intervals.icu sync", "Garmin, Wahoo, Zwift", "HRV, Sleep, Fatigue"].map(item => (
                       <span key={item} className="dm" style={{ fontSize: 12, color: "#94a3b8", fontWeight: 300 }}>{item}</span>
                     ))}
                   </div>

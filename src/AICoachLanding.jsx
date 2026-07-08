@@ -38,23 +38,31 @@ const PAIN_POINTS = [
 const FEATURES = [
   { icon: "📊", title: "Personalized to YOUR Data", desc: "Every recommendation is generated from your actual training. Not a generic template, not advice scraped from running blogs." },
   { icon: "💬", title: "Conversational, Ask Anything", desc: "Talk to your coach like you'd text a friend. Get answers in plain English, backed by your numbers." },
-  { icon: "📅", title: "Writes Workouts to Your Calendar", desc: "Say 'post it' and the structured workout lands on your Intervals.icu calendar. Syncs to Zwift, Garmin, and Wahoo." },
+  { icon: "📅", title: "Writes Workouts to Your Calendar", desc: "Say 'post it' and the structured workout lands on your calendar. Connects to your intervals.icu account, syncing to Zwift, Garmin, and Wahoo." },
   { icon: "🧠", title: "Adapts to HRV, Sleep, and Fatigue", desc: "Your plan flexes when you do. Bad sleep or high fatigue? Your coach adjusts the day, not next month." },
   { icon: "🏃", title: "Built By An Athlete", desc: "A competitive age-group triathlete who uses this system every morning. Not a Silicon Valley product team." },
-  { icon: "🔒", title: "Your Data, Your Control", desc: "Powered by your Intervals.icu account. Export, view, or delete anytime. No vendor lock-in." },
+  { icon: "🔒", title: "Your Data, Your Control", desc: "Connects to your intervals.icu account. Export, view, or delete anytime. No vendor lock-in." },
 ];
 
 const HOW_IT_WORKS = [
   { num: "01", title: "Sign Up", time: "60 seconds", desc: "Email and password. Confirm your address. You're in." },
-  { num: "02", title: "Connect Intervals.icu", desc: "Paste your credentials once. We pull your training history, your fitness and fatigue trends, and your goal races." },
+  { num: "02", title: "Connect Your Training Data", desc: "Optionally connect your intervals.icu account — we pull in your training history, your fitness and fatigue trends, and your goal races." },
   { num: "03", title: "Get Coached", desc: "Your AI coach reads your data and starts giving personalized guidance from day one. Ask anything. Get answers backed by your real numbers." },
 ];
 
-const PRICING = [
-  { tier: "Founding", price: "$14.99", period: "/month", desc: "Lock in this rate for as long as you remain subscribed. Supporter pricing for getting in early.", features: ["7-day free trial", "Personalized AI coaching from your training data", "Workouts written to your Intervals.icu calendar", "Adapts to HRV, sleep, and fatigue", "Conversational, ask-anything", "Cancel anytime"], cta: "Claim Founding Rate", highlight: true, badge: "LIMITED TIME" },
-  { tier: "Monthly", price: "$24.99", period: "/month", desc: "Full access, billed monthly. Cancel anytime.", features: ["7-day free trial", "Personalized AI coaching from your training data", "Workouts written to your Intervals.icu calendar", "Adapts to HRV, sleep, and fatigue", "Conversational, ask-anything", "Cancel anytime"], cta: "Start Free Trial", highlight: false, badge: null },
-  { tier: "Annual", price: "$249", period: "/year", desc: "Save $51 versus monthly. Two months free.", features: ["7-day free trial", "Personalized AI coaching from your training data", "Workouts written to your Intervals.icu calendar", "Adapts to HRV, sleep, and fatigue", "Conversational, ask-anything", "Cancel anytime"], cta: "Start Free Trial", highlight: false, badge: "BEST VALUE" },
+/* Pricing flip rule: while the founding tier is open, only FOUNDING_TIER is shown.
+   When founding sells out, set SHOW_STANDARD_TIERS = true — standard tiers return, founding hides. */
+const SHOW_STANDARD_TIERS = false;
+
+const FOUNDING_TIER =
+  { tier: "Founding Athlete", price: "$14.99", period: "/month", desc: "Lock in this rate for as long as you remain subscribed. Limited founding spots.", features: ["7-day free trial", "Personalized AI coaching from your training data", "Workouts written to your calendar (connects to intervals.icu)", "Adapts to HRV, sleep, and fatigue", "Conversational, ask-anything", "Cancel anytime"], cta: "Claim Founding Rate", highlight: true, badge: "LIMITED FOUNDING SPOTS" };
+
+const STANDARD_TIERS = [
+  { tier: "Monthly", price: "$24.99", period: "/month", desc: "Full access, billed monthly. Cancel anytime.", features: ["7-day free trial", "Personalized AI coaching from your training data", "Workouts written to your calendar (connects to intervals.icu)", "Adapts to HRV, sleep, and fatigue", "Conversational, ask-anything", "Cancel anytime"], cta: "Start Free Trial", highlight: false, badge: null },
+  { tier: "Annual", price: "$249", period: "/year", desc: "Save $51 versus monthly. Two months free.", features: ["7-day free trial", "Personalized AI coaching from your training data", "Workouts written to your calendar (connects to intervals.icu)", "Adapts to HRV, sleep, and fatigue", "Conversational, ask-anything", "Cancel anytime"], cta: "Start Free Trial", highlight: false, badge: "BEST VALUE" },
 ];
+
+const PRICING = SHOW_STANDARD_TIERS ? STANDARD_TIERS : [FOUNDING_TIER];
 
 const PERSONAS = [
   { icon: "🏊‍♂️🚴‍♂️🏃‍♂️", title: "Self-Coached Triathletes", desc: "You train for 70.3s or full distance and want smarter guidance without a $200/month human coach." },
@@ -64,14 +72,14 @@ const PERSONAS = [
 ];
 
 const FAQS = [
-  { q: "Who built this?", a: "A competitive age-group triathlete who has completed multiple IRONMAN 70.3 races and uses this system every single day for his own training. This is not a Silicon Valley tech product. It was built by an athlete who needed smarter coaching and couldn't find it anywhere." },
+  { q: "Who built this?", a: "A competitive age-group triathlete and 4× IRONMAN 70.3 finisher who uses this system every single day for his own training. This is not a Silicon Valley tech product. It was built by an athlete who needed smarter coaching and couldn't find it anywhere." },
   { q: "Do you actually use this yourself?", a: "Every morning. My AI coach analyzes my previous day's training, checks my fitness and fatigue trends, and gives me a personalized recommendation before I even lace up my shoes. What you're buying is the exact same system I rely on." },
-  { q: "Do I need to be technical to use this?", a: "Not at all. Sign up takes 60 seconds. Connecting your Intervals.icu account takes another minute. From there, you talk to your coach like you'd text a friend. No installs, no setup calls, no command line." },
-  { q: "What if I don't have an Intervals.icu account?", a: "You'll need one to use AI Coach. The good news: Intervals.icu is free, and it pulls data from most training apps automatically (Garmin Connect, Zwift, Apple Watch via HealthFit, and others). Sign up at intervals.icu, then connect AI Coach to your account." },
+  { q: "Do I need to be technical to use this?", a: "Not at all. Sign up takes 60 seconds. If you connect your intervals.icu account, that takes about another minute. From there, you talk to your coach like you'd text a friend. No installs, no setup calls, no command line." },
+  { q: "Do I need an intervals.icu account?", a: "No — intervals.icu is optional, not required. Connecting one lets your coach read your full training history and write workouts to your calendar. If you want that, intervals.icu is free, and it pulls data from most training apps automatically (Garmin Connect, Zwift, Apple Watch via HealthFit, and others)." },
   { q: "Which AI does it use?", a: "AI Coach runs on Anthropic's Claude. The same models that power Claude.ai, configured specifically for endurance coaching. We chose Claude because it's the most reliable model available for the kind of careful reasoning coaching requires." },
   { q: "Is there a free trial?", a: "Yes. Every plan starts with a 7-day free trial. You enter a card upfront so your account stays active when the trial ends, but you can cancel anytime during the trial with no charge." },
   { q: "What's the catch with the founding rate?", a: "No catch. Early supporters get the founding rate locked in for as long as they remain subscribed. I'm building this with your feedback, and the founding price is my thank-you for getting in early. Use it, tell me what works and what doesn't, and share a testimonial or review when you're ready." },
-  { q: "Is my data private?", a: "We take privacy seriously. Your account lives on encrypted, AWS-backed infrastructure (Supabase and Railway), with industry-standard encryption in transit and at rest. Your Intervals.icu credentials are stored in an encrypted vault, never logged or exposed. We never sell, rent, or share your data with third parties. Anthropic does not train its AI models on customer API data, so your conversations stay private. Your training data lives at Intervals.icu, which is the source of truth, and you can export it from there anytime. You can review your conversation history and remove individual threads at any time." },
+  { q: "Is my data private?", a: "We take privacy seriously. Your account lives on encrypted, AWS-backed infrastructure (Supabase and Railway), with industry-standard encryption in transit and at rest. If you connect intervals.icu, your credentials are stored in an encrypted vault, never logged or exposed. We never sell, rent, or share your data with third parties. Anthropic does not train its AI models on customer API data, so your conversations stay private. If you connect intervals.icu, your training data stays there and you can export it from there anytime. You can review your conversation history and remove individual threads at any time." },
 ];
 
 const NAV_LINKS = [["Story", "story"], ["Features", "features"], ["Pricing", "pricing"], ["FAQ", "faq"]];
@@ -198,13 +206,13 @@ export default function AICoachLanding() {
         <div style={{ position: "relative", zIndex: 2, maxWidth: 1100, margin: "0 auto", width: "100%", textAlign: "center", padding: "130px 5vw 90px" }}>
           <FadeIn>
             <div className="barlow" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(232,69,37,0.2)", border: `1px solid ${s.accent}`, borderRadius: 4, padding: "8px 22px", marginBottom: 32, fontSize: 12, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: s.accent }}>
-              Built by an IRONMAN 70.3 Finisher
+              Built by a 4× IRONMAN 70.3 Finisher
             </div>
             <h1 className="barlow" style={{ fontSize: "clamp(42px, 7vw, 82px)", fontWeight: 800, lineHeight: 1.05, color: "#fff", textTransform: "uppercase", marginBottom: 24 }}>
               I Built The Coach<br /><span style={{ color: s.accent }}>I Wished I Had</span>
             </h1>
             <p className="dm" style={{ fontSize: "clamp(16px, 2vw, 20px)", color: "rgba(255,255,255,0.8)", lineHeight: 1.65, marginBottom: 40, maxWidth: 620, margin: "0 auto 40px", fontWeight: 300 }}>
-              A conversational AI coach that reads your real training data and tells you exactly what to do today. Sign up in 60 seconds, connect Intervals.icu, and start training smarter.
+              The AI triathlon coach that reads your real training data and tells you exactly what to do today — swim, bike, run, and strength. Sign up in 60 seconds and start training smarter. Connects to your intervals.icu account.
             </p>
             <div className="hero-buttons" style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
               <a href="https://coach.sharmaautomation.com/signup" className="btn-primary" style={{ fontSize: 16, padding: "16px 36px", textDecoration: "none", display: "inline-block" }}>Start Free Trial</a>
@@ -228,8 +236,8 @@ export default function AICoachLanding() {
               <p className="section-label" style={{ color: s.accent }}>The Founder</p>
               <h2 className="heading" style={{ textTransform: "none", fontSize: "clamp(26px, 3.5vw, 38px)" }}>I've Been Where You Are</h2>
               <div className="dm" style={{ fontSize: 16, lineHeight: 1.8 }}>
-                <p style={{ marginBottom: 20 }}>I've been a competitive age-group triathlete for five years. I've finished multiple IRONMAN 70.3 races. I train 7 to 10 hours a week. And like most self-coached athletes, I spent too much time staring at data I didn't fully understand and following plans that didn't adapt to how I actually felt.</p>
-                <p style={{ marginBottom: 20 }}>So I built something better. An AI that connects to my Intervals.icu account, reads my real workout data (heart rate, power, sleep, HRV, and fitness trends), and gives me a personalized recommendation every morning.</p>
+                <p style={{ marginBottom: 20 }}>I've been a competitive age-group triathlete for five years. I'm a 4× IRONMAN 70.3 finisher. I train 7 to 10 hours a week. And like most self-coached athletes, I spent too much time staring at data I didn't fully understand and following plans that didn't adapt to how I actually felt.</p>
+                <p style={{ marginBottom: 20 }}>So I built something better. An AI that reads my real workout data (heart rate, power, sleep, HRV, and fitness trends) and gives me a personalized recommendation every morning. It connects to my intervals.icu account.</p>
                 <p style={{ marginBottom: 28, color: s.textDark, fontWeight: 600 }}>I use it every single day. Now I've made it available to other athletes, fully hosted in the cloud. No install, no technical setup. Just sign up and start training smarter.</p>
                 <button className="btn-outline" onClick={() => scrollTo("demo")}>Watch the Demo ↓</button>
               </div>
@@ -283,7 +291,7 @@ export default function AICoachLanding() {
               <div style={{ background: "rgba(232,69,37,0.06)", border: `1px solid rgba(232,69,37,0.25)`, borderRadius: 8, padding: 32 }}>
                 <p className="barlow" style={{ fontSize: 12, letterSpacing: "0.15em", color: "#10b981", textTransform: "uppercase", marginBottom: 16, fontWeight: 700 }}>What I Built</p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                  {["Conversational coaching from your actual training data.", "Tells you exactly what to do today in plain English.", "\"Post it\" and the workout lands on your Intervals.icu calendar.", "Sign up in 60 seconds."].map((pt, i) => (
+                  {["Conversational coaching from your actual training data.", "Tells you exactly what to do today in plain English.", "\"Post it\" and the workout lands on your calendar.", "Sign up in 60 seconds."].map((pt, i) => (
                     <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
                       <span style={{ color: "#10b981", fontSize: 14, marginTop: 2, flexShrink: 0 }}>✓</span>
                       <span className="dm" style={{ fontSize: 14, color: "rgba(255,255,255,0.85)", lineHeight: 1.6, fontWeight: 400 }}>{pt}</span>
@@ -376,15 +384,15 @@ export default function AICoachLanding() {
         </div>
       </section>
 
-      {/* ═══ 10. PRICING (3 tiers, dark) ═══ */}
+      {/* ═══ 10. PRICING (founding tier only while open — see SHOW_STANDARD_TIERS) ═══ */}
       <section id="pricing" style={{ padding: "96px 5vw", background: s.bgDark }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <FadeIn><div style={{ textAlign: "center", marginBottom: 48 }}>
             <p className="section-label" style={{ color: s.accent }}>Pricing</p>
             <h2 className="heading" style={{ color: "#fff" }}>Simple, Transparent Pricing</h2>
-            <p className="dm" style={{ fontSize: 16, color: "rgba(255,255,255,0.7)", lineHeight: 1.75, maxWidth: 640, margin: "0 auto", fontWeight: 300 }}>7-day free trial on every plan. Cancel anytime.</p>
+            <p className="dm" style={{ fontSize: 16, color: "rgba(255,255,255,0.7)", lineHeight: 1.75, maxWidth: 640, margin: "0 auto", fontWeight: 300 }}>7-day free trial. Cancel anytime.</p>
           </div></FadeIn>
-          <div className="pricing-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
+          <div className="pricing-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20, ...(PRICING.length === 1 ? { maxWidth: 440, margin: "0 auto" } : {}) }}>
             {PRICING.map((plan, i) => (
               <FadeIn key={plan.tier} delay={i * 0.08}>
                 <div style={{ background: plan.highlight ? "rgba(232,69,37,0.08)" : "rgba(255,255,255,0.03)", border: plan.highlight ? `2px solid ${s.accent}` : "1px solid rgba(255,255,255,0.08)", borderRadius: 8, padding: "32px 28px", height: "100%", display: "flex", flexDirection: "column", position: "relative" }}>
@@ -418,7 +426,7 @@ export default function AICoachLanding() {
         <FadeIn>
           <div className="founding-box" style={{ maxWidth: 800, margin: "0 auto", background: s.goldBg, border: `1px solid ${s.goldBorder}`, borderRadius: 8, padding: "48px 40px", textAlign: "center" }}>
             <div className="barlow" style={{ display: "inline-block", background: "#fef3c7", color: s.goldDark, fontSize: 12, fontWeight: 700, letterSpacing: "0.15em", padding: "4px 14px", borderRadius: 4, textTransform: "uppercase", marginBottom: 20 }}>FOUNDING ATHLETE PROGRAM</div>
-            <h2 className="heading" style={{ fontSize: "clamp(24px, 3.5vw, 36px)" }}>Founding Pricing. Limited Time.</h2>
+            <h2 className="heading" style={{ fontSize: "clamp(24px, 3.5vw, 36px)" }}>Founding Pricing. Limited Spots.</h2>
             <p className="dm" style={{ fontSize: 15, color: s.textBody, lineHeight: 1.85, maxWidth: 600, margin: "0 auto 20px", fontWeight: 300 }}>Founding access is $14.99 per month, locked in at that rate for as long as you remain subscribed. You're getting in early. I'm building this with your feedback.</p>
             <p className="dm" style={{ fontSize: 15, color: s.textBody, lineHeight: 1.85, maxWidth: 600, margin: "0 auto 32px", fontWeight: 300 }}>
               <strong style={{ color: s.textDark, fontWeight: 600 }}>What I ask in return:</strong> Use it. Tell me what works and what doesn't. Share a testimonial or review when you're ready. That's it.
