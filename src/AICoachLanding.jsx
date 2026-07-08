@@ -216,6 +216,7 @@ export default function AICoachLanding() {
             </p>
             <div className="hero-buttons" style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
               <a href="https://coach.sharmaautomation.com/signup" className="btn-primary" style={{ fontSize: 16, padding: "16px 36px", textDecoration: "none", display: "inline-block" }}>Start Free Trial</a>
+              <a href="https://coach.sharmaautomation.com" className="btn-outline-light" style={{ fontSize: 16, padding: "15px 36px", textDecoration: "none", display: "inline-block" }}>See It Live</a>
               <button className="btn-outline-light" onClick={() => scrollTo("demo")} style={{ fontSize: 16, padding: "15px 36px" }}>Watch the Demo</button>
             </div>
           </FadeIn>
@@ -317,6 +318,11 @@ export default function AICoachLanding() {
                 <iframe src="https://www.youtube.com/embed/t94TFathyCs?rel=0" title="Sharma AI Coach Demo" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
               </div>
             </div>
+          </FadeIn>
+          <FadeIn delay={0.15}>
+            <p className="dm" style={{ textAlign: "center", marginTop: 28, fontSize: 15, fontWeight: 500 }}>
+              <a href="https://coach.sharmaautomation.com" style={{ color: s.accent, textDecoration: "none", borderBottom: `1px solid ${s.accent}`, paddingBottom: 2 }}>Explore the live product — browse a real training week →</a>
+            </p>
           </FadeIn>
         </div>
       </section>
