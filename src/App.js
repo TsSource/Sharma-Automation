@@ -173,6 +173,19 @@ export default function App() {
         .faq-q:hover { color: #0ea5e9; }
         .faq-a { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; color: #64748b; line-height: 1.75; padding: 0 24px 20px; }
         section[id] { scroll-margin-top: 88px; }
+        .hero-section { min-height: 78vh; }
+        .hero-panel { position: absolute; top: 0; right: 0; bottom: 0; width: 38%; clip-path: polygon(26% 0, 100% 0, 100% 100%, 0 100%); background: linear-gradient(210deg, #132036 0%, #0f172a 48%, #0a1120 100%); z-index: 1; }
+        .hero-panel-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+        .hero-trace { position: relative; flex: 1; height: 100px; min-width: 80px; }
+        .hero-band { display: none; position: absolute; left: 0; right: 0; bottom: 0; height: 88px; clip-path: polygon(0 30%, 100% 0, 100% 100%, 0 100%); background: linear-gradient(100deg, #132036 0%, #0f172a 55%, #0a1120 100%); z-index: 1; }
+        @keyframes heroPulse { 0% { left: 2%; opacity: 0; } 12% { opacity: 0.9; } 55% { opacity: 0.9; } 70% { left: 98%; opacity: 0; } 100% { left: 98%; opacity: 0; } }
+        .hero-pulse { position: absolute; top: -1.5px; left: 2%; width: 5px; height: 5px; border-radius: 50%; background: #38bdf8; box-shadow: 0 0 8px 2px rgba(56,189,248,0.55); animation: heroPulse 7s ease-in-out 1.2s infinite; }
+        @media (prefers-reduced-motion: reduce) { .hero-pulse { animation: none; opacity: 0; } }
+        @media (max-width: 1150px) and (min-width: 769px) {
+          .hero-panel { width: 30%; }
+          .hero-copy { max-width: 56vw !important; }
+          .hero-copy h1 { font-size: clamp(30px, 4.6vw, 44px) !important; }
+        }
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
           .hamburger { display: flex !important; }
@@ -185,7 +198,12 @@ export default function App() {
           section { padding-left: 24px !important; padding-right: 24px !important; }
           section:not(:first-of-type) { padding-top: 64px !important; padding-bottom: 64px !important; }
           .nav-logo-img { height: 34px !important; }
-          .hero-logo { height: 56px !important; }
+          .hero-logo { height: 64px !important; }
+          .hero-section { min-height: auto !important; padding-bottom: 140px !important; }
+          .hero-panel { display: none !important; }
+          .hero-trace { display: none !important; }
+          .hero-band { display: block !important; }
+          .hero-mark-row { margin-bottom: 28px !important; }
           * { max-width: 100%; }
           img { max-width: 100%; height: auto; }
           .back-to-top-btn { bottom: 20px !important; right: 20px !important; width: 42px !important; height: 42px !important; font-size: 18px !important; }
@@ -223,13 +241,37 @@ export default function App() {
         <button className="btn-primary" onClick={openBooking} style={{ marginTop: 16, padding: "14px", fontSize: 15, textAlign: "center" }}>Book a fit call</button>
       </div>
 
-      {/* 1. HERO */}
-      <section style={{ minHeight: "100vh", background: "linear-gradient(160deg, #f8fafc 0%, #f0f9ff 50%, #f8fafc 100%)", display: "flex", alignItems: "center", padding: `${headerHeight}px 5vw 80px`, position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: -80, right: -80, width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(14,165,233,0.07) 0%, transparent 70%)", pointerEvents: "none" }} />
-        <div style={{ position: "absolute", bottom: 40, left: "10%", width: 300, height: 300, borderRadius: "50%", background: "radial-gradient(circle, rgba(15,23,42,0.04) 0%, transparent 70%)", pointerEvents: "none" }} />
-        <div style={{ position: "absolute", top: "20%", right: "8%", opacity: 0.06, pointerEvents: "none" }}>{[...Array(5)].map((_, i) => (<div key={i} style={{ width: 200 - i * 30, height: 200 - i * 30, border: "1px solid #0f172a", borderRadius: "50%", position: "absolute", top: i * 15, left: i * 15 }} />))}</div>
-        <div style={{ maxWidth: 1100, margin: "0 auto", width: "100%" }}>
-          <div style={{ maxWidth: 760 }}>
+      {/* 1. HERO — split banner: light type field left, navy circuit panel right,
+             the mark's own circuit traces continue across the seam. The mark is a
+             stand-in PNG; swap the src for the brand SVG later — the row layout,
+             explicit dimensions, and trace geometry do not depend on the file. */}
+      <section className="hero-section" style={{ position: "relative", display: "flex", alignItems: "center", background: "linear-gradient(160deg, #f8fafc 0%, #f0f9ff 55%, #e9f3fa 100%)", padding: `${headerHeight + 20}px 5vw 48px`, overflow: "hidden" }}>
+        <div className="hero-panel" aria-hidden="true">
+          <svg className="hero-panel-svg" viewBox="0 0 420 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <g fill="none" stroke="#7dd3fc" strokeWidth="1.5" strokeOpacity="0.14">
+              <path d="M 96 0 V 148 H 188 V 276" />
+              <path d="M 150 760 V 596 H 244 V 462 H 356" />
+              <path d="M 316 0 V 96 H 400" />
+              <path d="M 420 308 H 306 V 392 H 216 V 528" />
+              <path d="M 388 760 V 648 H 330" />
+            </g>
+            <g fill="#38bdf8" fillOpacity="0.32">
+              <circle cx="188" cy="276" r="3.5" />
+              <circle cx="356" cy="462" r="3.5" />
+              <circle cx="400" cy="96" r="3.5" />
+              <circle cx="216" cy="528" r="3.5" />
+              <circle cx="330" cy="648" r="3.5" />
+            </g>
+            <g fill="#7dd3fc" fillOpacity="0.2">
+              <rect x="92" y="144" width="8" height="8" />
+              <rect x="240" y="592" width="8" height="8" />
+              <rect x="302" y="388" width="8" height="8" />
+            </g>
+          </svg>
+          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 68% 26%, rgba(56,189,248,0.16) 0%, transparent 55%)" }} />
+        </div>
+        <div style={{ maxWidth: 1100, margin: "0 auto", width: "100%", position: "relative", zIndex: 2 }}>
+          <div className="hero-mark-row" style={{ display: "flex", alignItems: "center", marginBottom: 28 }}>
             <img
               src="/SharmaAutomationLogoHero.png"
               alt="Sharma Automation"
@@ -237,14 +279,40 @@ export default function App() {
               height={144}
               fetchPriority="high"
               className="hero-logo"
-              style={{ height: 72, width: "auto", display: "block", marginBottom: 24 }}
+              style={{ height: 100, width: "auto", display: "block", flexShrink: 0 }}
             />
-            <h1 className="playfair" style={{ fontSize: "clamp(30px, 5.5vw, 54px)", fontWeight: 700, lineHeight: 1.18, letterSpacing: "-1px", marginBottom: 24, color: s.navy }}>Tell me about your typical day. I'll tell you where AI actually saves you time and money, <span style={{ color: s.accent }}>and where it won't.</span></h1>
-            <p className="dm hero-sub" style={{ fontSize: 18, color: s.mid, lineHeight: 1.75, marginBottom: 40, maxWidth: 560, fontWeight: 300 }}>One service. Three steps. You only buy the next step if the last one earned it.</p>
+            <div className="hero-trace" aria-hidden="true">
+              <div style={{ position: "absolute", top: 41, left: 0, width: "30%", height: 2, background: "rgba(14,165,233,0.5)" }} />
+              <div style={{ position: "absolute", top: 42, left: "30%", marginLeft: -2, width: 2, height: 16, background: "rgba(14,165,233,0.5)" }} />
+              <div style={{ position: "absolute", top: 43, left: "30%", width: 6, height: 6, marginLeft: -3, marginTop: -3, borderRadius: "50%", background: "rgba(14,165,233,0.8)" }} />
+              <div style={{ position: "absolute", top: 57, left: "30%", right: "4%", height: 2, background: "rgba(14,165,233,0.5)" }}>
+                <div className="hero-pulse" />
+              </div>
+              <div style={{ position: "absolute", top: 58, right: "4%", width: 8, height: 8, marginRight: -4, marginTop: -4, borderRadius: "50%", background: "#38bdf8", boxShadow: "0 0 12px 2px rgba(56,189,248,0.5)" }} />
+              <div style={{ position: "absolute", top: 74, left: 0, width: "46%", height: 1.5, background: "rgba(14,165,233,0.22)" }} />
+              <div style={{ position: "absolute", top: 72, left: "46%", width: 4, height: 4, borderRadius: "50%", background: "rgba(14,165,233,0.35)" }} />
+            </div>
+          </div>
+          <div className="hero-copy" style={{ maxWidth: 760 }}>
+            <h1 className="playfair" style={{ fontSize: "clamp(30px, 5.5vw, 54px)", fontWeight: 700, lineHeight: 1.18, letterSpacing: "-1px", marginBottom: 18, color: s.navy, maxWidth: 680 }}>Tell me about your typical day. I'll tell you where AI actually saves you time and money, <span style={{ color: s.accentDark }}>and where it won't.</span></h1>
+            <p className="dm hero-sub" style={{ fontSize: 18, color: s.slate, lineHeight: 1.75, marginBottom: 28, maxWidth: 560, fontWeight: 300 }}>One service. Three steps. You only buy the next step if the last one earned it.</p>
             <div className="hero-buttons" style={{ display: "flex", gap: 14, flexWrap: "wrap", alignItems: "center" }}>
               <button className="btn-primary hero-btn-primary" onClick={openBooking} style={{ fontSize: 15, padding: "15px 34px" }}>Book a free 15-minute fit call</button>
             </div>
           </div>
+        </div>
+        <div className="hero-band" aria-hidden="true">
+          <svg width="100%" height="100%" viewBox="0 0 800 88" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <g fill="none" stroke="#7dd3fc" strokeWidth="1.5" strokeOpacity="0.2">
+              <path d="M 0 58 H 210 V 34 H 380" />
+              <path d="M 460 70 H 620 V 44 H 800" />
+              <path d="M 300 88 V 62 H 430" />
+            </g>
+            <g fill="#38bdf8" fillOpacity="0.4">
+              <circle cx="380" cy="34" r="3" />
+              <circle cx="430" cy="62" r="3" />
+            </g>
+          </svg>
         </div>
       </section>
 
