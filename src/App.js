@@ -185,6 +185,7 @@ export default function App() {
           section { padding-left: 24px !important; padding-right: 24px !important; }
           section:not(:first-of-type) { padding-top: 64px !important; padding-bottom: 64px !important; }
           .nav-logo-img { height: 34px !important; }
+          .hero-logo { height: 56px !important; }
           * { max-width: 100%; }
           img { max-width: 100%; height: auto; }
           .back-to-top-btn { bottom: 20px !important; right: 20px !important; width: 42px !important; height: 42px !important; font-size: 18px !important; }
@@ -229,6 +230,15 @@ export default function App() {
         <div style={{ position: "absolute", top: "20%", right: "8%", opacity: 0.06, pointerEvents: "none" }}>{[...Array(5)].map((_, i) => (<div key={i} style={{ width: 200 - i * 30, height: 200 - i * 30, border: "1px solid #0f172a", borderRadius: "50%", position: "absolute", top: i * 15, left: i * 15 }} />))}</div>
         <div style={{ maxWidth: 1100, margin: "0 auto", width: "100%" }}>
           <div style={{ maxWidth: 760 }}>
+            <img
+              src="/SharmaAutomationLogoHero.png"
+              alt="Sharma Automation"
+              width={314}
+              height={144}
+              fetchPriority="high"
+              className="hero-logo"
+              style={{ height: 72, width: "auto", display: "block", marginBottom: 24 }}
+            />
             <h1 className="playfair" style={{ fontSize: "clamp(30px, 5.5vw, 54px)", fontWeight: 700, lineHeight: 1.18, letterSpacing: "-1px", marginBottom: 24, color: s.navy }}>Tell me about your typical day. I'll tell you where AI actually saves you time and money, <span style={{ color: s.accent }}>and where it won't.</span></h1>
             <p className="dm hero-sub" style={{ fontSize: 18, color: s.mid, lineHeight: 1.75, marginBottom: 40, maxWidth: 560, fontWeight: 300 }}>One service. Three steps. You only buy the next step if the last one earned it.</p>
             <div className="hero-buttons" style={{ display: "flex", gap: 14, flexWrap: "wrap", alignItems: "center" }}>
