@@ -9,7 +9,18 @@ import { useState, useEffect, useRef } from "react";
    Section copy is ratified and must not be reworded.
 ═══════════════════════════════════════════════════════════════ */
 
-const NAV_LINKS = ["How It Works", "Examples", "About", "FAQ", "Contact"];
+/* [label, target] — target is either a section id on this page (scrolls)
+   or a route path beginning with "/" (navigates). */
+export const NAV_LINKS = [
+  ["How It Works", "how-it-works"],
+  ["Examples", "examples"],
+  ["Company Intelligence", "/company-intelligence"],
+  ["About", "about"],
+  ["FAQ", "faq"],
+  ["Contact", "contact"],
+];
+
+export const isRouteTarget = (target) => target.startsWith("/");
 
 const BOOKING_URL = "https://api.leadconnectorhq.com/widget/booking/l0FfSuPINhd1ypD8cyiX";
 
@@ -116,6 +127,9 @@ export default function App() {
   useEffect(() => { const h = () => { setShowBackToTop(window.scrollY > 400); }; window.addEventListener("scroll", h); return () => window.removeEventListener("scroll", h); }, []);
 
   const scrollTo = (id) => { document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); };
+  /* Route targets navigate with a full reload, consistent with every other
+     cross-page link on this site (there is no <Link> usage anywhere). */
+  const goTo = (target) => { if (isRouteTarget(target)) { setMenuOpen(false); window.location.href = target; return; } scrollTo(target); };
   const openBooking = () => { window.open(BOOKING_URL, "_blank"); setMenuOpen(false); };
 
   useEffect(() => {
@@ -223,7 +237,7 @@ export default function App() {
               <img src="/SharmaAutomationIcon.png" alt="Sharma Automation logo" className="nav-logo-img" style={{ height: 42, width: "auto", objectFit: "contain" }} />
             </div>
             <div className="desktop-nav" style={{ display: "flex", gap: 32, alignItems: "center" }}>
-              {NAV_LINKS.map(l => (<span key={l} className="nav-link" onClick={() => scrollTo(l.toLowerCase().replaceAll(" ", "-"))}>{l}</span>))}
+              {NAV_LINKS.map(([label, target]) => (<span key={label} className="nav-link" onClick={() => goTo(target)}>{label}</span>))}
               <button className="btn-primary" onClick={openBooking} style={{ padding: "10px 22px" }}>Book a fit call</button>
             </div>
             <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu" style={{ display: "none", flexDirection: "column", gap: 5, background: "none", border: "none", cursor: "pointer", padding: 4 }}>
@@ -237,7 +251,7 @@ export default function App() {
 
       {/* MOBILE MENU */}
       <div className="mobile-menu" style={{ display: "none", position: "fixed", top: headerHeight, left: 0, right: 0, zIndex: 101, background: "rgba(255,255,255,0.98)", backdropFilter: "blur(12px)", borderBottom: "1px solid #e2e8f0", flexDirection: "column", padding: "16px 24px 24px", transform: menuOpen ? "translateY(0)" : "translateY(-120%)", visibility: menuOpen ? "visible" : "hidden", transition: "transform 0.3s ease, visibility 0.3s ease", boxShadow: "0 8px 32px rgba(0,0,0,0.08)" }}>
-        {NAV_LINKS.map(l => (<span key={l} onClick={() => scrollTo(l.toLowerCase().replaceAll(" ", "-"))} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, fontWeight: 500, color: s.navy, padding: "14px 0", borderBottom: "1px solid #f1f5f9", cursor: "pointer" }}>{l}</span>))}
+        {NAV_LINKS.map(([label, target]) => (<span key={label} onClick={() => goTo(target)} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, fontWeight: 500, color: s.navy, padding: "14px 0", borderBottom: "1px solid #f1f5f9", cursor: "pointer" }}>{label}</span>))}
         <button className="btn-primary" onClick={openBooking} style={{ marginTop: 16, padding: "14px", fontSize: 15, textAlign: "center" }}>Book a fit call</button>
       </div>
 
@@ -349,7 +363,21 @@ export default function App() {
         </FadeIn>
       </section>
 
-      {/* 4. WHAT THIS LOOKS LIKE */}
+      {/* 4. COMPANY INTELLIGENCE TEASER — additive; links to the dedicated page */}
+      <section id="company-intelligence-teaser" style={{ padding: "96px 5vw", background: s.light }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <FadeIn>
+            <div className="panel-card" style={{ maxWidth: 860, margin: "0 auto", padding: "44px 40px" }}>
+              <p className="dm" style={{ fontSize: 12, letterSpacing: "3px", color: s.accent, textTransform: "uppercase", marginBottom: 16, fontWeight: 700 }}>NEW — A NAMED PRODUCT</p>
+              <h2 className="playfair" style={{ fontSize: "clamp(26px, 3.5vw, 40px)", fontWeight: 700, color: s.navy, letterSpacing: "-0.5px", marginBottom: 18 }}>Company Intelligence</h2>
+              <p className="dm" style={{ fontSize: 16, color: s.mid, lineHeight: 1.8, fontWeight: 300, marginBottom: 28 }}>Your entire business, one question away. A private assistant that answers your team's questions from your own data and systems — with the source shown, and permissions respected.</p>
+              <button className="btn-primary" onClick={() => goTo("/company-intelligence")} style={{ alignSelf: "flex-start" }}>See how it works</button>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* 5. WHAT THIS LOOKS LIKE */}
       <section id="examples" style={{ padding: "96px 5vw", background: s.white }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <FadeIn>
@@ -377,7 +405,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* 5. WHO YOU'RE HIRING */}
+      {/* 6. WHO YOU'RE HIRING */}
       <section id="about" style={{ padding: "96px 5vw", background: s.light }}>
         <div className="two-col" style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }}>
           <FadeIn>
@@ -401,7 +429,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* 6. FAQ */}
+      {/* 7. FAQ */}
       <section id="faq" style={{ padding: "96px 5vw", background: s.white }}>
         <div style={{ maxWidth: 760, margin: "0 auto" }}>
           <FadeIn>
@@ -429,7 +457,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* 7. CONTACT / BOOKING */}
+      {/* 8. CONTACT / BOOKING */}
       <section id="contact" style={{ padding: "96px 5vw", background: s.light }}>
         <div className="two-col" style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "start" }}>
           <FadeIn>
@@ -474,7 +502,7 @@ export default function App() {
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 20 }}>
           <div onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}><img src="/SharmaAutomationIcon.png" alt="Sharma Automation logo" style={{ height: 36, width: "auto", objectFit: "contain" }} /></div>
           <div style={{ display: "flex", gap: 28, flexWrap: "wrap" }}>
-            {NAV_LINKS.map(l => (<span key={l} className="dm" onClick={() => scrollTo(l.toLowerCase().replaceAll(" ", "-"))} style={{ fontSize: 13, color: "#64748b", cursor: "pointer", transition: "color 0.2s" }} onMouseEnter={e => e.target.style.color = "#fff"} onMouseLeave={e => e.target.style.color = "#64748b"}>{l}</span>))}
+            {NAV_LINKS.map(([label, target]) => (<span key={label} className="dm" onClick={() => goTo(target)} style={{ fontSize: 13, color: "#64748b", cursor: "pointer", transition: "color 0.2s" }} onMouseEnter={e => e.target.style.color = "#fff"} onMouseLeave={e => e.target.style.color = "#64748b"}>{label}</span>))}
             <a href="/ai-coach" className="dm" style={{ fontSize: 13, color: "#64748b", transition: "color 0.2s" }} onMouseEnter={e => e.target.style.color = "#fff"} onMouseLeave={e => e.target.style.color = "#64748b"}>AI Coach Cloud</a>
           </div>
           <p className="dm" style={{ fontSize: 12, color: "#475569" }}>© 2026 Sharma Automation. All rights reserved.</p>
