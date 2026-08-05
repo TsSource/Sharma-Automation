@@ -9,7 +9,7 @@ import { useState, useEffect, useRef } from "react";
    Section copy is ratified and must not be reworded.
 ═══════════════════════════════════════════════════════════════ */
 
-/* [label, target] — target is either a section id on this page (scrolls)
+/* [label, target]: target is either a section id on this page (scrolls)
    or a route path beginning with "/" (navigates). */
 export const NAV_LINKS = [
   ["How It Works", "how-it-works"],
@@ -363,14 +363,14 @@ export default function App() {
         </FadeIn>
       </section>
 
-      {/* 4. COMPANY INTELLIGENCE TEASER — additive; links to the dedicated page */}
+      {/* 4. COMPANY INTELLIGENCE TEASER: additive; links to the dedicated page */}
       <section id="company-intelligence-teaser" style={{ padding: "96px 5vw", background: s.light }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <FadeIn>
             <div className="panel-card" style={{ maxWidth: 860, margin: "0 auto", padding: "44px 40px" }}>
-              <p className="dm" style={{ fontSize: 12, letterSpacing: "3px", color: s.accent, textTransform: "uppercase", marginBottom: 16, fontWeight: 700 }}>NEW — A NAMED PRODUCT</p>
+              <p className="dm" style={{ fontSize: 12, letterSpacing: "3px", color: s.accent, textTransform: "uppercase", marginBottom: 16, fontWeight: 700 }}>NEW: A NAMED PRODUCT</p>
               <h2 className="playfair" style={{ fontSize: "clamp(26px, 3.5vw, 40px)", fontWeight: 700, color: s.navy, letterSpacing: "-0.5px", marginBottom: 18 }}>Company Intelligence</h2>
-              <p className="dm" style={{ fontSize: 16, color: s.mid, lineHeight: 1.8, fontWeight: 300, marginBottom: 28 }}>Your entire business, one question away. A private assistant that answers your team's questions from your own data and systems — with the source shown, and permissions respected.</p>
+              <p className="dm" style={{ fontSize: 16, color: s.mid, lineHeight: 1.8, fontWeight: 300, marginBottom: 28 }}>Your entire business, one question away. A private assistant that answers your team's questions from your own data and systems, with the source shown and permissions respected.</p>
               <button className="btn-primary" onClick={() => goTo("/company-intelligence")} style={{ alignSelf: "flex-start" }}>See how it works</button>
             </div>
           </FadeIn>

@@ -46,11 +46,11 @@ const TRUST = [
   { title: "Answers with receipts", body: "Every answer cites its source document or system. If it doesn't know, it says so." },
   { title: "Respects the org chart", body: "Field staff can't see payroll. Permissions are enforced in the plumbing, not on the honor system." },
   { title: "Private by design", body: "Your data stays in your own dedicated, secured environment. It is never used to train anyone's model." },
-  { title: "Grows into automation", body: "Once trusted, it doesn't just answer. It acts — reminders sent, gaps flagged — under your approval rules." },
+  { title: "Grows into automation", body: "Once trusted, it doesn't just answer. It sends the reminders and flags the gaps, all under your approval rules." },
 ];
 
 const FAQS = [
-  { q: "What does it cost?", a: "Every business is different, so setup is scoped in your free audit — it depends on how many systems we connect. Ongoing service is a flat monthly plan. Founding clients receive preferred rates." },
+  { q: "What does it cost?", a: "Every business is different, so setup is scoped in your free audit. The price depends on how many systems we connect. Ongoing service is a flat monthly plan. Founding clients receive preferred rates." },
   { q: "What systems does it work with?", a: "The ones you already use. Accounting, scheduling, documents, email, and the software specific to your trade. The audit maps exactly which ones matter for your questions." },
   { q: "Is our data safe?", a: "Your data lives in its own dedicated, secured environment, separated from every other client, and is never used to train any model. Access follows your org chart." },
   { q: "How long until it's running?", a: "Typically a few weeks from audit to pilot, depending on how many systems we connect." },
@@ -76,9 +76,11 @@ export default function CompanyIntelligence() {
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef(null);
   const [headerHeight, setHeaderHeight] = useState(56);
+  const [showBackToTop, setShowBackToTop] = useState(false);
   const [faqOpen, setFaqOpen] = useState(null);
 
   useEffect(() => { const measure = () => { if (headerRef.current) setHeaderHeight(headerRef.current.offsetHeight); }; measure(); window.addEventListener("resize", measure); return () => window.removeEventListener("resize", measure); }, []);
+  useEffect(() => { const h = () => { setShowBackToTop(window.scrollY > 400); }; window.addEventListener("scroll", h); return () => window.removeEventListener("scroll", h); }, []);
 
   const scrollTo = (id) => { document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); };
 
@@ -117,6 +119,8 @@ export default function CompanyIntelligence() {
         .faq-q { font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; color: #0f172a; padding: 20px 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; user-select: none; }
         .faq-q:hover { color: #0ea5e9; }
         .faq-a { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; color: #64748b; line-height: 1.75; padding: 0 24px 20px; }
+        .back-to-top-btn { position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px; border-radius: 50%; background: #0f172a; color: #fff; border: none; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; z-index: 200; transition: opacity 0.3s, transform 0.3s, background 0.2s; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+        .back-to-top-btn:hover { background: #0ea5e9; transform: translateY(-2px); box-shadow: 0 6px 24px rgba(14,165,233,0.3); }
         section[id] { scroll-margin-top: 88px; }
         .chat-panel { position: relative; border-radius: 16px; overflow: hidden; background: linear-gradient(210deg, #132036 0%, #0f172a 48%, #0a1120 100%); padding: 40px 36px; }
         .chat-panel-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -139,6 +143,7 @@ export default function CompanyIntelligence() {
           .panel-grid { grid-template-columns: 1fr !important; }
           .chat-panel { padding: 26px 18px !important; }
           .chat-q, .chat-a { max-width: 90% !important; }
+          .back-to-top-btn { bottom: 20px !important; right: 20px !important; width: 42px !important; height: 42px !important; font-size: 18px !important; }
           * { max-width: 100%; }
           img { max-width: 100%; height: auto; }
           section[id] { scroll-margin-top: 72px !important; }
@@ -178,7 +183,7 @@ export default function CompanyIntelligence() {
           <div style={{ maxWidth: 780 }}>
             <p className="dm" style={{ fontSize: 12, letterSpacing: "3px", color: s.accent, textTransform: "uppercase", marginBottom: 18, fontWeight: 600 }}>Company Intelligence</p>
             <h1 className="playfair" style={{ fontSize: "clamp(30px, 5.5vw, 54px)", fontWeight: 700, lineHeight: 1.18, letterSpacing: "-1px", marginBottom: 20, color: s.navy, maxWidth: 700 }}>Your entire business, one question away.</h1>
-            <p className="dm hero-sub" style={{ fontSize: 18, color: s.slate, lineHeight: 1.75, marginBottom: 30, maxWidth: 620, fontWeight: 300 }}>Company Intelligence is a private, secure assistant built on your business — your documents, your systems, your rules. Any employee asks in plain English. It answers with the source shown.</p>
+            <p className="dm hero-sub" style={{ fontSize: 18, color: s.slate, lineHeight: 1.75, marginBottom: 30, maxWidth: 620, fontWeight: 300 }}>Company Intelligence is a private, secure assistant built on your business: your documents, your systems, your rules. Any employee asks in plain English. It answers with the source shown.</p>
             <div className="hero-buttons" style={{ display: "flex", gap: 14, flexWrap: "wrap", alignItems: "center" }}>
               <button className="btn-primary" onClick={openBooking} style={{ fontSize: 15, padding: "15px 34px" }}>Book your free Intelligence Audit</button>
             </div>
@@ -191,7 +196,7 @@ export default function CompanyIntelligence() {
       <section id="chat-demo" style={{ padding: "96px 5vw", background: s.white }}>
         <div style={{ maxWidth: 880, margin: "0 auto" }}>
           <FadeIn>
-            <p className="dm" style={{ textAlign: "center", fontSize: 17, color: s.slate, marginBottom: 30, fontWeight: 300 }}>Imagine your team could ask —</p>
+            <p className="dm" style={{ textAlign: "center", fontSize: 17, color: s.slate, marginBottom: 30, fontWeight: 300 }}>Imagine your team could ask</p>
           </FadeIn>
           <FadeIn delay={0.1}>
             <div className="chat-panel">
@@ -267,6 +272,11 @@ export default function CompanyIntelligence() {
       {/* D. TRUST */}
       <section style={{ padding: "96px 5vw", background: s.white }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <FadeIn>
+            <div style={{ textAlign: "center", marginBottom: 48 }}>
+              <h2 className="playfair" style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 700, color: s.navy, letterSpacing: "-0.5px" }}>Built to be trusted</h2>
+            </div>
+          </FadeIn>
           <div className="panel-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, alignItems: "stretch" }}>
             {TRUST.map((t, i) => (
               <FadeIn key={t.title} delay={i * 0.08} style={{ height: "100%" }}>
@@ -332,6 +342,9 @@ export default function CompanyIntelligence() {
           <p className="dm" style={{ fontSize: 12, color: "#475569" }}>© 2026 Sharma Automation. All rights reserved.</p>
         </div>
       </footer>
+
+      {/* BACK TO TOP */}
+      <button className="back-to-top-btn" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} style={{ opacity: showBackToTop ? 0.85 : 0, pointerEvents: showBackToTop ? "auto" : "none", transform: showBackToTop ? "translateY(0)" : "translateY(12px)" }} aria-label="Back to top">↑</button>
     </div>
   );
 }
