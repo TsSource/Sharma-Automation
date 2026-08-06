@@ -26,7 +26,7 @@ const BOOKING_URL = "https://api.leadconnectorhq.com/widget/booking/l0FfSuPINhd1
    event posts an unrecognized label and no conversion is recorded. */
 const GTAG_CONVERSION_SEND_TO = "AW-18119945677/REPLACE_WITH_CONVERSION_LABEL";
 
-const NAV_LINKS = [["How It Works", "how-it-works"], ["FAQ", "faq"]];
+const NAV_LINKS = [["Watch", "watch"], ["How It Works", "how-it-works"], ["FAQ", "faq"]];
 
 const CHAT = [
   { q: "What's overdue right now?", a: "Three items are past due. The oldest is 12 days.", source: "Accounting" },
@@ -78,6 +78,15 @@ export default function CompanyIntelligence() {
   const [headerHeight, setHeaderHeight] = useState(56);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [faqOpen, setFaqOpen] = useState(null);
+  /* The player shows the branded poster and its own play affordance until the
+     viewer starts it; from the first play the native controls take over. */
+  const videoRef = useRef(null);
+  const [videoStarted, setVideoStarted] = useState(false);
+
+  const startVideo = () => {
+    setVideoStarted(true);
+    videoRef.current?.play();
+  };
 
   useEffect(() => { const measure = () => { if (headerRef.current) setHeaderHeight(headerRef.current.offsetHeight); }; measure(); window.addEventListener("resize", measure); return () => window.removeEventListener("resize", measure); }, []);
   useEffect(() => { const h = () => { setShowBackToTop(window.scrollY > 400); }; window.addEventListener("scroll", h); return () => window.removeEventListener("scroll", h); }, []);
@@ -128,6 +137,42 @@ export default function CompanyIntelligence() {
         .chat-q { align-self: flex-end; max-width: 76%; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.16); border-radius: 14px 14px 4px 14px; padding: 13px 17px; }
         .chat-a { align-self: flex-start; max-width: 82%; background: rgba(14,165,233,0.10); border: 1px solid rgba(56,189,248,0.28); border-radius: 14px 14px 14px 4px; padding: 13px 17px; }
         .chat-chip { display: inline-flex; align-items: center; gap: 7px; margin-top: 10px; background: rgba(56,189,248,0.16); border: 1px solid rgba(56,189,248,0.3); border-radius: 999px; padding: 4px 11px; }
+        /* Launch-video section, in the root page's own vocabulary.
+           The media border is #bae6fd rather than the grey #e2e8f0 used on
+           text cards: App.js frames its one photograph exactly that way, and a
+           screen is media, not a card. The rail and its travelling dot are the
+           root hero's .hero-trace / .hero-pulse, which is the only motion the
+           site owns anywhere, reused here so the section reads as the same
+           hand. Keyframes are namespaced ci* so they can never collide with
+           the root page's. */
+        .video-frame { position: relative; border-radius: 16px; overflow: hidden; border: 1px solid #bae6fd; box-shadow: 0 20px 60px rgba(2,8,20,0.12); background: #0a1120; line-height: 0; }
+        .video-frame video { display: block; width: 100%; height: auto; }
+        .watch-field { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+        .watch-rail { position: relative; height: 18px; margin-bottom: 20px; }
+        @keyframes ciPulse { 0% { left: 2%; opacity: 0; } 12% { opacity: 0.9; } 55% { opacity: 0.9; } 70% { left: 98%; opacity: 0; } 100% { left: 98%; opacity: 0; } }
+        .ci-pulse { position: absolute; top: -1.5px; left: 2%; width: 5px; height: 5px; border-radius: 50%; background: #38bdf8; box-shadow: 0 0 8px 2px rgba(56,189,248,0.55); animation: ciPulse 7s ease-in-out 1.2s infinite; }
+        @media (prefers-reduced-motion: reduce) { .ci-pulse { animation: none; opacity: 0; } }
+        /* Branded play affordance. The browser's own control bar is the one
+           generic object in this section, and parking it across the poster
+           undoes the framing, so controls stay off until the viewer starts the
+           piece and this stands in until then. It is a real button, so it is
+           focusable and operable from the keyboard, and the native controls
+           take over from the first play onward. */
+        /* Parked bottom-left, not centred. The poster is the film's own title
+           card, so a disc in the middle of the frame sits straight on top of
+           the product name and the strapline. The whole overlay stays a
+           full-bleed click target; only its contents move to the corner, and
+           the scrim guarantees contrast over whatever frame is behind it. */
+        .watch-play { position: absolute; inset: 0; z-index: 3; display: flex; align-items: flex-end; justify-content: flex-start; padding: 34px; background: linear-gradient(to top, rgba(2,8,20,0.74) 0%, rgba(2,8,20,0.16) 34%, rgba(2,8,20,0) 62%); border: none; cursor: pointer; }
+        .watch-play-row { display: flex; align-items: center; gap: 18px; }
+        .watch-play-disc { width: 72px; height: 72px; border-radius: 50%; background: rgba(15,23,42,0.8); border: 1.5px solid rgba(125,211,252,0.55); display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 40px rgba(2,8,20,0.5); transition: background 0.2s, border-color 0.2s, transform 0.2s; flex-shrink: 0; }
+        .watch-play:hover .watch-play-disc, .watch-play:focus-visible .watch-play-disc { background: #0ea5e9; border-color: #38bdf8; transform: scale(1.06); }
+        .watch-play-label { font-family: 'DM Sans', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; color: #bae6fd; }
+        @media (max-width: 768px) {
+          .watch-play { padding: 20px !important; }
+          .watch-play-disc { width: 58px !important; height: 58px !important; }
+          .watch-play-label { font-size: 11px !important; letter-spacing: 1.4px !important; }
+        }
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
           .hamburger { display: flex !important; }
@@ -189,6 +234,106 @@ export default function CompanyIntelligence() {
             </div>
             <p className="dm" style={{ fontSize: 13, color: s.mid, marginTop: 16, fontWeight: 300 }}>Free, 15 minutes, no obligation. You leave with a map of what's possible.</p>
           </div>
+        </div>
+      </section>
+
+      {/* A2. LAUNCH VIDEO
+          Sits between the hero and the chat mock on purpose. The video tells
+          the whole story (the scattered systems, the name, the four exchanges,
+          the trust points, the audit), so it belongs where intent is highest,
+          directly under the headline. The chat mock stays exactly as it is
+          below: it is the readable version for the large majority who never
+          press play, and the caption under the player says so rather than
+          leaving the repetition unexplained.
+
+          Self-hosted rather than embedded. This is a conversion page, and an
+          embed ends by offering somebody else's videos on it. The file is
+          remuxed with the moov atom at the front so playback starts before the
+          whole 8.6 MB has arrived, and preload is metadata only so a visitor
+          who never plays it never pays for it. Captions are burned into the
+          picture, so the video carries its own text track. */}
+      <section id="watch" style={{ position: "relative", padding: "96px 5vw", background: s.light, overflow: "hidden" }}>
+        {/* The board the section sits on. Same orthogonal trace grammar as the
+            root hero's navy panel, re-inked for a light field: sky at low
+            opacity instead of #7dd3fc on navy, which is how the brand already
+            draws traces on light elsewhere. */}
+        {/* Traces run in the MARGINS, terminating before x=230 and after
+            x=1210, because the player sits over the middle of this box. Routed
+            edge-inward to interior nodes exactly like the root hero's panel,
+            so the section reads as a board the screen is mounted on rather
+            than as loose fragments behind it. */}
+        <svg className="watch-field" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <g fill="none" stroke="#0ea5e9" strokeWidth="1.5" strokeOpacity="0.11">
+            <path d="M 0 132 H 128 V 246 H 214" />
+            <path d="M 0 372 H 88 V 470" />
+            <path d="M 0 640 H 152 V 546 H 226" />
+            <path d="M 0 812 H 196 V 726" />
+            <path d="M 1440 108 H 1298 V 214 H 1226" />
+            <path d="M 1440 402 H 1352 V 486 H 1252" />
+            <path d="M 1440 664 H 1286 V 578" />
+            <path d="M 1440 836 H 1338 V 748 H 1240" />
+          </g>
+          <g fill="#0ea5e9" fillOpacity="0.2">
+            <circle cx="214" cy="246" r="3.5" />
+            <circle cx="88" cy="470" r="3.5" />
+            <circle cx="226" cy="546" r="3.5" />
+            <circle cx="196" cy="726" r="3.5" />
+            <circle cx="1226" cy="214" r="3.5" />
+            <circle cx="1252" cy="486" r="3.5" />
+            <circle cx="1286" cy="578" r="3.5" />
+            <circle cx="1240" cy="748" r="3.5" />
+          </g>
+          <g fill="#0ea5e9" fillOpacity="0.13">
+            <rect x="124" y="242" width="8" height="8" />
+            <rect x="148" y="542" width="8" height="8" />
+            <rect x="1294" y="210" width="8" height="8" />
+            <rect x="1348" y="482" width="8" height="8" />
+          </g>
+        </svg>
+
+        <div style={{ maxWidth: 940, margin: "0 auto", position: "relative", zIndex: 2 }}>
+          <FadeIn>
+            <div style={{ textAlign: "center", marginBottom: 44 }}>
+              <p className="dm" style={{ fontSize: 12, letterSpacing: "3px", color: s.accent, textTransform: "uppercase", marginBottom: 16, fontWeight: 600 }}>See It In Action</p>
+              <h2 className="playfair" style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 700, color: s.navy, letterSpacing: "-0.5px", marginBottom: 16 }}>Watch It Work</h2>
+              <p className="dm" style={{ fontSize: 16, color: s.mid, maxWidth: 620, margin: "0 auto", fontWeight: 300, lineHeight: 1.7 }}>Seventy seconds, with captions on screen. Everything below is the same story in writing.</p>
+            </div>
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            {/* The signal reaching the screen: the root hero's trace and pulse. */}
+            <div className="watch-rail" aria-hidden="true">
+              <div style={{ position: "absolute", top: 8, left: 0, right: 0, height: 2, background: "rgba(14,165,233,0.35)" }}>
+                <div className="ci-pulse" />
+              </div>
+              <div style={{ position: "absolute", top: 5, left: 0, width: 8, height: 8, borderRadius: "50%", background: "rgba(14,165,233,0.55)" }} />
+              <div style={{ position: "absolute", top: 5, right: 0, width: 8, height: 8, borderRadius: "50%", background: "#38bdf8", boxShadow: "0 0 12px 2px rgba(56,189,248,0.5)" }} />
+            </div>
+            <div className="video-frame">
+              <video
+                ref={videoRef}
+                controls={videoStarted}
+                preload="metadata"
+                playsInline
+                poster="/company-intelligence-poster.jpg"
+                aria-label="Company Intelligence launch video, 71 seconds, with captions shown on screen."
+              >
+                <source src="/company-intelligence.mp4" type="video/mp4" />
+                Your browser cannot play this video. <a href="/company-intelligence.mp4">Download it instead.</a>
+              </video>
+              {!videoStarted && (
+                <button className="watch-play" onClick={startVideo} aria-label="Play the Company Intelligence video, 71 seconds">
+                  <span className="watch-play-row">
+                    <span className="watch-play-disc">
+                      <svg width="26" height="30" viewBox="0 0 26 30" aria-hidden="true">
+                        <path d="M24 15 L2 29 L2 1 Z" fill="#ffffff" />
+                      </svg>
+                    </span>
+                    <span className="watch-play-label">Watch. 1 min 11 sec</span>
+                  </span>
+                </button>
+              )}
+            </div>
+          </FadeIn>
         </div>
       </section>
 
