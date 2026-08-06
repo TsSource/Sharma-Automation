@@ -18,3 +18,14 @@ test('renders the Intelligence Audit booking CTA', () => {
   render(<CompanyIntelligence />);
   expect(screen.getAllByText(/Book your free Intelligence Audit/i).length).toBeGreaterThan(0);
 });
+
+test('renders the launch video with a poster and no autoplay', () => {
+  const { container } = render(<CompanyIntelligence />);
+  const video = container.querySelector('video');
+  expect(video).toBeInTheDocument();
+  expect(video).toHaveAttribute('poster', '/company-intelligence-poster.jpg');
+  expect(video).toHaveAttribute('controls');
+  // The piece is narrated, so it must never start on its own.
+  expect(video).not.toHaveAttribute('autoplay');
+  expect(video.querySelector('source')).toHaveAttribute('src', '/company-intelligence.mp4');
+});

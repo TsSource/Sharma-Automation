@@ -26,7 +26,7 @@ const BOOKING_URL = "https://api.leadconnectorhq.com/widget/booking/l0FfSuPINhd1
    event posts an unrecognized label and no conversion is recorded. */
 const GTAG_CONVERSION_SEND_TO = "AW-18119945677/REPLACE_WITH_CONVERSION_LABEL";
 
-const NAV_LINKS = [["How It Works", "how-it-works"], ["FAQ", "faq"]];
+const NAV_LINKS = [["Watch", "watch"], ["How It Works", "how-it-works"], ["FAQ", "faq"]];
 
 const CHAT = [
   { q: "What's overdue right now?", a: "Three items are past due. The oldest is 12 days.", source: "Accounting" },
@@ -128,6 +128,8 @@ export default function CompanyIntelligence() {
         .chat-q { align-self: flex-end; max-width: 76%; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.16); border-radius: 14px 14px 4px 14px; padding: 13px 17px; }
         .chat-a { align-self: flex-start; max-width: 82%; background: rgba(14,165,233,0.10); border: 1px solid rgba(56,189,248,0.28); border-radius: 14px 14px 14px 4px; padding: 13px 17px; }
         .chat-chip { display: inline-flex; align-items: center; gap: 7px; margin-top: 10px; background: rgba(56,189,248,0.16); border: 1px solid rgba(56,189,248,0.3); border-radius: 999px; padding: 4px 11px; }
+        .video-frame { position: relative; border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 18px 60px rgba(15,23,42,0.16); background: #0a1120; line-height: 0; }
+        .video-frame video { display: block; width: 100%; height: auto; }
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
           .hamburger { display: flex !important; }
@@ -189,6 +191,49 @@ export default function CompanyIntelligence() {
             </div>
             <p className="dm" style={{ fontSize: 13, color: s.mid, marginTop: 16, fontWeight: 300 }}>Free, 15 minutes, no obligation. You leave with a map of what's possible.</p>
           </div>
+        </div>
+      </section>
+
+      {/* A2. LAUNCH VIDEO
+          Sits between the hero and the chat mock on purpose. The video tells
+          the whole story (the scattered systems, the name, the four exchanges,
+          the trust points, the audit), so it belongs where intent is highest,
+          directly under the headline. The chat mock stays exactly as it is
+          below: it is the readable version for the large majority who never
+          press play, and the caption under the player says so rather than
+          leaving the repetition unexplained.
+
+          Self-hosted rather than embedded. This is a conversion page, and an
+          embed ends by offering somebody else's videos on it. The file is
+          remuxed with the moov atom at the front so playback starts before the
+          whole 8.6 MB has arrived, and preload is metadata only so a visitor
+          who never plays it never pays for it. Captions are burned into the
+          picture, so the video carries its own text track. */}
+      <section id="watch" style={{ padding: "88px 5vw", background: s.light }}>
+        <div style={{ maxWidth: 940, margin: "0 auto" }}>
+          <FadeIn>
+            <div style={{ textAlign: "center", marginBottom: 40 }}>
+              <p className="dm" style={{ fontSize: 12, letterSpacing: "3px", color: s.accent, textTransform: "uppercase", marginBottom: 16, fontWeight: 600 }}>See It In Action</p>
+              <h2 className="playfair" style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 700, color: s.navy, letterSpacing: "-0.5px" }}>The whole idea in seventy seconds.</h2>
+            </div>
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            <div className="video-frame">
+              <video
+                controls
+                preload="metadata"
+                playsInline
+                poster="/company-intelligence-poster.jpg"
+                aria-label="Company Intelligence launch video, 71 seconds, with captions shown on screen."
+              >
+                <source src="/company-intelligence.mp4" type="video/mp4" />
+                Your browser cannot play this video. <a href="/company-intelligence.mp4">Download it instead.</a>
+              </video>
+            </div>
+          </FadeIn>
+          <FadeIn delay={0.15}>
+            <p className="dm" style={{ textAlign: "center", fontSize: 14, color: s.mid, marginTop: 24, fontWeight: 300 }}>Seventy seconds, with captions on screen. Everything below is the same story in writing.</p>
+          </FadeIn>
         </div>
       </section>
 
