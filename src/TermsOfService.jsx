@@ -87,6 +87,7 @@ export default function TermsOfService() {
         <div style={{ maxWidth: 760, margin: '0 auto', textAlign: 'left' }}>
           <h1 className="barlow" style={{ fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 700, color: s.textDark, textTransform: 'uppercase', letterSpacing: '0.02em', lineHeight: 1.1 }}>Terms of Service</h1>
           <p className="dm" style={{ marginTop: 12, fontSize: 14, fontWeight: 300, color: s.textMuted }}>Effective Date: July 7, 2026</p>
+          <p className="dm" style={{ marginTop: 6, fontSize: 14, fontWeight: 300, color: s.textMuted }}>Last updated: August 13, 2026 — added Section 6 (App Store Purchases) and web-scope clarifications to Sections 5 and 7.</p>
         </div>
       </section>
 
