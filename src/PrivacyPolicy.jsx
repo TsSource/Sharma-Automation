@@ -117,6 +117,7 @@ export default function PrivacyPolicy() {
             <li>Heart rate variability</li>
             <li>Sleep</li>
             <li>Body weight</li>
+            <li>Distance (swimming, cycling, and walking/running)</li>
             <li>Workout routes</li>
           </ul>
           <p className="legal-p"><strong>How we use it.</strong> Health data read from HealthKit is used solely to provide coaching within the product: generating training recommendations, adapting workouts to your recovery, and answering your questions in the coaching interface.</p>
