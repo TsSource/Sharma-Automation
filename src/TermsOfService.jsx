@@ -108,7 +108,7 @@ export default function TermsOfService() {
             <li>Structured workout writing to your training calendar.</li>
             <li>Adaptive guidance based on HRV, sleep, fatigue, and other recovery signals.</li>
           </ul>
-          <p className="legal-p">The Service is provided "as is" and may be modified, suspended, or discontinued at our discretion, subject to the cancellation rights described in Section 6.</p>
+          <p className="legal-p">The Service is provided "as is" and may be modified, suspended, or discontinued at our discretion, subject to the cancellation rights described in Sections 6 and 7.</p>
 
           <h2 className="legal-h2">Section 2. Eligibility</h2>
           <p className="legal-p">You must be at least 18 years old to create an account or use the Service. By using the Service, you represent that you are at least 18 years old and have the legal capacity to enter into these Terms.</p>
@@ -126,7 +126,8 @@ export default function TermsOfService() {
           <h2 className="legal-h2">Section 4. Third-Party Account Connection</h2>
           <p className="legal-p">The Service does not require an Intervals.icu account to function. You may optionally connect an Intervals.icu account to enable features that read your training data and write workouts to your calendar. If you connect an Intervals.icu account, you are responsible for maintaining it and for ensuring the credentials you provide to AI Coach Cloud remain valid. AI Coach Cloud is not affiliated with Intervals.icu; the use of Intervals.icu is governed by their own terms of service.</p>
 
-          <h2 className="legal-h2">Section 5. Subscriptions, Trial, and Billing</h2>
+          <h2 className="legal-h2">Section 5. Subscriptions, Trial, and Billing (Web)</h2>
+          <p className="legal-p">This section applies to subscriptions purchased on the web at sharmaautomation.com or coach.sharmaautomation.com, which are processed by Stripe. Subscriptions purchased through the AI Coach Cloud iOS app are governed by Section 6.</p>
           <p className="legal-p"><strong>Free trial.</strong> All subscription plans begin with a 7-day free trial. To start a trial, you must provide a valid payment method. You can cancel at any time during the trial period at no charge.</p>
           <p className="legal-p"><strong>Subscription plans.</strong> We offer the following subscription tiers:</p>
           <ul className="legal-ul">
@@ -140,13 +141,22 @@ export default function TermsOfService() {
           <p className="legal-p"><strong>Auto-renewal.</strong> Your subscription will automatically renew at the end of each billing period unless you cancel before renewal.</p>
           <p className="legal-p"><strong>Price changes.</strong> We may change subscription prices for new subscribers and renewals with at least 30 days' advance notice. Founding rate holders are not subject to standard price increases as long as their subscription remains active without interruption.</p>
 
-          <h2 className="legal-h2">Section 6. Cancellation and Refunds</h2>
+          <h2 className="legal-h2">Section 6. App Store Purchases (iOS App)</h2>
+          <p className="legal-p">This section applies only to subscriptions purchased through the AI Coach Cloud iOS app on the Apple App Store. Subscriptions purchased on the web are governed by Sections 5 and 7.</p>
+          <p className="legal-p"><strong>Price and free trial.</strong> The subscription offered in the iOS app is $14.99 per month in United States dollars, following a 1-week free trial. Any unused portion of a free trial period is forfeited when you purchase a subscription.</p>
+          <p className="legal-p"><strong>Payment.</strong> Payment is charged to your Apple ID account at confirmation of purchase, or at the end of the free trial period if you have not cancelled before then.</p>
+          <p className="legal-p"><strong>Auto-renewal.</strong> Your subscription renews automatically unless auto-renew is turned off at least 24 hours before the end of the current period. Your Apple ID account is charged for renewal within 24 hours prior to the end of the current period, at the price of the selected plan.</p>
+          <p className="legal-p"><strong>Managing and cancelling.</strong> You can manage your subscription and turn off auto-renewal at any time in your App Store account settings after purchase. Cancellation takes effect at the end of the current billing period, and you retain access until then. Deleting the app does not cancel your subscription.</p>
+          <p className="legal-p"><strong>Refunds.</strong> Refunds for purchases made through the iOS app are handled by Apple, not by Sharma Automation. You can request a refund from Apple at <a href="https://reportaproblem.apple.com" target="_blank" rel="noopener noreferrer" className="legal-link">reportaproblem.apple.com</a>, subject to Apple's Media Services Terms and Conditions.</p>
+
+          <h2 className="legal-h2">Section 7. Cancellation and Refunds (Web)</h2>
+          <p className="legal-p">This section applies to subscriptions purchased on the web. Cancellation and refunds for subscriptions purchased through the iOS app are handled by Apple as described in Section 6.</p>
           <p className="legal-p"><strong>Trial cancellation.</strong> You may cancel during the 7-day free trial at any time with no charge.</p>
           <p className="legal-p"><strong>Post-trial cancellation.</strong> You may cancel your subscription at any time through the customer billing portal. Cancellation takes effect at the end of your current billing period. You will retain access to the Service until the end of the period you have paid for.</p>
           <p className="legal-p"><strong>Refunds.</strong> Subscription fees are non-refundable except where required by law. We do not provide prorated refunds for cancellation mid-period. For example, if you cancel an annual subscription in month 3, you retain access through the end of the year but are not refunded the unused portion.</p>
           <p className="legal-p"><strong>Failed payments.</strong> If a payment fails, we will attempt to recover it through Stripe's standard retry mechanism over approximately 7 days. If recovery fails, your access may be suspended until payment is resolved.</p>
 
-          <h2 className="legal-h2">Section 7. Acceptable Use</h2>
+          <h2 className="legal-h2">Section 8. Acceptable Use</h2>
           <p className="legal-p">You agree not to:</p>
           <ul className="legal-ul">
             <li>Use the Service for any illegal purpose or in violation of any applicable law.</li>
@@ -160,15 +170,15 @@ export default function TermsOfService() {
           </ul>
           <p className="legal-p">Violation of these terms may result in suspension or termination of your account without refund.</p>
 
-          <h2 className="legal-h2">Section 8. Intellectual Property</h2>
+          <h2 className="legal-h2">Section 9. Intellectual Property</h2>
           <p className="legal-p"><strong>Our property.</strong> AI Coach Cloud, including all software, design, content (excluding your data and conversations), and trademarks, is owned by Sharma Automation and protected by intellectual property laws. We grant you a limited, non-exclusive, non-transferable, revocable license to use the Service for your personal training purposes, subject to these Terms.</p>
           <p className="legal-p"><strong>Your content.</strong> You retain ownership of the content you create through the Service, including your conversations with the AI Coach. You grant us a non-exclusive license to process this content as necessary to operate the Service, including transmitting conversation context to Anthropic for AI response generation.</p>
           <p className="legal-p"><strong>Feedback.</strong> If you provide us with feedback, suggestions, or ideas about the Service, you grant us a non-exclusive, royalty-free, perpetual license to use that feedback to improve the Service without obligation to you.</p>
 
-          <h2 className="legal-h2">Section 9. AI-Generated Content</h2>
+          <h2 className="legal-h2">Section 10. AI-Generated Content</h2>
           <p className="legal-p">AI Coach Cloud uses large language models to generate coaching recommendations. AI-generated content may occasionally be incorrect, incomplete, or inappropriate for your specific situation. You are responsible for evaluating whether any recommendation makes sense for you before acting on it.</p>
 
-          <h2 className="legal-h2">Section 10. Health, Training, and Medical Disclaimer</h2>
+          <h2 className="legal-h2">Section 11. Health, Training, and Medical Disclaimer</h2>
           <div className="legal-callout">This section is critically important. Please read carefully.</div>
           <p className="legal-p">AI Coach Cloud provides training guidance based on your data. It is not a substitute for medical advice, diagnosis, or treatment from a qualified healthcare professional. The Service is not designed or intended to diagnose, treat, cure, or prevent any disease or medical condition.</p>
           <p className="legal-p">You should consult a physician before beginning any new training program, especially if you have any pre-existing medical condition, injury, or concern. If you experience pain, dizziness, shortness of breath, or other unusual symptoms during training, stop immediately and seek medical attention.</p>
@@ -180,41 +190,41 @@ export default function TermsOfService() {
           </ul>
           <p className="legal-p">You are solely responsible for assessing whether any recommendation provided by the Service is safe and appropriate for you, and for the consequences of acting on any such recommendation. By using AI Coach Cloud, you acknowledge that endurance training involves inherent physical risks and you assume those risks knowingly and voluntarily.</p>
 
-          <h2 className="legal-h2">Section 11. Service Availability</h2>
+          <h2 className="legal-h2">Section 12. Service Availability</h2>
           <p className="legal-p">We strive to keep the Service available at all times but do not guarantee uninterrupted access. The Service may be unavailable due to maintenance, third-party outages (Intervals.icu, Anthropic, Stripe, or our hosting providers), or events beyond our reasonable control. We are not liable for any inability to access the Service.</p>
 
-          <h2 className="legal-h2">Section 12. Disclaimers</h2>
+          <h2 className="legal-h2">Section 13. Disclaimers</h2>
           <p className="legal-p-caps">THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, OR ACCURACY. WE DO NOT WARRANT THAT THE SERVICE WILL BE ERROR-FREE, SECURE, OR UNINTERRUPTED.</p>
 
-          <h2 className="legal-h2">Section 13. Limitation of Liability</h2>
+          <h2 className="legal-h2">Section 14. Limitation of Liability</h2>
           <p className="legal-p-caps">TO THE FULLEST EXTENT PERMITTED BY LAW, SHARMA AUTOMATION AND ITS OPERATOR ROHIT SHARMA SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, DATA, OR USE, ARISING OUT OF OR RELATED TO YOUR USE OF THE SERVICE, REGARDLESS OF THE LEGAL THEORY (CONTRACT, TORT, STATUTE, OR OTHERWISE).</p>
           <p className="legal-p-caps">OUR TOTAL CUMULATIVE LIABILITY FOR ANY CLAIM ARISING OUT OF OR RELATED TO THE SERVICE SHALL NOT EXCEED THE TOTAL AMOUNT YOU PAID US IN THE 12 MONTHS PRECEDING THE EVENT GIVING RISE TO THE CLAIM, OR ONE HUNDRED UNITED STATES DOLLARS, WHICHEVER IS GREATER.</p>
           <p className="legal-p">Some jurisdictions do not allow the exclusion or limitation of certain damages, so the above limitations may not apply to you in full.</p>
 
-          <h2 className="legal-h2">Section 14. Indemnification</h2>
+          <h2 className="legal-h2">Section 15. Indemnification</h2>
           <p className="legal-p">You agree to defend, indemnify, and hold harmless Sharma Automation and Rohit Sharma from any claim, demand, loss, or expense (including reasonable attorneys' fees) arising out of or related to your use of the Service, your violation of these Terms, or your violation of any rights of another.</p>
 
-          <h2 className="legal-h2">Section 15. Termination</h2>
+          <h2 className="legal-h2">Section 16. Termination</h2>
           <p className="legal-p">We may suspend or terminate your account at any time if you violate these Terms, fail to make payment, or engage in conduct we determine to be harmful to the Service or other users. Upon termination, your right to use the Service ends immediately. Sections that by their nature should survive termination will survive, including ownership, disclaimers, limitations of liability, and dispute resolution.</p>
           <p className="legal-p">You may terminate your account at any time by canceling your subscription and requesting account deletion as described in our Privacy Policy.</p>
 
-          <h2 className="legal-h2">Section 16. Changes to These Terms</h2>
+          <h2 className="legal-h2">Section 17. Changes to These Terms</h2>
           <p className="legal-p">We may modify these Terms at any time. If we make material changes, we will notify you by email or through the Service at least 30 days before the changes take effect. Your continued use of the Service after the effective date constitutes acceptance of the modified Terms.</p>
 
-          <h2 className="legal-h2">Section 17. Governing Law and Jurisdiction</h2>
+          <h2 className="legal-h2">Section 18. Governing Law and Jurisdiction</h2>
           <p className="legal-p">These Terms are governed by the laws of the State of New Jersey, United States, without regard to its conflict of laws principles. Any dispute arising out of or related to these Terms or the Service shall be resolved exclusively in the state or federal courts located in New Jersey, and you consent to the personal jurisdiction of those courts.</p>
 
-          <h2 className="legal-h2">Section 18. Dispute Resolution</h2>
+          <h2 className="legal-h2">Section 19. Dispute Resolution</h2>
           <p className="legal-p">Before filing a formal legal claim, you agree to attempt to resolve the dispute informally by contacting us at <a href="mailto:sharma@sharmaautomation.com" className="legal-link">sharma@sharmaautomation.com</a> and giving us 30 days to respond and attempt to resolve the matter.</p>
 
-          <h2 className="legal-h2">Section 19. Miscellaneous</h2>
+          <h2 className="legal-h2">Section 20. Miscellaneous</h2>
           <p className="legal-p"><strong>Entire agreement.</strong> These Terms, together with our Privacy Policy, constitute the entire agreement between you and Sharma Automation regarding the Service.</p>
           <p className="legal-p"><strong>Severability.</strong> If any provision of these Terms is found to be unenforceable, the remaining provisions will remain in full effect.</p>
           <p className="legal-p"><strong>Waiver.</strong> Our failure to enforce any right or provision of these Terms is not a waiver of that right or provision.</p>
           <p className="legal-p"><strong>Assignment.</strong> You may not assign or transfer these Terms without our prior written consent. We may assign these Terms in connection with a merger, acquisition, or sale of assets.</p>
           <p className="legal-p"><strong>Notices.</strong> We may provide notices via email to the address associated with your account or by posting on the Service.</p>
 
-          <h2 className="legal-h2">Section 20. Contact Us</h2>
+          <h2 className="legal-h2">Section 21. Contact Us</h2>
           <p className="legal-p">Questions about these Terms?</p>
           <div className="dm" style={{ fontSize: 15, fontWeight: 400, color: s.textBody, lineHeight: 1.75, marginTop: 8 }}>
             <div style={{ fontWeight: 600, color: s.textDark }}>Sharma Automation</div>

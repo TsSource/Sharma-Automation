@@ -107,7 +107,24 @@ export default function PrivacyPolicy() {
           <p className="legal-p"><strong>Usage and technical data.</strong> Our servers automatically log standard technical information including IP address, browser type, device type, pages visited, and timestamps. We use these logs to monitor service health, diagnose problems, and prevent abuse. We do not use these logs for advertising or sale.</p>
           <p className="legal-p"><strong>Cookies.</strong> We use cookies that are necessary for the Service to function, primarily for authentication and session management. We do not use third-party advertising or tracking cookies.</p>
 
-          <h2 className="legal-h2">Section 2. How We Use Your Information</h2>
+          <h2 className="legal-h2">Section 2. Health Data (Apple Health / HealthKit)</h2>
+          <p className="legal-p">If you use the AI Coach Cloud iOS app and grant permission, the app reads health and fitness data from Apple Health (HealthKit). You choose whether to grant this permission, and you can change or revoke it at any time in the Health app or in iOS Settings. The Service works without HealthKit access; granting it simply lets the coach see more of your training and recovery picture.</p>
+          <p className="legal-p"><strong>Data we read.</strong> With your permission, we read the following HealthKit data types:</p>
+          <ul className="legal-ul">
+            <li>Workouts</li>
+            <li>Heart rate</li>
+            <li>Heart rate variability</li>
+            <li>Sleep</li>
+            <li>Body weight</li>
+            <li>Active and resting energy</li>
+            <li>Workout routes</li>
+          </ul>
+          <p className="legal-p"><strong>How we use it.</strong> Health data read from HealthKit is used solely to provide coaching within the product: generating training recommendations, adapting workouts to your recovery, and answering your questions in the coaching interface.</p>
+          <p className="legal-p"><strong>What we never do.</strong> We never use HealthKit data for advertising, marketing, or similar services, and we never use it for data mining. We never sell your health data, and we never disclose it to third parties for advertising, marketing, or data mining purposes.</p>
+          <p className="legal-p"><strong>Storage.</strong> Health data read from HealthKit is not stored in iCloud.</p>
+          <p className="legal-p"><strong>Deletion.</strong> You can delete your health data at any time using in-app account deletion, which removes your account and its associated health data from our systems. Revoking HealthKit permission in the Health app stops any further reading of your data.</p>
+
+          <h2 className="legal-h2">Section 3. How We Use Your Information</h2>
           <p className="legal-p">We use the information described above to:</p>
           <ul className="legal-ul">
             <li>Provide the Service, including AI coaching, calendar synchronization, and account management.</li>
@@ -118,7 +135,7 @@ export default function PrivacyPolicy() {
           </ul>
           <p className="legal-p">We do not sell, rent, or share your personal information for marketing purposes.</p>
 
-          <h2 className="legal-h2">Section 3. How We Share Your Information</h2>
+          <h2 className="legal-h2">Section 4. How We Share Your Information</h2>
           <p className="legal-p">We share information with the following categories of third parties, each of which is contractually or technically bound to handle data appropriately:</p>
           <ul className="legal-ul">
             <li><strong>Anthropic, PBC</strong> (United States): We send conversation context to Anthropic's Claude API to generate coaching responses. Anthropic does not train its production AI models on customer API data, per its commercial API terms.</li>
@@ -128,12 +145,12 @@ export default function PrivacyPolicy() {
           </ul>
           <p className="legal-p">We do not transfer your data to any other third parties without your explicit consent, except as required by law (such as in response to a valid subpoena, court order, or legal process).</p>
 
-          <h2 className="legal-h2">Section 4. Data Retention</h2>
+          <h2 className="legal-h2">Section 5. Data Retention</h2>
           <p className="legal-p">We retain your account information and conversation history for as long as your account is active and for a reasonable period after cancellation to support billing reconciliation, audit, and legal compliance, typically 30 days. After that period, we delete your personal data, subject to any longer retention required by law (for example, financial records).</p>
           <p className="legal-p">If you connect an Intervals.icu account, your training data is read from it in real time and is not stored on our servers in bulk; Intervals.icu remains the source of truth for that training history. Training data from uploaded workout files is stored in our database as described in Section 1.</p>
           <p className="legal-p">Logs and technical data are retained for up to 90 days for security and operational purposes.</p>
 
-          <h2 className="legal-h2">Section 5. Data Security</h2>
+          <h2 className="legal-h2">Section 6. Data Security</h2>
           <p className="legal-p">We protect your data using industry-standard security measures including:</p>
           <ul className="legal-ul">
             <li>Encryption in transit (TLS / HTTPS) for all communications between your device and our servers.</li>
@@ -145,7 +162,7 @@ export default function PrivacyPolicy() {
           </ul>
           <p className="legal-p">No system is perfectly secure, and we cannot guarantee absolute security. If we ever experience a data incident that materially affects your personal information, we will notify you in accordance with applicable law.</p>
 
-          <h2 className="legal-h2">Section 6. Your Rights</h2>
+          <h2 className="legal-h2">Section 7. Your Rights</h2>
           <p className="legal-p">You have the following rights regarding your personal information:</p>
           <ul className="legal-ul">
             <li><strong>Access:</strong> You can view your account information and conversation history within the Service at any time.</li>
@@ -155,20 +172,20 @@ export default function PrivacyPolicy() {
             <li><strong>Marketing opt-out:</strong> We do not send marketing emails by default. Operational emails (account confirmation, password reset, billing notices) are required for service operation.</li>
           </ul>
 
-          <h2 className="legal-h2">Section 7. International Users</h2>
+          <h2 className="legal-h2">Section 8. International Users</h2>
           <p className="legal-p">If you are accessing AI Coach Cloud from outside the United States, please be aware that your information will be transferred to, stored, and processed in the United States, where our servers and infrastructure providers operate. By using the Service, you consent to this transfer.</p>
           <p className="legal-p"><strong>European Economic Area, United Kingdom, and Switzerland:</strong> If you are located in the EEA, UK, or Switzerland, you have rights under the General Data Protection Regulation (GDPR) and equivalent local laws, including the right to access, rectify, erase, restrict, object to, or port your personal data, and the right to lodge a complaint with your local supervisory authority. To exercise these rights, contact us at <a href="mailto:sharma@sharmaautomation.com" className="legal-link">sharma@sharmaautomation.com</a>.</p>
 
-          <h2 className="legal-h2">Section 8. California Residents</h2>
+          <h2 className="legal-h2">Section 9. California Residents</h2>
           <p className="legal-p">If you are a California resident, you have rights under the California Consumer Privacy Act (CCPA) as amended by the California Privacy Rights Act (CPRA), including the right to know, the right to delete, the right to correct, and the right to opt out of the sale or sharing of your personal information. We do not sell or share your personal information as those terms are defined under the CCPA. To exercise other rights, contact us at <a href="mailto:sharma@sharmaautomation.com" className="legal-link">sharma@sharmaautomation.com</a>.</p>
 
-          <h2 className="legal-h2">Section 9. Children's Privacy</h2>
+          <h2 className="legal-h2">Section 10. Children's Privacy</h2>
           <p className="legal-p">AI Coach Cloud is intended for users aged 18 and older. We do not knowingly collect personal information from anyone under the age of 18. If you believe a child has provided us with personal information, contact us at <a href="mailto:sharma@sharmaautomation.com" className="legal-link">sharma@sharmaautomation.com</a> and we will delete it.</p>
 
-          <h2 className="legal-h2">Section 10. Changes to This Policy</h2>
+          <h2 className="legal-h2">Section 11. Changes to This Policy</h2>
           <p className="legal-p">We may update this Privacy Policy from time to time. The "Effective Date" at the top of this Policy indicates when it was last revised. If we make material changes, we will notify you by email or through the Service before the changes take effect.</p>
 
-          <h2 className="legal-h2">Section 11. Contact Us</h2>
+          <h2 className="legal-h2">Section 12. Contact Us</h2>
           <p className="legal-p">Questions, requests, or concerns about this Privacy Policy or our data practices? Contact us at:</p>
           <div className="dm" style={{ fontSize: 15, fontWeight: 400, color: s.textBody, lineHeight: 1.75, marginTop: 8 }}>
             <div style={{ fontWeight: 600, color: s.textDark }}>Sharma Automation</div>
