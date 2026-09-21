@@ -1,11 +1,14 @@
 import { useState, useEffect, useRef } from "react";
+import ContactForm from "./ContactForm";
+import { openCalendlyPopup } from "./lib/calendly";
 
 /* ═══════════════════════════════════════════════════════════════
    ROOT PAGE: Sharma Automation Consulting (Wave CONSULT-1)
    sharmaautomation.com/
 
    One service, three steps: AI Fit Assessment, Build, Support.
-   Booking runs through the GoHighLevel LeadConnector widget.
+   Booking runs through the Calendly popup; the contact form posts
+   to Formspree. Both endpoints live in src/config/contact.js.
    Section copy is ratified and must not be reworded.
 ═══════════════════════════════════════════════════════════════ */
 
@@ -21,8 +24,6 @@ export const NAV_LINKS = [
 ];
 
 export const isRouteTarget = (target) => target.startsWith("/");
-
-const BOOKING_URL = "https://api.leadconnectorhq.com/widget/booking/l0FfSuPINhd1ypD8cyiX";
 
 const STEPS = [
   {
@@ -130,15 +131,11 @@ export default function App() {
   /* Route targets navigate with a full reload, consistent with every other
      cross-page link on this site (there is no <Link> usage anywhere). */
   const goTo = (target) => { if (isRouteTarget(target)) { setMenuOpen(false); window.location.href = target; return; } scrollTo(target); };
-  const openBooking = () => { window.open(BOOKING_URL, "_blank"); setMenuOpen(false); };
-
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://link.msgsndr.com/js/form_embed.js";
-    script.async = true;
-    document.body.appendChild(script);
-    return () => { document.body.removeChild(script); };
-  }, []);
+  const openBooking = () => {
+    if (typeof window.gtag === "function") { window.gtag("event", "book_call_click"); }
+    openCalendlyPopup();
+    setMenuOpen(false);
+  };
 
   // Handle deep links like /#faq: wait for page to render, then scroll
   useEffect(() => {
@@ -223,7 +220,6 @@ export default function App() {
           .back-to-top-btn { bottom: 20px !important; right: 20px !important; width: 42px !important; height: 42px !important; font-size: 18px !important; }
           .steps-grid { grid-template-columns: 1fr !important; }
           .panel-grid { grid-template-columns: 1fr !important; }
-          .ghl-form-iframe { height: 750px !important; }
           section[id] { scroll-margin-top: 72px !important; }
         }
         @media (min-width: 769px) { .hamburger { display: none !important; } .mobile-menu { display: none !important; } }
@@ -472,26 +468,8 @@ export default function App() {
             </div>
           </FadeIn>
           <FadeIn delay={0.15}>
-            <div style={{ borderRadius: 16, overflow: "hidden" }}>
-              <iframe
-                src="https://api.leadconnectorhq.com/widget/form/jUedMA7PglKtkEaVgXMg"
-                className="ghl-form-iframe"
-                style={{ width: "100%", height: 650, border: "none", display: "block" }}
-                scrolling="no"
-                id="inline-jUedMA7PglKtkEaVgXMg"
-                data-layout="{'id':'INLINE'}"
-                data-trigger-type="alwaysShow"
-                data-trigger-value=""
-                data-activation-type="alwaysActivated"
-                data-activation-value=""
-                data-deactivation-type="neverDeactivate"
-                data-deactivation-value=""
-                data-form-name="Sharma Automation Contact Form"
-                data-height="650"
-                data-layout-iframe-id="inline-jUedMA7PglKtkEaVgXMg"
-                data-form-id="jUedMA7PglKtkEaVgXMg"
-                title="Sharma Automation Contact Form"
-              />
+            <div>
+              <ContactForm />
             </div>
           </FadeIn>
         </div>

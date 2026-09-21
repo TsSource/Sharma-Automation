@@ -1,4 +1,5 @@
 import { Fragment, useState, useEffect, useRef } from "react";
+import { openCalendlyPopup } from "./lib/calendly";
 
 /* ═══════════════════════════════════════════════════════════════
    COMPANY INTELLIGENCE: Productized Service Page (Wave CI-PAGE-1)
@@ -6,18 +7,17 @@ import { Fragment, useState, useEffect, useRef } from "react";
 
    A business-wide AI assistant that answers employee questions from
    the company's own data and systems. The only conversion action is
-   the existing free GoHighLevel booking call, labeled here as the
-   free Intelligence Audit. Section copy is ratified and must not be
+   the existing free booking call, labeled here as the free
+   Intelligence Audit. Section copy is ratified and must not be
    reworded.
 
    Palette and type follow the consulting root page (App.js), not the
    /ai-coach product page: Playfair Display + DM Sans, navy/sky.
 ═══════════════════════════════════════════════════════════════ */
 
-/* Same calendar as the root page. App.js:14 is the source of truth;
-   App.js does not export it, so it is declared locally here. Owner
-   ruling: the free 15-minute fit call IS the Intelligence Audit. */
-const BOOKING_URL = "https://api.leadconnectorhq.com/widget/booking/l0FfSuPINhd1ypD8cyiX";
+/* Same calendar as the root page: the shared Calendly popup, whose
+   URL lives in src/config/contact.js. Owner ruling: the free
+   15-minute fit call IS the Intelligence Audit. */
 
 /* Google Ads conversion. The global tag (AW-18119945677) is loaded in
    public/index.html but fires no events anywhere on the site.
@@ -96,8 +96,9 @@ export default function CompanyIntelligence() {
   const openBooking = () => {
     if (typeof window.gtag === "function") {
       window.gtag("event", "conversion", { send_to: GTAG_CONVERSION_SEND_TO });
+      window.gtag("event", "book_call_click");
     }
-    window.open(BOOKING_URL, "_blank");
+    openCalendlyPopup();
     setMenuOpen(false);
   };
 
