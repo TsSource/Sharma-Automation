@@ -84,6 +84,20 @@ const FAQS = [
 
 const NAV_LINKS = [["Story", "story"], ["Features", "features"], ["Pricing", "pricing"], ["FAQ", "faq"]];
 
+/* ── External Destinations ───────────────────────────────────── */
+/* Single source of truth for the hosted app. Every signup / login CTA
+   on this page reads from here so the URLs cannot drift apart. */
+const COACH_URLS = {
+  signup: "https://coach.sharmaautomation.com/signup",
+  login: "https://coach.sharmaautomation.com/login",
+};
+
+const APP_STORE_URL = "https://apps.apple.com/us/app/ai-coach-cloud/id6794181978";
+
+const PAGE_TITLE = "AI Coach Cloud | The AI triathlon coach";
+
+const TRIAL_TERMS = "7-day free trial · $14.99/month after · card required · cancel anytime";
+
 /* ── Utility Components ──────────────────────────────────────── */
 function useInView(threshold = 0.15) {
   const ref = useRef(null);
@@ -105,6 +119,25 @@ function FadeIn({ children, delay = 0, style = {} }) {
   );
 }
 
+/* Apple App Store badge. The artwork ships unmodified at its native
+   aspect ratio, 40px tall, with 10px of clear space on every side. */
+function AppStoreBadge() {
+  return (
+    <div className="appstore-group">
+      <span className="appstore-note dm">Also on iPhone</span>
+      <a
+        className="appstore-link"
+        href={APP_STORE_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Download AI Coach Cloud on the App Store"
+      >
+        <img className="appstore-badge" src="/download-on-the-app-store.svg" alt="Download on the App Store" />
+      </a>
+    </div>
+  );
+}
+
 /* ══════════════════════════════════════════════════════════════
    MAIN COMPONENT
    ══════════════════════════════════════════════════════════════ */
@@ -113,6 +146,12 @@ export default function AICoachLanding() {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [navScrolled, setNavScrolled] = useState(false);
+
+  useEffect(() => {
+    const prev = document.title;
+    document.title = PAGE_TITLE;
+    return () => { document.title = prev; };
+  }, []);
 
   useEffect(() => {
     const h = () => { setShowBackToTop(window.scrollY > 400); setNavScrolled(window.scrollY > 80); };
@@ -148,6 +187,11 @@ export default function AICoachLanding() {
         .faq-q { font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; color: ${s.textDark}; padding: 20px 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; user-select: none; }
         .faq-q:hover { color: ${s.accent}; }
         .faq-a { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; color: ${s.textBody}; line-height: 1.75; padding: 0 24px 20px; }
+        .appstore-group { display: flex; align-items: center; justify-content: center; gap: 4px; flex-wrap: wrap; }
+        .appstore-note { font-size: 13px; font-weight: 400; letter-spacing: 0.04em; color: rgba(255,255,255,0.92); white-space: nowrap; }
+        .appstore-link { display: inline-block; padding: 10px; margin: 0; line-height: 0; text-decoration: none; }
+        .appstore-badge { height: 40px; width: auto; display: block; border: 0; }
+        .hero-terms { font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.92); line-height: 1.6; margin-top: 18px; }
         .back-to-top-btn { position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px; border-radius: 50%; background: ${s.accent}; color: #fff; border: none; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; z-index: 200; transition: opacity 0.3s, transform 0.3s; box-shadow: 0 4px 16px ${s.accentGlow}; }
         section[id] { scroll-margin-top: 80px; }
         @media (max-width: 768px) {
@@ -165,6 +209,10 @@ export default function AICoachLanding() {
           .gallery-grid { grid-template-columns: 1fr 1fr !important; }
           section[id] { scroll-margin-top: 72px !important; }
         }
+        @media (max-width: 640px) {
+          .appstore-group { width: 100% !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; gap: 2px !important; text-align: center; }
+          .appstore-link { padding: 10px !important; }
+        }
         @media (max-width: 480px) { .gallery-grid { grid-template-columns: 1fr !important; } }
         @media (min-width: 769px) { .mobile-nav { display: none !important; } }
       `}</style>
@@ -179,8 +227,8 @@ export default function AICoachLanding() {
             {NAV_LINKS.map(([label, target]) => (
               <span key={label} className="dm" onClick={() => scrollTo(target)} style={{ fontSize: 14, fontWeight: 500, color: navScrolled ? s.textBody : "rgba(255,255,255,0.85)", cursor: "pointer", transition: "color 0.2s" }} onMouseEnter={e => e.target.style.color = s.accent} onMouseLeave={e => e.target.style.color = navScrolled ? s.textBody : "rgba(255,255,255,0.85)"}>{label}</span>
             ))}
-            <a href="https://coach.sharmaautomation.com/login" className="dm" style={{ fontSize: 14, fontWeight: 500, color: navScrolled ? s.textBody : "rgba(255,255,255,0.85)", textDecoration: "none", transition: "color 0.2s" }}>Sign In</a>
-            <a href="https://coach.sharmaautomation.com/signup" className="btn-primary" style={{ padding: "10px 22px", fontSize: 13, textDecoration: "none", display: "inline-block" }}>Start Free Trial</a>
+            <a href={COACH_URLS.login} className="dm" style={{ fontSize: 14, fontWeight: 500, color: navScrolled ? s.textBody : "rgba(255,255,255,0.85)", textDecoration: "none", transition: "color 0.2s" }}>Sign In</a>
+            <a href={COACH_URLS.signup} className="btn-primary" style={{ padding: "10px 22px", fontSize: 13, textDecoration: "none", display: "inline-block" }}>Start Free Trial</a>
           </div>
           <button className="mobile-nav" onClick={() => setMenuOpen(!menuOpen)} style={{ display: "none", flexDirection: "column", gap: 5, background: "none", border: "none", cursor: "pointer", padding: 8 }}>
             <div style={{ width: 22, height: 2.5, background: navScrolled ? s.textDark : "#fff", borderRadius: 2, transition: "all 0.3s", transform: menuOpen ? "rotate(45deg) translate(5px,5px)" : "none" }} />
@@ -193,8 +241,8 @@ export default function AICoachLanding() {
             {NAV_LINKS.map(([label, target]) => (
               <span key={label} className="dm" onClick={() => { scrollTo(target); setMenuOpen(false); }} style={{ fontSize: 16, fontWeight: 500, color: s.textDark, padding: "12px 0", borderBottom: `1px solid ${s.border}`, cursor: "pointer" }}>{label}</span>
             ))}
-            <a href="https://coach.sharmaautomation.com/login" className="dm" style={{ fontSize: 16, fontWeight: 500, color: s.textDark, padding: "12px 0", borderBottom: `1px solid ${s.border}`, textDecoration: "none" }} onClick={() => setMenuOpen(false)}>Sign In</a>
-            <a href="https://coach.sharmaautomation.com/signup" className="btn-primary" style={{ marginTop: 12, padding: 14, textAlign: "center", textDecoration: "none", display: "block" }} onClick={() => setMenuOpen(false)}>Start Free Trial</a>
+            <a href={COACH_URLS.login} className="dm" style={{ fontSize: 16, fontWeight: 500, color: s.textDark, padding: "12px 0", borderBottom: `1px solid ${s.border}`, textDecoration: "none" }} onClick={() => setMenuOpen(false)}>Sign In</a>
+            <a href={COACH_URLS.signup} className="btn-primary" style={{ marginTop: 12, padding: 14, textAlign: "center", textDecoration: "none", display: "block" }} onClick={() => setMenuOpen(false)}>Start Free Trial</a>
           </div>
         )}
       </nav>
@@ -214,11 +262,13 @@ export default function AICoachLanding() {
             <p className="dm" style={{ fontSize: "clamp(16px, 2vw, 20px)", color: "rgba(255,255,255,0.8)", lineHeight: 1.65, marginBottom: 40, maxWidth: 620, margin: "0 auto 40px", fontWeight: 300 }}>
               The AI triathlon coach that reads your real training data and tells you exactly what to do today — swim, bike, run, and strength. Sign up in 60 seconds and start training smarter. Connects to your intervals.icu account.
             </p>
-            <div className="hero-buttons" style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-              <a href="https://coach.sharmaautomation.com/signup" className="btn-primary" style={{ fontSize: 16, padding: "16px 36px", textDecoration: "none", display: "inline-block" }}>Start Free Trial</a>
+            <div className="hero-buttons" style={{ display: "flex", gap: 14, justifyContent: "center", alignItems: "center", flexWrap: "wrap" }}>
+              <a href={COACH_URLS.signup} className="btn-primary" style={{ fontSize: 16, padding: "16px 36px", textDecoration: "none", display: "inline-block" }}>Start Free Trial</a>
               <a href="https://coach.sharmaautomation.com" className="btn-outline-light" style={{ fontSize: 16, padding: "15px 36px", textDecoration: "none", display: "inline-block" }}>See It Live</a>
               <button className="btn-outline-light" onClick={() => scrollTo("demo")} style={{ fontSize: 16, padding: "15px 36px" }}>Watch the Demo</button>
+              <AppStoreBadge />
             </div>
+            <p className="dm hero-terms">{TRIAL_TERMS}</p>
           </FadeIn>
         </div>
       </section>
@@ -419,7 +469,7 @@ export default function AICoachLanding() {
                       </div>
                     ))}
                   </div>
-                  <a href="https://coach.sharmaautomation.com/signup" className="btn-primary" style={{ width: "100%", textAlign: "center", padding: "13px 20px", background: plan.highlight ? s.accent : "rgba(255,255,255,0.1)", border: plan.highlight ? "none" : "1px solid rgba(255,255,255,0.15)", boxShadow: plan.highlight ? `0 4px 16px ${s.accentGlow}` : "none", textDecoration: "none", display: "inline-block" }}>{plan.cta}</a>
+                  <a href={COACH_URLS.signup} className="btn-primary" style={{ width: "100%", textAlign: "center", padding: "13px 20px", background: plan.highlight ? s.accent : "rgba(255,255,255,0.1)", border: plan.highlight ? "none" : "1px solid rgba(255,255,255,0.15)", boxShadow: plan.highlight ? `0 4px 16px ${s.accentGlow}` : "none", textDecoration: "none", display: "inline-block" }}>{plan.cta}</a>
                 </div>
               </FadeIn>
             ))}
@@ -437,7 +487,7 @@ export default function AICoachLanding() {
             <p className="dm" style={{ fontSize: 15, color: s.textBody, lineHeight: 1.85, maxWidth: 600, margin: "0 auto 32px", fontWeight: 300 }}>
               <strong style={{ color: s.textDark, fontWeight: 600 }}>What I ask in return:</strong> Use it. Tell me what works and what doesn't. Share a testimonial or review when you're ready. That's it.
             </p>
-            <a href="https://coach.sharmaautomation.com/signup" className="btn-gold" style={{ textDecoration: "none", display: "inline-block" }}>Claim Founding Rate</a>
+            <a href={COACH_URLS.signup} className="btn-gold" style={{ textDecoration: "none", display: "inline-block" }}>Claim Founding Rate</a>
           </div>
         </FadeIn>
       </section>
@@ -501,7 +551,7 @@ export default function AICoachLanding() {
           <FadeIn delay={0.1}>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
               <a
-                href="https://coach.sharmaautomation.com/signup"
+                href={COACH_URLS.signup}
                 className="btn-primary"
                 style={{ fontSize: 18, padding: "18px 48px", textDecoration: "none", display: "inline-block" }}
               >
@@ -510,12 +560,13 @@ export default function AICoachLanding() {
               <p className="dm" style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", margin: 0 }}>
                 Already have an account?{" "}
                 <a
-                  href="https://coach.sharmaautomation.com/login"
+                  href={COACH_URLS.login}
                   style={{ color: s.accent, textDecoration: "none", fontWeight: 500 }}
                 >
                   Sign in
                 </a>
               </p>
+              <AppStoreBadge />
             </div>
           </FadeIn>
           <FadeIn delay={0.2}>
